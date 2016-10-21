@@ -1,20 +1,35 @@
 /*global describe, expect, it, beforeEach*/
-import { PersonIndex } from './../../src/PersonIndex';
+import GitHub from './../../src/index';
 
-describe( 'Person', () => {
+describe( 'unit::GitHub', () => {
 
-  let idx;
-  beforeEach( () => {
-    idx = new PersonIndex();
+  var gitHub;
+  before( () => {
+    gitHub = new GitHub();
   } );
 
-  it( 'should have a property person', () => {
-    expect( idx.person ).to.exist;
-    expect( idx.person ).to.be.an( 'object' );
+  it( 'should be an object', () => {
+    expect( gitHub ).to.exist;
+    expect( gitHub ).to.be.an.object;
   } );
 
-  it( 'should have a property fullName', () => {
-    expect( idx.person ).to.have.a.property( 'fullName', 'Stefan Walther' );
+  it( 'should have a property db', () => {
+    expect( gitHub ).to.have.a.property( 'db' );
   } );
+
+  it( 'should have a property logger', () => {
+    expect( gitHub ).to.have.a.property( 'logger' );
+    expect( gitHub.logger ).to.have.a.property( 'error' ).that.is.a( 'function' );
+  } );
+
+  it( 'should have a property repos', () => {
+    expect( gitHub ).to.have.a.property( 'repos' );
+  } );
+
+  //Todo: Can be removed here
+  it( 'should have tables in the db', () => {
+    expect( gitHub.db.tables ).to.be.an.array;
+  } );
+
 
 } );

@@ -1,0 +1,6 @@
+{
+  "gitHubAuth": {
+    "type": "oauth",
+    "token": "xxx"
+  }
+}
