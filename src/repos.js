@@ -2,6 +2,9 @@ import * as _ from 'lodash';
 import * as gh from './gh';
 import * as ghUtils from './ghUtils';
 
+/**
+ * Handle GitHub repositories.
+ */
 export default class repos {
   constructor( base ) {
     if ( !base ) {
@@ -12,6 +15,7 @@ export default class repos {
 
     // shortcuts
     this.db = this.base.db;
+    this.logger = this.base.logger;
   }
 
   /**
@@ -21,7 +25,6 @@ export default class repos {
    *
    * The repositories will be filtered as follows:
    * - Forked repositories are ignored.
-   *
    *
    * @param {object} options - Configuration options for repos.getAll (as defined on http://mikedeboer.github.io/node-github/#api-users-getAll & http://mikedeboer.github.io/node-github/#api-repos-getAll)
    * @param {callback} cb - Callback
@@ -59,5 +62,10 @@ export default class repos {
       res = _.filter( res, { fork: false, private: false } );
       return cb( err, res );
     } );
+  }
+
+  _saveRepos( repos, cb ) {
+    this.logger.silly('Save repos');
+    cb();
   }
 }
