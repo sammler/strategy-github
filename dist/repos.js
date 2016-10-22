@@ -22,6 +22,9 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ * Handle GitHub repositories.
+ */
 var repos = function () {
   function repos(base) {
     _classCallCheck(this, repos);
@@ -34,6 +37,7 @@ var repos = function () {
 
     // shortcuts
     this.db = this.base.db;
+    this.logger = this.base.logger;
   }
 
   /**
@@ -44,8 +48,7 @@ var repos = function () {
    * The repositories will be filtered as follows:
    * - Forked repositories are ignored.
    *
-   *
-   * @param {object} options - Configuration options for repos.getAll (as defined on http://mikedeboer.github.io/node-github/#api-users-getAll & http://mikedeboer.github.io/node-github/#api-repos-getAll)
+   * @param {object} queryOptions - Configuration options for repos.getAll (as defined on http://mikedeboer.github.io/node-github/#api-users-getAll & http://mikedeboer.github.io/node-github/#api-repos-getAll)
    * @param {callback} cb - Callback
    * @public
    */
@@ -53,7 +56,7 @@ var repos = function () {
 
   _createClass(repos, [{
     key: 'syncRepos',
-    value: function syncRepos(options, cb) {
+    value: function syncRepos(queryOptions, cb) {
       var _this = this;
 
       var cfg = {
@@ -61,8 +64,13 @@ var repos = function () {
         "per_page": 100
       };
 
-      cfg = _.extend(cfg, options || {});
-      this._getRepos(cfg, function (err, res) {
+      var filter = {
+        forked: false,
+        private: false
+      };
+
+      cfg = _.extend(cfg, queryOptions || {});
+      this._getRepos(cfg, filter, function (err, res) {
         if (err) {
           throw err;
         }
@@ -77,18 +85,26 @@ var repos = function () {
     /**
      * Load repositories for the given (current authenticated) user.
      *
-     * @param options
-     * @param cb
+     * @param {object} options - The query options.
+     * @param {callback} cb - Callback
+     * @param {object} filter - Result filter (client side).
+     *
      * @private
      */
 
   }, {
     key: '_getRepos',
-    value: function _getRepos(options, cb) {
+    value: function _getRepos(options, filter, cb) {
       ghUtils.getAll(this.ghClient, 'repos.getAll', options, function (err, res) {
-        res = _.filter(res, { fork: false, private: false });
+        res = _.filter(res, filter || {});
         return cb(err, res);
       });
+    }
+  }, {
+    key: '_saveRepos',
+    value: function _saveRepos(repos, cb) {
+      this.logger.silly('Save repos');
+      cb();
     }
   }]);
 

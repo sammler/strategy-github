@@ -1,3 +1,5 @@
+import Logger from './logger';
+
 /**
  * Get results from all pages
  *
@@ -8,38 +10,40 @@
  *
  * @see https://github.com/mikedeboer/node-github/blob/master/examples/getStarred.js
  */
-export function getAll ( ghClient, fnName, options, cb ) {
+export function getAll( ghClient, fnName, options, cb ) {
 
-    if ( !cb || typeof cb !== 'function' ) {
-        throw new Error( 'No callback defined' );
+  let logger = new Logger();
+
+  if ( !cb || typeof cb !== 'function' ) {
+    throw new Error( 'No callback defined' );
+  }
+
+  let items = [];
+
+  let nameSpace = (fnName).toString().split( '.' );
+  let resolvedFnName = ghClient;
+  if ( nameSpace.length > 0 ) {
+    nameSpace.forEach( function( name ) {
+      resolvedFnName = resolvedFnName[ name ];
+    } );
+  }
+  resolvedFnName( options, fetchResult );
+
+  function fetchResult( err, res ) {
+    if ( err ) {
+      return done( err );
     }
 
-    let items = [];
-
-    let nameSpace = (fnName).toString().split( '.' );
-    let resolvedFnName = ghClient;
-    if ( nameSpace.length > 0 ) {
-        nameSpace.forEach( function ( name ) {
-            resolvedFnName = resolvedFnName[name];
-        } );
+    items = items.concat( res );
+    if ( ghClient.hasNextPage( res ) ) {
+      ghClient.getNextPage( res, fetchResult );
+    } else {
+      returnResult();
     }
-    resolvedFnName( options, fetchResult );
+  }
 
-    function fetchResult ( err, res ) {
-        if ( err ) {
-            return done(err);
-        }
-
-        items = items.concat( res );
-        if ( ghClient.hasNextPage( res ) ) {
-            ghClient.getNextPage( res, fetchResult );
-        } else {
-            returnResult();
-        }
-    }
-
-    function returnResult () {
-        return cb( null, items );
-    }
+  function returnResult() {
+    return cb( null, items );
+  }
 
 }

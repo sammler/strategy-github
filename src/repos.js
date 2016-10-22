@@ -26,19 +26,24 @@ export default class repos {
    * The repositories will be filtered as follows:
    * - Forked repositories are ignored.
    *
-   * @param {object} options - Configuration options for repos.getAll (as defined on http://mikedeboer.github.io/node-github/#api-users-getAll & http://mikedeboer.github.io/node-github/#api-repos-getAll)
+   * @param {object} queryOptions - Configuration options for repos.getAll (as defined on http://mikedeboer.github.io/node-github/#api-users-getAll & http://mikedeboer.github.io/node-github/#api-repos-getAll)
    * @param {callback} cb - Callback
    * @public
    */
-  syncRepos( options, cb ) {
+  syncRepos( queryOptions, cb ) {
 
     var cfg = {
       "affiliation": "owner",
       "per_page": 100
     };
 
-    cfg = _.extend( cfg, options || {} );
-    this._getRepos( cfg, ( err, res ) => {
+    var filter = {
+      forked: false,
+      private: false
+    };
+
+    cfg = _.extend( cfg, queryOptions || {} );
+    this._getRepos( cfg, filter, ( err, res ) => {
       if ( err ) {
         throw err;
       }
@@ -53,19 +58,21 @@ export default class repos {
   /**
    * Load repositories for the given (current authenticated) user.
    *
-   * @param options
-   * @param cb
+   * @param {object} options - The query options.
+   * @param {callback} cb - Callback
+   * @param {object} filter - Result filter (client side).
+   *
    * @private
    */
-  _getRepos( options, cb ) {
+  _getRepos( options, filter, cb ) {
     ghUtils.getAll( this.ghClient, 'repos.getAll', options, ( err, res ) => {
-      res = _.filter( res, { fork: false, private: false } );
+      res = _.filter( res, filter || {} );
       return cb( err, res );
     } );
   }
 
   _saveRepos( repos, cb ) {
-    this.logger.silly('Save repos');
+    this.logger.silly( 'Save repos' );
     cb();
   }
 }
