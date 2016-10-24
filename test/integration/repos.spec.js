@@ -1,11 +1,11 @@
-/*global before, describe, expect, it, beforeEach*/
+/*global before, beforeEach, describe, expect, it, beforeEach*/
 import * as _ from 'lodash';
 import GitHub from './../../src/index';
 
 describe( 'int::repos', () => {
 
   var gitHub;
-  before( () => {
+  beforeEach( () => {
     gitHub = new GitHub();
   } );
 
@@ -13,7 +13,7 @@ describe( 'int::repos', () => {
     expect( gitHub.repos ).to.have.a.property( '_getRepos' ).that.is.a( 'function' );
   } );
 
-  it( '_getRepos should return repositories and accept filters', ( cb ) => {
+  it( '_getRepos should return and array of repositories and accept filters', ( cb ) => {
 
     let cfg = {
       "affiliation": "owner",
