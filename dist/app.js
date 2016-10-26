@@ -1,0 +1,21 @@
+'use strict';
+
+var express = require('express');
+var app = express();
+var port = 3000;
+
+app.get('/', function (req, res) {
+  res.status(200).send('Testing and Debugging Sample');
+});
+app.get('/test/:test', function (req, res) {
+  res.status(200).send(req.params.number);
+});
+
+exports.stop = function () {
+  server.close();
+};
+
+var server = app.listen(port, function () {
+  console.log("Express server listening on port %d in %s mode", port, app.settings.env);
+});
+//# sourceMappingURL=app.js.map

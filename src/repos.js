@@ -14,7 +14,6 @@ export default class repos {
     this.ghClient = gh.getGhClient();
 
     // shortcuts
-    this.db = this.base.db;
     this.logger = this.base.logger;
   }
 
@@ -66,11 +65,30 @@ export default class repos {
    */
   _getRepos( options, filter, cb ) {
     ghUtils.getAll( this.ghClient, 'repos.getAll', options, ( err, res ) => {
-      res = _.filter( res, filter || {} );
+      res = this._filterRepos( res, filter );
       return cb( err, res );
     } );
   }
 
+  /**
+   * Filter repositories
+   * @param {Array<repos>} repos - The array of repositories.
+   * @param {Object} filter - Filters, such as `private`, `forked`, ...
+   * @returns {Array<repos>} repos - Array of filtered repos.
+   *
+   * @private
+   */
+  _filterRepos( repos, filter ) {
+    this.logger.silly( 'Filter repos', repos, filter );
+    return _.filter( repos, filter || {} )
+  }
+
+  /**
+   * Save repos to storage.
+   * @param repos
+   * @param cb
+   * @private
+   */
   _saveRepos( repos, cb ) {
     this.logger.silly( 'Save repos' );
     cb();

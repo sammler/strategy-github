@@ -36,7 +36,6 @@ var repos = function () {
     this.ghClient = gh.getGhClient();
 
     // shortcuts
-    this.db = this.base.db;
     this.logger = this.base.logger;
   }
 
@@ -95,11 +94,37 @@ var repos = function () {
   }, {
     key: '_getRepos',
     value: function _getRepos(options, filter, cb) {
+      var _this2 = this;
+
       ghUtils.getAll(this.ghClient, 'repos.getAll', options, function (err, res) {
-        res = _.filter(res, filter || {});
+        res = _this2._filterRepos(res, filter);
         return cb(err, res);
       });
     }
+
+    /**
+     * Filter repositories
+     * @param {Array<repos>} repos - The array of repositories.
+     * @param {Object} filter - Filters, such as `private`, `forked`, ...
+     * @returns {Array<repos>} repos - Array of filtered repos.
+     *
+     * @private
+     */
+
+  }, {
+    key: '_filterRepos',
+    value: function _filterRepos(repos, filter) {
+      this.logger.silly('Filter repos', repos, filter);
+      return _.filter(repos, filter || {});
+    }
+
+    /**
+     * Save repos to storage.
+     * @param repos
+     * @param cb
+     * @private
+     */
+
   }, {
     key: '_saveRepos',
     value: function _saveRepos(repos, cb) {

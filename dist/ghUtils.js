@@ -42,7 +42,7 @@ function getAll(ghClient, fnName, options, cb) {
 
   function fetchResult(err, res) {
     if (err) {
-      return done(err);
+      return cb(err);
     }
 
     items = items.concat(res);
