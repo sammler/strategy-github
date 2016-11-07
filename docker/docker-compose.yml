@@ -1,0 +1,32 @@
+version: '2'
+services:
+
+  sammler_github_db:
+    extends:
+      file: ./sammler_github_db/docker-compose.yml
+      service: sammler_github_db
+
+  sammler_github:
+    extends:
+      file: ./sammler_github/docker-compose.yml
+      service: sammler_github
+    links:
+      - sammler_github_db
+
+#  api:
+#    container_name: sammler-middlware-github
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    volumes:
+#      - .:/data
+#    depends_on:
+#      - github_db
+#      - flyway-migrator
+#    links:
+#      - github_db
+
+volumes:
+  postgres_data:
+
+

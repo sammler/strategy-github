@@ -1,2 +1,2 @@
-FROM postgres:9.5
+FROM postgres:9.6
 ADD init-user-db.sh /docker-entrypoint-initdb.d/
