@@ -8,6 +8,9 @@ describe( 'unit::repos', () => {
     gitHub = new GitHub();
   } );
 
+  it( '_getRepos should be a method', () => {
+    expect( gitHub.repos ).to.have.a.property( '_getRepos' ).that.is.a( 'function' );
+  } );
 
 
 

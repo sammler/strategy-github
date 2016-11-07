@@ -9,11 +9,8 @@ describe( 'int::repos', () => {
     gitHub = new GitHub();
   } );
 
-  it( '_getRepos should be a method', () => {
-    expect( gitHub.repos ).to.have.a.property( '_getRepos' ).that.is.a( 'function' );
-  } );
 
-  it( '_getRepos should return and array of repositories and accept filters', ( cb ) => {
+  it( '_getRepos should return an array of repositories and accept filters', ( cb ) => {
 
     let cfg = {
       "affiliation": "owner",
