@@ -20,4 +20,4 @@ COPY . /home/app
 ENV DOCKER=true
 
 EXPOSE 3000 5858
-ENTRYPOINT ["npm", "test"]
+ENTRYPOINT ["npm", "run", "start"]

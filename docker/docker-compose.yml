@@ -1,17 +1,17 @@
 version: '2'
 services:
 
-  sammler_github_db:
+  sammler-github-db:
     extends:
-      file: ./sammler_github_db/docker-compose.yml
-      service: sammler_github_db
+      file: ./sammler-github-db/docker-compose.yml
+      service: sammler-github-db
 
-  sammler_github:
+  sammler-github:
     extends:
-      file: ./sammler_github/docker-compose.yml
-      service: sammler_github
+      file: ./sammler-github/docker-compose.yml
+      service: sammler-github
     links:
-      - sammler_github_db
+      - sammler-github-db
 
 #  api:
 #    container_name: sammler-middlware-github

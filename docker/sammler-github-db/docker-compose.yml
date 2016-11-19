@@ -1,7 +1,7 @@
 version: '2'
 services:
-  sammler_github_db:
-    container_name: 'sammler_github_db'
+  sammler-github-db:
+    container_name: 'sammler-github-db'
     build: .
     ports:
       - 5432

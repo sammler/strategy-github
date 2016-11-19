@@ -14,6 +14,6 @@ exports.stop = () => {
   server.close();
 };
 
-var server = app.listen( port, () => {
+let server = app.listen( port, () => {
   console.log( "Express server listening on port %d in %s mode", port, app.settings.env );
 } );

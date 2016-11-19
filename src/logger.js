@@ -42,7 +42,7 @@ export default class logger {
 // Fix to include a line break into the log
 // See: https://github.com/winstonjs/winston/issues/460
 logger.log = function() {
-  var args = arguments;
+  let args = arguments;
   args[ 1 ] = args[ 1 ] + '\r\n';
   winston.Logger.prototype.log.apply( this, args );
 };

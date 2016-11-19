@@ -4,7 +4,7 @@ import GitHub from './../../src/index';
 
 describe( 'int::repos', () => {
 
-  var gitHub;
+  let gitHub;
   beforeEach( () => {
     gitHub = new GitHub();
   } );

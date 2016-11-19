@@ -1,7 +1,0 @@
-version: '2'
-services:
-  sammler_github:
-    container_name: 'sammler_github'
-    build:
-      context: ./../../.
-      dockerfile: ./docker/sammler_github/Dockerfile
