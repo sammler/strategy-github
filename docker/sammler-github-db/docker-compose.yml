@@ -2,7 +2,9 @@ version: '2'
 services:
   sammler-github-db:
     container_name: 'sammler-github-db'
-    build: .
+    build:
+      context: ./../../.
+      dockerfile: ./docker/sammler-github-db/Dockerfile
     ports:
       - 5432
     environment:

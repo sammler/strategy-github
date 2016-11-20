@@ -1,0 +1,31 @@
+version: '2'
+services:
+
+  sammler-github:
+    extends:
+      file: ./sammler-github/docker-compose.yml
+      service: sammler-github
+    links:
+      - sammler-github-db
+
+  sammler-github-db:
+    extends:
+      file: ./sammler-github-db/docker-compose.yml
+      service: sammler-github-db
+
+  sammler-github-pgadmin:
+    container_name: "sammler-github-pgadmin"
+    image: fenglc/pgadmin4:1.1
+    ports:
+      - "5050:5050"
+    links:
+      - sammler-github-db
+
+  flyway-rest:
+    container_name: "sammler-github-flyway-rest"
+    image: stefanwalther/flyway-rest
+    links:
+      - sammler-github-db
+
+volumes:
+  postgres_data:
