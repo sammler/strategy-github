@@ -5,7 +5,7 @@
 ## Install
 
 ```sh
-$ npm install sammler-middleware-github
+$ npm install sammler-github
 ```
 
 ## Author
