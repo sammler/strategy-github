@@ -1,4 +1,4 @@
-import Logger from './logger';
+//import Logger from './logger';
 
 /**
  * Get results from all pages
@@ -12,7 +12,7 @@ import Logger from './logger';
  */
 export function getAll( ghClient, fnName, options, cb ) {
 
-  let logger = new Logger();
+  //let logger = new Logger();
 
   if ( !cb || typeof cb !== 'function' ) {
     throw new Error( 'No callback defined' );
@@ -20,10 +20,10 @@ export function getAll( ghClient, fnName, options, cb ) {
 
   let items = [];
 
-  let nameSpace = (fnName).toString().split( '.' );
+  let nameSpace = ( fnName ).toString().split( '.' );
   let resolvedFnName = ghClient;
   if ( nameSpace.length > 0 ) {
-    nameSpace.forEach( function( name ) {
+    nameSpace.forEach( ( name ) => {
       resolvedFnName = resolvedFnName[ name ];
     } );
   }

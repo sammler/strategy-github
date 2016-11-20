@@ -3,12 +3,12 @@ services:
 
   sammler_github_db:
     extends:
-      file: ./docker/sammler_github_db/docker-compose.yml
-      service: sammler_github_db
+      file: ./docker/sammler-github-db/docker-compose.yml
+      service: sammler-github-db
 
   sammler_github:
     extends:
-      file: ./docker/sammler_github/docker-compose.yml
-      service: sammler_github
+      file: ./docker/sammler-github/docker-compose.yml
+      service: sammler-github
     links:
-      - sammler_github_db
+      - sammler-github-db

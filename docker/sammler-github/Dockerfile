@@ -12,9 +12,6 @@ COPY package.json /home/app
 
 RUN npm install
 
-# Install pm2 so we can run our application
-RUN npm i -g pm2
-
 COPY . /home/app
 
 ENV DOCKER=true

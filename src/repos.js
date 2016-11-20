@@ -5,7 +5,7 @@ import * as ghUtils from './ghUtils';
 /**
  * Handle GitHub repositories.
  */
-export default class repos {
+export default class Repos {
   constructor( base ) {
     if ( !base ) {
       throw new Error( 'No base defined' );
@@ -31,12 +31,12 @@ export default class repos {
    */
   syncRepos( queryOptions, cb ) {
 
-    var cfg = {
-      "affiliation": "owner",
-      "per_page": 100
+    let cfg = {
+      affiliation: 'owner',
+      per_page: 100
     };
 
-    var filter = {
+    let filter = {
       forked: false,
       private: false
     };
@@ -79,7 +79,7 @@ export default class repos {
    * @private
    */
   _filterRepos( repos, filter ) {
-    this.logger.silly( 'Filter repos', repos, filter );
+    this.logger.silly( 'Filter repos', repos.length, filter );
     return _.filter( repos, filter || {} )
   }
 

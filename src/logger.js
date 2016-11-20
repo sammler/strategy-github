@@ -13,8 +13,8 @@ export default class logger {
   }
 
   // Lowest level
-  silly( message ) {
-    this.winston.silly( message );
+  silly( message, arg1, arg2 ) {
+    this.winston.silly( message, arg1, arg2 );
   }
 
   debug( message ) {
