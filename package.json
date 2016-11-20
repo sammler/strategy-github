@@ -7,9 +7,9 @@
     "sammler",
     "sammler-middleware"
   ],
-  "homepage": "https://github.com/sammler/sammler-middleware-github",
+  "homepage": "https://github.com/sammler/sammler-github",
   "bugs": {
-    "url": "https://github.com/sammler/sammler-middleware-github/issues"
+    "url": "https://github.com/sammler/sammler-github/issues"
   },
   "license": "MIT",
   "author": {

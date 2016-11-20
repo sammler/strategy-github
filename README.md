@@ -1,4 +1,4 @@
-## sammler-middleware-github
+## sammler-github
 
 > Sammler middleware to collect GitHub content.
 
