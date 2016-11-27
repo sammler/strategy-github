@@ -6,10 +6,10 @@ services:
       file: ./sammler-github-db/docker-compose.yml
       service: sammler-github-db
 
-  sammler-github:
+  sammler-middleware-github:
     extends:
-      file: ./sammler-github/docker-compose.yml
-      service: sammler-github
+      file: ./sammler-middleware-github/docker-compose.yml
+      service: sammler-middleware-github
     links:
       - sammler-github-db
 
