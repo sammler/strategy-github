@@ -24,7 +24,8 @@
   "repository": "sammler/sammler-middleware-github",
   "scripts": {
     "build": "gulp build",
-    "docker-compose-dev": "docker-compose --f=./docker/docker-compose.dev.yml up --build",
+    "docker-compose": "docker-compose up --build",
+    "docker-compose-dev": "docker-compose --f=./docker-compose.dev.yml up --build",
     "coverage": "babel-node ./node_modules/.bin/isparta cover _mocha",
     "docs": "verb",
     "lint": "eslint src",
@@ -62,6 +63,7 @@
     "mocha": "^3.1.2",
     "nock": "^9.0.2",
     "nyc": "^9.0.1",
+    "sammler-base": "0.0.1",
     "superagent": "^3.0.0",
     "supertest": "^2.0.1",
     "supertest-as-promised": "^4.0.2"
