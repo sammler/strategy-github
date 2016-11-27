@@ -1,7 +1,0 @@
-version: '2'
-services:
-  sammler-middleware-github:
-    container_name: 'sammler-middleware-github'
-    build:
-      context: ./../../.
-      dockerfile: ./docker/sammler-middleware-github/Dockerfile

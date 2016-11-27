@@ -1,20 +1,19 @@
 version: '2'
 services:
 
-  sammler-github:
-    extends:
-      file: ./sammler-github/docker-compose.yml
-      service: sammler-github
+  sammler-middleware-github:
+    context: ./../
+    dockerfile: Dockerfile
     links:
-      - sammler-github-db
+      - sammler-middleware-github-db
 
-  sammler-github-db:
+  sammler-middleware-github-db:
     extends:
       file: ./sammler-github-db/docker-compose.yml
-      service: sammler-github-db
+      service: sammler-middleware-github-db
 
-  sammler-github-pgadmin:
-    container_name: "sammler-github-pgadmin"
+  sammler-middleware-github-pgadmin:
+    container_name: "sammler-middelware-github-pgadmin"
     image: fenglc/pgadmin4:1.1
     ports:
       - "5050:5050"

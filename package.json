@@ -41,9 +41,8 @@
     "github": "^6.1.0",
     "lodash": "^4.17.2",
     "massive": "^2.5.0",
-    "sammler-nodelib-logger": "^0.1.0",
-    "sammler-storage": "^0.1.1",
-    "winston": "^2.3.0"
+    "sammler-nodelib-logger": "^0.1.4",
+    "sammler-storage": "*"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -63,7 +62,6 @@
     "mocha": "^3.1.2",
     "nock": "^9.0.2",
     "nyc": "^9.0.1",
-    "sammler-nodelib-logger": "^0.1.1",
     "superagent": "^3.0.0",
     "supertest": "^2.0.1",
     "supertest-as-promised": "^4.0.2"

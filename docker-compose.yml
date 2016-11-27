@@ -1,17 +1,15 @@
 version: '2'
 services:
 
-  sammler-mw-github-db:
+  sammler-middleware-github-db:
     extends:
-      file: ./docker/sammler-github-db/docker-compose.yml
-      service: sammler-github-db
+      file: ./docker/sammler-middleware-github-db/docker-compose.yml
+      service: sammler-middleware-github-db
 
-  sammler-mw-github:
-    extends:
-      file: ./docker/sammler-middleware-github/docker-compose.yml
-      service: sammler-middleware-github
+  sammler-middleware-github:
+    build: .
     links:
-      - sammler-mw-github-db
+      - sammler-middleware-github-db
 
 volumes:
   postgres_data:

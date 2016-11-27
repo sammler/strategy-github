@@ -1,9 +1,10 @@
 /*global describe, expect, it, beforeEach*/
 import GitHub from './../../src/index';
+import appServer from './../../src/app';
 
 describe( 'unit::GitHub', () => {
 
-  var gitHub;
+  let gitHub;
   before( () => {
     gitHub = new GitHub();
   } );
@@ -22,3 +23,9 @@ describe( 'unit::GitHub', () => {
     expect( gitHub ).to.have.a.property( 'repos' );
   } );
 } );
+
+describe( 'unit:appServer', () => {
+  it( 'bla', () => {
+    expect( true ).to.be.true;
+  } );
+});
