@@ -1,5 +1,5 @@
 import Storage from 'sammler-storage';
-import Logger from './logger';
+import Logger from 'sammler-nodelib-logger';
 import Repos from './repos';
 import Profile from './profile';
 
@@ -17,6 +17,7 @@ export default class {
         db: 'docker'
       };
       this._db = new Storage( config );
+      this.logger.silly( 'connected' );
     }
     return this._db;
   }

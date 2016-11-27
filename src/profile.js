@@ -1,6 +1,7 @@
-import * as _ from 'lodash';
+//import * as _ from 'lodash';
 import * as gh from './gh';
 import * as ghUtils from './ghUtils';
+//import * as dbProfile from './storage/profile';
 
 export default class Profile {
   constructor( base ) {
@@ -16,7 +17,8 @@ export default class Profile {
 
   _getProfile( options, filter, cb ) {
     ghUtils.getAll( this.ghClient, 'users.get', options, ( err, res ) => {
-      console.log( JSON.stringify( res ) );
+      this.logger.silly( res );
+
       return cb( err, res );
     } )
   }

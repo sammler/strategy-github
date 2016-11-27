@@ -1,8 +1,12 @@
 /*global before, beforeEach, describe, expect, it, beforeEach*/
-import * as _ from 'lodash';
+import * as flyway from './../lib/flyway';
 import GitHub from './../../src/index';
 
 describe( 'int::profile', () => {
+
+  before( () => {
+    return flyway.init();
+  } );
 
   let gitHub;
   beforeEach( () => {

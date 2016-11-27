@@ -23,7 +23,12 @@ services:
 
   flyway-rest:
     container_name: "sammler-github-flyway-rest"
-    image: stefanwalther/flyway-rest
+    extends:
+      file: ./../node_modules/flyway-rest/docker/flyway-rest/docker-compose.yml
+      service: flyway-rest
+    #image: stefanwalther/flyway-rest
+    ports:
+      - "9001:9001"
     links:
       - sammler-github-db
 
