@@ -1,6 +1,6 @@
 {
   "name": "sammler-github",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Sammler middleware to collect GitHub content.",
   "keywords": [
     "github",
