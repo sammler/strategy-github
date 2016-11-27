@@ -1,15 +1,15 @@
 {
-  "name": "sammler-github",
-  "version": "0.0.2",
+  "name": "sammler-middleware-github",
+  "version": "0.0.3",
   "description": "Sammler middleware to collect GitHub content.",
   "keywords": [
     "github",
     "sammler",
     "sammler-middleware"
   ],
-  "homepage": "https://github.com/sammler/sammler-github",
+  "homepage": "https://github.com/sammler/sammler-middleware-github",
   "bugs": {
-    "url": "https://github.com/sammler/sammler-github/issues"
+    "url": "https://github.com/sammler/sammler-middleware-github/issues"
   },
   "license": "MIT",
   "author": {
