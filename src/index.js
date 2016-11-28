@@ -1,7 +1,7 @@
-import Storage from 'sammler-storage';
 import Logger from 'sammler-nodelib-logger';
 import Repos from './repos';
 import Profile from './profile';
+import Storage from './storage/index';
 
 export default class {
   constructor() {
@@ -9,6 +9,7 @@ export default class {
     this.logger = new Logger();
     this.repos = new Repos( this );
     this.profile = new Profile( this );
+    this.storage = new Storage( this );
   }
 
   get db() {
