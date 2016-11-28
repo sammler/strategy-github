@@ -1,3 +1,12 @@
+
+**Production environment**
+
 ```sh
-$ npm install sammler-github
+$ npm run docker-compose
+```
+
+**Development environment**
+
+```sh
+$ npm run docker-compose-dev
 ```

@@ -1,3 +1,4 @@
 ## Environment variables
 
 - SAMMLER_MIDDLEWARE_GITHUB_PORT
+- SAMMLER_RABBITMQ_URL
