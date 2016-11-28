@@ -11,6 +11,8 @@ services:
     extends:
       file: ./node_modules/sammler-base/docker-compose.yml
       service: 's5r-scheduler'
+    links:
+      - s5r-rabbitmq
 
   # Middleware GitHub
   sammler-middleware-github-db:
@@ -24,6 +26,7 @@ services:
   sammler-middleware-github:
     build: .
     links:
+      - s5r-rabbitmq
       - sammler-middleware-github-db
     environment:
       - SAMMLER_MIDDLEWARE_GITHUB_PORT=3010

@@ -34,7 +34,10 @@ export default class Profile {
    * Sync the profile with what have been stored so far.
    */
   sync() {
-    this.base.logger.silly( 'Just sync' );
+    this.base.logger.verbose( 'sammler-middleware-github: Sync' );
+
+
+
   }
 
 }
