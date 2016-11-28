@@ -2,6 +2,7 @@ const express = require( 'express' );
 const app = express();
 const port = process.env.SAMMLER_MIDDLEWARE_GITHUB_PORT || 3000;
 import Logger from 'sammler-nodelib-logger';
+import * as mqListener from './modules/mq-listener';
 
 let logger = new Logger();
 
@@ -25,4 +26,5 @@ let server = app.listen( port, () => {
   }
 
   logger.silly( 'Express server listening on port %d in %s mode', port, app.settings.env );
+  mqListener.listen();
 } );
