@@ -5,19 +5,18 @@ export default class Context {
   constructor() {
     this.logger = new winster();
     this.db;
-
+    mongoose.Promise = global.Promise;
+    mongoose.set( 'debug', true );
   }
 
   dbConnect() {
     let uri = 'mongodb://localhost:27017/s5r-mw-github';
-    this.db = mongoose.createConnection( uri );
+    this.db = mongoose.connect( uri );
   }
 
   dbDisconnect() {
-    console.log( this.db );
-
     if ( this.db ) {
-      this.db.disconnect();
+      mongoose.disconnect();
     }
   }
 

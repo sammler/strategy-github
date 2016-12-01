@@ -17,7 +17,7 @@ export default class AppServer {
 
   _initApp() {
     this.app.get( '/*', ( req, res, next ) => {
-      console.log( req.path );
+      console.log( req.path & '\n' );
       next();
     } );
     routes.config( this.app );
@@ -42,7 +42,7 @@ export default class AppServer {
   }
 
   dbConnect() {
-    //this.context.dbConnect();
+    this.context.dbConnect();
   }
 
   stop() {

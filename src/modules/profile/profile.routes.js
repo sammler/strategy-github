@@ -1,12 +1,11 @@
 import { Router } from 'express';
+import ProfileController from './profile.controller';
 
 export function routes() {
   let routes = Router();
+  let profileController = new ProfileController();
 
-  routes.get( '/', ( req, res ) => {
-    res.setHeader( 'Content-Type', 'application/json' );
-    res.send( { ts: new Date().toJSON() } );
-  } );
+  routes.get( '/', profileController.get );
 
   return routes;
 }
