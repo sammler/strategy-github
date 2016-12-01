@@ -13,7 +13,7 @@ services:
       - POSTGRES_PWD=postgres
       - POSTGRES_DB=sammler-github
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data_9_6:/var/lib/postgresql/data
 
 volumes:
-  postgres_data:
+  postgres_data_9_6:

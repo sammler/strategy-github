@@ -2,7 +2,7 @@
 import * as _ from 'lodash';
 import GitHub from './../../src/index';
 
-describe( 'int::repos', () => {
+xdescribe( 'int::repos', () => {
 
   let gitHub;
   beforeEach( () => {

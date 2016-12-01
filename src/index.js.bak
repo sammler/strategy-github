@@ -1,0 +1,14 @@
+import { winster as Logger } from 'winster';
+import Repos from './repos';
+import Profile from './profile';
+import * as AppServer from './app.js';
+
+export default class {
+  constructor() {
+    this.logger = new Logger();
+    this.repos = new Repos( this );
+    this.profile = new Profile( this );
+    this.app = new AppServer();
+    this.app.start();
+  }
+}

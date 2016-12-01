@@ -1,5 +1,3 @@
-//import Logger from './logger';
-
 /**
  * Get results from all pages
  *
@@ -11,8 +9,6 @@
  * @see https://github.com/mikedeboer/node-github/blob/master/examples/getStarred.js
  */
 export function getAll( ghClient, fnName, options, cb ) {
-
-  //let logger = new Logger();
 
   if ( !cb || typeof cb !== 'function' ) {
     throw new Error( 'No callback defined' );
