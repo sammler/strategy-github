@@ -1,5 +1,5 @@
-/* global expect, describe, beforeEach, it */
 import AppServer from './../../src/appServer';
+import supertest from 'supertest-as-promised';
 
 describe( 'AppServer', () => {
 
@@ -21,11 +21,33 @@ describe( 'AppServer', () => {
   } );
 
   it( 'should have an object base', () => {
-    expect( appServer ).to.have.a.property( 'base' ).to.be.an.object;
+    expect( appServer ).to.have.a.property( 'context' ).to.be.an.object;
   } );
 
   it( 'base should have a logger', () => {
-    expect( appServer.base ).to.have.a.property( 'logger' ).to.be.an.object;
+    expect( appServer.context ).to.have.a.property( 'logger' ).to.be.an.object;
+  } );
+
+} );
+
+describe( 'Loading AppServer', () => {
+
+  let server;
+  let appServer = new AppServer();
+  beforeEach( () => {
+    return appServer.start()
+      .then( () => {
+        server = supertest( appServer.server );
+      } )
+  } );
+  afterEach( () => {
+    return appServer.stop();
+  } );
+
+  it( 'responds with 404 to /', () => {
+    return server
+      .get( '/' )
+      .expect( 404 );
   } );
 
 } );

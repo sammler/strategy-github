@@ -1,3 +1,17 @@
+const GitHubApi = require( 'github' );
+const auth = require( './../../.github-auth.json' );
+
+export function getGhClient() {
+
+  //Todo: Use bluebird for promises
+  let clientInstance = new GitHubApi( {
+    debug: false,
+    // bluebird could be used here
+  } );
+  clientInstance.authenticate( auth );
+  return clientInstance;
+}
+
 /**
  * Get results from all pages
  *

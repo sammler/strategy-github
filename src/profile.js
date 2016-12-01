@@ -12,7 +12,6 @@ export default class Profile {
 
     // shortcuts
     this.logger = this.base.logger;
-
   }
 
   /**
@@ -52,7 +51,5 @@ export default class Profile {
         this.base.storage.profile.save( res );
       } )
       .catch( this.base.logger.error )
-
   }
-
 }

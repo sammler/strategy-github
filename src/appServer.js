@@ -1,39 +1,60 @@
-const express = require( 'express' );
-const app = express();
-const port = process.env.SAMMLER_MIDDLEWARE_GITHUB_PORT || 3000;
+import express from 'express';
+import Context from './context';
+import * as routes from './routes';
 
-import Base from './base';
-import * as mqListener from './modules/mq-listener';
+//import * as mqListener from './modules/mq-listener';
 
 export default class AppServer {
-  constructor() {
+
+  constructor( config ) {
+    this.PORT = process.env.SAMMLER_MIDDLEWARE_GITHUB_PORT || ( config ? config.port : null ) || 3000;
+    this.app = express();
+    this._initApp();
+
     this.server = null;
-    this.base = new Base();
-    this._init();
+    this.context = new Context();
   }
 
-  _init() {
-
-  }
-
-  start() {
-    this.server = app.listen( port, () => {
-      if ( !port ) {
-        let msg = 'Port for SAMMLER_MIDDLEWARE_GITHUB_PORT is not set';
-        this.base.logger.error( msg );
-        throw new Error( msg );
-      }
-
-      this.base.logger.silly( 'Express server listening on port %d in %s mode', port, app.settings.env );
-
-
-
+  _initApp() {
+    this.app.get( '/*', ( req, res, next ) => {
+      console.log( req.path );
+      next();
     } );
+    routes.config( this.app );
+  }
+
+  /**
+   * Start the Express server
+   * @returns {Promise}
+   */
+  start() {
+
+    return new Promise( ( resolve, reject ) => {
+      this.server = this.app.listen( this.PORT, ( err ) => {
+        if ( err ) {
+          return reject( err );
+        }
+        this.context.logger.silly( 'Express server listening on port %d in "%s" mode', this.PORT, this.app.settings.env );
+        return resolve();
+      } );
+    } );
+
+  }
+
+  dbConnect() {
+    //this.context.dbConnect();
   }
 
   stop() {
-    this.server.close();
-    this.base.logger.silly( 'Server stopped' );
+    return new Promise( ( resolve ) => {
+
+      this.context.dbDisconnect();
+
+      this.server.close();
+      this.context.logger.silly( 'Server stopped' );
+      resolve();
+    } )
+
   }
 }
 
