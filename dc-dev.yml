@@ -1,4 +1,8 @@
 version: "2"
+
+volumes:
+  postgres_data:
+
 services:
 
   # Base services

@@ -1,5 +1,5 @@
 import AppServer from './../../src/appServer';
-import supertest from 'supertest-as-promised';
+import supertest from 'supertest';
 
 describe( 'AppServer', () => {
 

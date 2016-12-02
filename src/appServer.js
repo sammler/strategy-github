@@ -1,6 +1,8 @@
 import express from 'express';
 import Context from './context';
 import * as routes from './routes';
+import * as ServiceManagerConfig from './config/service-manager-config';
+import ServiceManager from 'simple-service-manager';
 
 //import * as mqListener from './modules/mq-listener';
 
@@ -10,6 +12,8 @@ export default class AppServer {
     this.PORT = process.env.SAMMLER_MIDDLEWARE_GITHUB_PORT || ( config ? config.port : null ) || 3000;
     this.app = express();
     this._initApp();
+    ServiceManagerConfig.init();
+    this.logger = ServiceManager.instance().get( 'logger' );
 
     this.server = null;
     this.context = new Context();
@@ -34,7 +38,7 @@ export default class AppServer {
         if ( err ) {
           return reject( err );
         }
-        this.context.logger.silly( 'Express server listening on port %d in "%s" mode', this.PORT, this.app.settings.env );
+        this.logger.silly( 'Express server listening on port %d in "%s" mode', this.PORT, this.app.settings.env );
         return resolve();
       } );
     } );
@@ -51,7 +55,7 @@ export default class AppServer {
       this.context.dbDisconnect();
 
       this.server.close();
-      this.context.logger.silly( 'Server stopped' );
+      this.logger.silly( 'Server stopped' );
       resolve();
     } )
 

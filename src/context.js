@@ -1,16 +1,15 @@
-import winster from 'winster';
-const mongoose = require( 'mongoose' );
+import mongoose from 'mongoose' ;
+import ServiceManager from 'service-manager';
 
 export default class Context {
   constructor() {
-    this.logger = new winster();
     this.db;
     mongoose.Promise = global.Promise;
     mongoose.set( 'debug', true );
   }
 
   dbConnect() {
-    let uri = 'mongodb://localhost:27017/s5r-mw-github';
+    let uri = ServiceManager.instance().get( 'dbConfig.uri' );
     this.db = mongoose.connect( uri );
   }
 

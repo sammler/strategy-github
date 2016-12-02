@@ -1,7 +1,7 @@
 import supertest from 'supertest'
 import AppServer from './../../src/appServer';
 
-describe.only( 'profile', () => {
+describe( 'profile', () => {
 
   let server;
   let appServer = new AppServer();
