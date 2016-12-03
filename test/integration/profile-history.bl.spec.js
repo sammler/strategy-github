@@ -2,7 +2,7 @@ import ProfileHistoryBL from './../../src/modules/profile-history/profile-histor
 import Context from './../../src/config/context';
 import DBHelpers from './../lib/db-helpers';
 
-describe.only( 'profile-history.bl', () => {
+describe( 'profile-history.bl', () => {
 
   let profileHistoryBL;
   let dbHelpers;
@@ -12,12 +12,6 @@ describe.only( 'profile-history.bl', () => {
     profileHistoryBL = new ProfileHistoryBL();
     dbHelpers = new DBHelpers();
     dbHelpers.dropDatabase( done );
-  } );
-  beforeEach( () => {
-
-  } );
-  after( () => {
-    //context.dbDisconnect();
   } );
 
   it( 'save should just save the item', () => {
