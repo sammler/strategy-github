@@ -1,8 +1,8 @@
-import Context from './../src/context';
+import Context from './../src/config/context';
 
 export default class Global {
   constructor() {
     process.env.NODE_ENV = 'test';
-    this.Context = new Context();
+    this.Context = Context.instance();
   }
 }

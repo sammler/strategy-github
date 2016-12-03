@@ -1,8 +1,7 @@
 import express from 'express';
-import Context from './context';
+import Context from './config/context';
 import * as routes from './routes';
-import * as ServiceManagerConfig from './config/service-manager-config';
-import ServiceManager from 'simple-service-manager';
+import bodyParser from 'body-parser';
 
 //import * as mqListener from './modules/mq-listener';
 
@@ -12,14 +11,14 @@ export default class AppServer {
     this.PORT = process.env.SAMMLER_MIDDLEWARE_GITHUB_PORT || ( config ? config.port : null ) || 3000;
     this.app = express();
     this._initApp();
-    ServiceManagerConfig.init();
-    this.logger = ServiceManager.instance().get( 'logger' );
 
     this.server = null;
-    this.context = new Context();
+    this.context = Context.instance();
+    this.logger = this.context.logger;
   }
 
   _initApp() {
+    this.app.use( bodyParser.json( { limit: '10mb' } ) );
     this.app.get( '/*', ( req, res, next ) => {
       console.log( req.path & '\n' );
       next();
@@ -43,10 +42,6 @@ export default class AppServer {
       } );
     } );
 
-  }
-
-  dbConnect() {
-    this.context.dbConnect();
   }
 
   stop() {

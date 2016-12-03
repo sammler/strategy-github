@@ -1,15 +1,12 @@
 import * as ghUtils from './../../helper/github-utils';
+import ServiceManager from 'service-manager';
 
 export default class GithubProfileFactory {
-  constructor( context ) {
-    if ( !context ) {
-      throw new Error( 'No context defined' );
-    }
-    this.context = context;
+  constructor(  ) {
     this.ghClient = ghUtils.getGhClient();
 
     // shortcuts
-    this.logger = context.logger;
+    this.logger = ServiceManager.instance().get('logger');
   }
 
   /**
