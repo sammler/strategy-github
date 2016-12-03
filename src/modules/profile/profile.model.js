@@ -20,6 +20,13 @@ let ProfileSchema = new Schema( {
     unique: true
   },
 
+  login: {
+    type: String,
+    null: false,
+    required: true,
+    unique: true
+  },
+
   name: {
     type: String,
     null: false,
@@ -66,15 +73,9 @@ let ProfileSchema = new Schema( {
     type: Number,
     null: false,
     default: 0
-  },
-
-  login: {
-    type: String,
-    null: false,
-    required: true
   }
 
-}, { strict: false } )
+}, { collection: 'profiles', strict: false } );
 
 ProfileSchema.plugin( uniqueValidator, null );
 ProfileSchema.plugin( timeStamps );

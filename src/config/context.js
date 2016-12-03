@@ -10,6 +10,7 @@ export default class Context {
     mongoose.Promise = global.Promise;
     mongoose.set( 'debug', false );
 
+    console.log('this.db', this.db);
     if ( !this.db ) {
       this.dbConnect();
     }
@@ -24,7 +25,12 @@ export default class Context {
 
   dbConnect() {
     let uri = 'mongodb://localhost:27017/s5r-mw-github';
-    this.db = mongoose.connect( uri );
+    let options = {
+      server: {
+        poolSize: 5
+      }
+    };
+    this.db = mongoose.connect( uri, options );
   }
 
   dbDisconnect() {

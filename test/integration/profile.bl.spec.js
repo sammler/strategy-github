@@ -2,7 +2,7 @@ import ProfileBL from './../../src/modules/profile/profile.bl';
 import Context from './../../src/config/context';
 import DBHelpers from './../lib/db-helpers';
 
-describe( 'profile.bl => fresh db', () => {
+describe( 'profile.bl', () => {
 
   let profileBL;
   let dbHelpers;

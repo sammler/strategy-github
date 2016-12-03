@@ -17,11 +17,29 @@ describe.only( 'profile-history.bl', () => {
 
   } );
   after( () => {
-    context.dbDisconnect();
+    //context.dbDisconnect();
   } );
 
-  it( 'should ideally succeed', () => {
-    expect( true ).to.be.true;
+  it( 'save should just save the item', () => {
+    let doc = {
+      id: 1,
+      login: 'stefanwalther',
+      foo: 'profile-history',
+      lastUpdate: new Date().setUTCHours( 0, 0, 0, 0 )
+    };
+    return profileHistoryBL.save( doc ).then( result => {
+      expect( result ).to.exist;
+      expect( result._doc ).to.have.property( 'login' );
+      expect( result._doc ).to.have.property( 'lastUpdate' );
+    } );
+  } );
+
+  it( 'allows to save multiple items per profile', () => {
+    expect( false ).to.be.true;
+  } );
+
+  it( 'updates and existing item automatically (per profile/day)', () => {
+    expect( false ).to.be.true;
   } );
 
 } );
