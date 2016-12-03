@@ -9,16 +9,11 @@ export default class ProfileBL {
     this.logger = context.logger;
   }
 
-  removeAll( callback ) {
-    ProfileModel
-      .remove( {}, callback );
-  }
-
-  removeAllP() {
+  removeAll() {
     return ProfileModel.remove( {} );
   }
 
-  save( data, callback ) {
+  xsave( data, callback ) {
 
     let query = { id: data.id, lastUpdate: data.lastUpdate };
     let Profile = new ProfileModel( data );
@@ -38,7 +33,7 @@ export default class ProfileBL {
       } )
   }
 
-  saveP( data ) {
+  save( data ) {
 
     let query = { id: data.id, lastUpdate: data.lastUpdate };
     let Profile = new ProfileModel( data );

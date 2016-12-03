@@ -2,7 +2,7 @@ import ProfileBL from './../../src/modules/profile/profile.bl';
 import Context from './../../src/config/context';
 import DBHelpers from './../lib/db-helpers';
 
-describe( 'profile.bl', () => {
+describe.only( 'profile.bl', () => {
 
   let profileBL;
   let dbHelpers;
@@ -21,23 +21,23 @@ describe( 'profile.bl', () => {
   } );
 
   it( 'removeAll removes all existing profiles', () => {
-    return profileBL.removeAllP();
+    return profileBL.removeAll();
   } );
 
-  it( 'requires some parameters', ( done ) => {
+  it( 'requires some parameters', () => {
     let doc = {
       id: 1,
       login: 'stefanwalther',
       foo: 'baz'
     };
-    profileBL.save( doc, ( err, doc ) => {
-      expect( err ).to.exist;
-      expect( err ).to.have.property( 'name' );
-      done();
-    } );
+    return profileBL.save( doc )
+      .catch( ( err ) => {
+        expect( err ).to.exist;
+        expect( err ).to.have.property( 'name' );
+      } )
   } );
 
-  it( 'can save a profile', ( done ) => {
+  it( 'can save a profile', () => {
 
     let doc = {
       id: 1,
@@ -46,104 +46,113 @@ describe( 'profile.bl', () => {
       name: 'Stefan Walther'
     };
 
-    profileBL.save( doc, ( err, doc ) => {
-      expect( err ).to.not.exist;
-      expect( err ).to.be.an.object;
-      expect( doc ).to.exist;
-      expect( doc ).to.be.an.object;
-      expect( doc.id ).to.be.equal( doc.id );
-      expect( doc.login ).to.be.equal( doc.login );
-      expect( doc.foo ).to.be.equal( doc.foo );
-      done();
-    } );
+    return profileBL.save( doc )
+      .then( ( doc ) => {
+        expect( doc ).to.exist;
+        expect( doc ).to.be.an.object;
+        expect( doc.id ).to.be.equal( doc.id );
+        expect( doc.login ).to.be.equal( doc.login );
+        expect( doc.foo ).to.be.equal( doc.foo );
+
+      } )
+      .catch( ( err ) => {
+        expect( err ).to.not.exist;
+        expect( err ).to.be.an.object;
+      } );
   } );
 
-  it( 'can update a profile', ( done ) => {
+  it( 'can update a profile', () => {
     let doc = {
       id: 1,
       login: 'stefanwalther',
       name: 'Stefan Walther',
       foo: 'baz'
     };
-    profileBL.save( doc, ( err, doc ) => {
-      expect( err ).to.not.exist;
-      expect( err ).to.be.an.object;
-      expect( doc ).to.exist;
-      expect( doc ).to.be.an.object;
-      expect( doc.id ).to.be.equal( doc.id );
-      expect( doc.login ).to.be.equal( doc.login );
-      expect( doc.foo ).to.be.equal( doc.foo );
-      done();
-    } );
-
-  } );
-
-  it( 'can only create one entry per profile per day', ( done ) => {
-    profileBL.removeAll( ( err ) => {
-      expect( err ).to.not.exist;
-
-      let doc1 = {
-        id: 1,
-        login: 'stefanwalther',
-        name: 'Stefan Walther',
-        foo: 'baz',
-        lastUpdate: new Date().setUTCHours( 0, 0, 0, 0 )
-      };
-      let doc2 = {
-        id: 1,
-        login: 'stefanwalther',
-        name: 'Stefan Walther',
-        foo: 'bar',
-        lastUpdate: new Date().setUTCHours( 0, 0, 0, 0 )
-      };
-
-      profileBL.save( doc1, ( err, result ) => {
+    return profileBL.save( doc )
+      .then( ( doc ) => {
+        expect( doc ).to.exist;
+        expect( doc ).to.be.an.object;
+        expect( doc.id ).to.be.equal( doc.id );
+        expect( doc.login ).to.be.equal( doc.login );
+        expect( doc.foo ).to.be.equal( doc.foo );
+      } )
+      .catch( ( err ) => {
         expect( err ).to.not.exist;
-        profileBL.save( doc2, ( err, result2 ) => {
-          expect( err ).to.not.exist;
-          expect( result2 ).to.exist;
-          expect( result2._doc ).to.have.property( 'foo' );
-          expect( result2._doc.foo ).to.be.equal( doc2.foo );
-          done();
-        } )
+        expect( err ).to.be.an.object;
       } );
 
-    } )
   } );
 
-  it( 'allows to create entries on different days for the same profiles', ( done ) => {
+  it( 'can only create one entry per profile per day', () => {
+    return profileBL.removeAll()
+      .then( () => {
 
-    profileBL.removeAll( ( err ) => {
-      expect( err ).to.not.exist;
+        let doc1 = {
+          id: 1,
+          login: 'stefanwalther',
+          name: 'Stefan Walther',
+          foo: 'baz',
+          lastUpdate: new Date().setUTCHours( 0, 0, 0, 0 )
+        };
+        let doc2 = {
+          id: 1,
+          login: 'stefanwalther',
+          name: 'Stefan Walther',
+          foo: 'bar',
+          lastUpdate: new Date().setUTCHours( 0, 0, 0, 0 )
+        };
+        return profileBL.save( doc1 )
+          .then( () => {
+            return profileBL.save( doc2 )
+              .then( ( result2 ) => {
+                expect( result2 ).to.exist;
+                expect( result2._doc ).to.have.property( 'foo' );
+                expect( result2._doc.foo ).to.be.equal( doc2.foo );
+              } )
+              .catch( ( err ) => {
+                expect( err ).to.not.exist;
+              } )
+          } )
+          .catch( ( err ) => {
+            expect( err ).to.not.exist;
+          } );
+      } );
+  } );
 
-      let profile1 = {
-        id: 1,
-        login: 'stefanwalther',
-        name: 'Stefan Walther',
-        foo: 'baz',
-        lastUpdate: new Date().setUTCHours( 0, 0, 0, 0 )
-      };
-      let profile2 = {
-        id: 2,
-        login: 'stefanwalther2',
-        name: 'Stefan Walther2',
-        foo: 'bar',
-        lastUpdate: new Date().setUTCHours( 0, 0, 0, 0 )
-      };
+  it( 'allows to create entries on different days for the same profiles', () => {
 
-      Promise.all( [
-        profileBL.saveP( profile1 ),
-        profileBL.saveP( profile2 )
-      ] ).then( ( results ) => {
-        expect( results ).to.exist;
-        done();
+    return profileBL.removeAll()
+      .then( () => {
+        let profile1 = {
+          id: 1,
+          login: 'stefanwalther',
+          name: 'Stefan Walther',
+          foo: 'baz',
+          lastUpdate: new Date().setUTCHours( 0, 0, 0, 0 )
+        };
+        let profile2 = {
+          id: 2,
+          login: 'stefanwalther2',
+          name: 'Stefan Walther2',
+          foo: 'bar',
+          lastUpdate: new Date().setUTCHours( 0, 0, 0, 0 )
+        };
+
+        return Promise.all( [
+          profileBL.save( profile1 ),
+          profileBL.save( profile2 )
+        ] ).then( ( results ) => {
+          expect( results ).to.exist;
+        } )
+          .catch( ( err ) => {
+            expect( err ).to.not.exist;
+          } );
+
       } )
-        .catch( ( err ) => {
-          expect( err ).to.not.exist;
-        } );
+      .catch( ( err ) => {
+        expect( err ).to.not.exist;
+      } );
 
-    } )
-
-  } );
+  } )
 
 } );

@@ -27,11 +27,12 @@ describe.only( 'profile-history.bl', () => {
       foo: 'profile-history',
       lastUpdate: new Date().setUTCHours( 0, 0, 0, 0 )
     };
-    return profileHistoryBL.save( doc ).then( result => {
-      expect( result ).to.exist;
-      expect( result._doc ).to.have.property( 'login' );
-      expect( result._doc ).to.have.property( 'lastUpdate' );
-    } );
+    return profileHistoryBL.save( doc )
+      .then( result => {
+        expect( result ).to.exist;
+        expect( result._doc ).to.have.property( 'login' );
+        expect( result._doc ).to.have.property( 'lastUpdate' );
+      } );
   } );
 
   it( 'allows to save multiple items per profile', () => {
