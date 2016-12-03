@@ -46,6 +46,7 @@
     "github": "^6.1.0",
     "lodash": "^4.17.2",
     "mongoose": "^4.7.1",
+    "mongoose-timestamp": "^0.6.0",
     "mongoose-unique-validator": "^1.0.3",
     "service-manager": "stefanwalther/service-manager",
     "winster": "^0.1.3",

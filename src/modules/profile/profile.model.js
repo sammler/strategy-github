@@ -2,6 +2,7 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 const uniqueValidator = require( 'mongoose-unique-validator' );
+const timeStamps = require( 'mongoose-timestamp' );
 
 //Todo: Required fields are not validated
 let ProfileSchema = new Schema( {
@@ -48,7 +49,7 @@ let ProfileSchema = new Schema( {
     default: 0
   },
 
-  total_private_repos:{
+  total_private_repos: {
     type: Number,
     null: false,
     default: 0
@@ -75,6 +76,7 @@ let ProfileSchema = new Schema( {
 }, { strict: false } )
 
 ProfileSchema.plugin( uniqueValidator, null );
+ProfileSchema.plugin( timeStamps );
 
 /**
  * Methods
