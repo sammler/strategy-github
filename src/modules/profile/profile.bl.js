@@ -9,9 +9,18 @@ export default class ProfileBL {
     this.logger = context.logger;
   }
 
+  removeAll( callback ) {
+    ProfileModel
+      .remove( {}, callback );
+  }
+
+  removeAllP() {
+    return ProfileModel.remove( {} );
+  }
+
   save( data, callback ) {
 
-    let query = { id: data.id };
+    let query = { id: data.id, lastUpdate: data.lastUpdate };
     let Profile = new ProfileModel( data );
 
     let error = Profile.validateSync();
@@ -27,6 +36,24 @@ export default class ProfileBL {
       }, ( err, numberAffected, raw ) => {
         callback( err, numberAffected, raw );
       } )
+  }
+
+  saveP( data ) {
+
+    let query = { id: data.id, lastUpdate: data.lastUpdate };
+    let Profile = new ProfileModel( data );
+
+    let error = Profile.validateSync();
+    if ( error && error.errors ) {
+      return Promise.reject( error );
+    }
+
+    return ProfileModel
+      .findOneAndUpdate( query, data, {
+        upsert: true,
+        setDefaultsOnInsert: true,
+        new: true
+      } );
   }
 
 }

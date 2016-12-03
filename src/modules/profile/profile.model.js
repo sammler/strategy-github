@@ -7,6 +7,7 @@ const timeStamps = require( 'mongoose-timestamp' );
 //Todo: Required fields are not validated
 let ProfileSchema = new Schema( {
 
+  // last time the data was updated in the MongoDb (not on GitHub!)
   lastUpdate: {
     type: Date,
     default: new Date().setUTCHours( 0, 0, 0, 0 ),
