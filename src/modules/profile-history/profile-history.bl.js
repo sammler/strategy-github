@@ -24,7 +24,20 @@ export default class ProfileHistoryBL {
         upsert: true,
         setDefaultsOnInsert: true,
         new: true
-      } ).exec();
+      } )
+      .exec();
+  }
+
+  countPerProfileId( profileId ) {
+    return ProfileHistoryModel
+      .count( { id: profileId } )
+      .exec();
+  }
+
+  removeAll() {
+    return ProfileHistoryModel
+      .remove( {} )
+      .exec();
   }
 
 }

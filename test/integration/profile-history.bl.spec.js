@@ -35,12 +35,67 @@ describe.only( 'profile-history.bl', () => {
       } );
   } );
 
-  it( 'allows to save multiple items per profile', () => {
-    expect( false ).to.be.true;
+  it( 'if the date is different a new rec will be created', () => {
+
+    let dateToday = new Date();
+
+    let doc1 = {
+      id: 1,
+      login: 'stefanwalther',
+      foo: 'profile-history',
+      lastUpdate: dateToday.setUTCHours( 0, 0, 0, 0 )
+    };
+
+    let dateYesterday = new Date( dateToday.setDate( dateToday.getDate() - 1 ) );
+    dateYesterday = dateYesterday.setUTCHours( 0, 0, 0, 0 );
+    let doc2 = {
+      id: 1,
+      login: 'stefanwalther',
+      foo: 'profile-history',
+      lastUpdate: dateYesterday
+    };
+
+    return profileHistoryBL.removeAll()
+      .then( () => {
+        return Promise.all( [
+          profileHistoryBL.save( doc1 ),
+          profileHistoryBL.save( doc2 )
+        ] )
+          .catch( ( err ) => {
+            expect( err ).to.not.exist;
+          } );
+      } );
   } );
 
   it( 'updates and existing item automatically (per profile/day)', () => {
-    expect( false ).to.be.true;
+
+    let doc1 = {
+      id: 1,
+      login: 'stefanwalther',
+      foo: 'profile-history',
+      lastUpdate: new Date().setUTCHours( 0, 0, 0, 0 )
+    };
+
+    let doc2 = {
+      id: 1,
+      login: 'stefanwalther',
+      foo: 'profile-history2',
+      lastUpdate: new Date().setUTCHours( 0, 0, 0, 0 )
+    };
+
+    return profileHistoryBL.removeAll()
+      .then( () => {
+        return Promise.all( [
+          profileHistoryBL.save( doc1 ),
+          profileHistoryBL.save( doc2 )
+        ] )
+          .then( () => {
+            return profileHistoryBL.countPerProfileId( 1 )
+              .then( ( count ) => {
+                expect( count ).to.be.equal( 1 )
+              } )
+          } )
+      } )
   } );
 
 } );

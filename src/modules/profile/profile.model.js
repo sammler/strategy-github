@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const uniqueValidator = require( 'mongoose-unique-validator' );
 const timeStamps = require( 'mongoose-timestamp' );
 
-//Todo: Required fields are not validated
 let ProfileSchema = new Schema( {
 
   // last time the data was updated in the MongoDb (not on GitHub!)
