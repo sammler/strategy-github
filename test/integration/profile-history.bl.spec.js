@@ -61,6 +61,7 @@ describe( 'profile-history.bl', () => {
       } );
   } );
 
+  //Todo: Doesn't seem to be robust, return 2 instead of 1 from time to time ... ?!
   it( 'updates and existing item automatically (per profile/day)', () => {
 
     let doc1 = {

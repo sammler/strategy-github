@@ -1,5 +1,5 @@
 //import * as _ from 'lodash';
-import * as ghUtils from './../helper/github-utils';
+import * as ghUtils from './../modules/github/github-utils';
 
 export default class GitHubProfile {
   constructor( context ) {
