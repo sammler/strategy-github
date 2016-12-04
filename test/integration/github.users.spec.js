@@ -1,7 +1,7 @@
 import GithubUsers from './../../src/modules/github/github.users';
 import Context from './../../src/config/context';
 
-describe.only( 'github.profile.follwers', () => {
+describe( 'github.profile.follwers', () => {
 
   let gitHubUsers;
   let context;

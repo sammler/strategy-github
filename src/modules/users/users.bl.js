@@ -1,7 +1,7 @@
-import { Model as ProfileModel } from './profile.model';
+import { Model as UserModel } from './users.model';
 import Context from './../../config/context';
 
-export default class ProfileBL {
+export default class UsersBL {
   constructor( context ) {
     if ( !context ) {
       context = Context.instance();
@@ -9,21 +9,16 @@ export default class ProfileBL {
     this.logger = context.logger;
   }
 
-  removeAll() {
-    return ProfileModel.remove( {} );
-  }
-
   save( data ) {
 
-    let query = { id: data.id, lastUpdate: data.lastUpdate };
-    let Profile = new ProfileModel( data );
-
-    let error = Profile.validateSync();
+    let query = { id: data.id };
+    let User = new UserModel( data );
+    let error = User.validateSync();
     if ( error && error.errors ) {
       return Promise.reject( error );
     }
 
-    return ProfileModel
+    return UserModel
       .findOneAndUpdate( query, data, {
         upsert: true,
         setDefaultsOnInsert: true,
@@ -31,5 +26,22 @@ export default class ProfileBL {
       } );
   }
 
-}
+  remove( userId ) {
 
+  }
+
+  removeAll() {
+    return UserModel
+      .remove( {} )
+      .exec();
+  }
+
+  getByName( userName ) {
+
+  }
+
+  getById( userId) {
+
+  }
+
+}
