@@ -7,11 +7,6 @@ export default class ProfileController {
   }
 
   // Todo: Proper error handling: https://derickbailey.com/2014/09/06/proper-error-handling-in-expressjs-route-handlers/
-  /**
-   * Get all profiles
-   * @param req
-   * @param res
-   */
   //get( req, res, next ) {
   //  profileModel.find( {}, ( err, data ) => {
   //    if ( err ) { return next( err ); }
@@ -19,6 +14,12 @@ export default class ProfileController {
   //  } )
   //}
 
+  /**
+   * Create a profile.
+   * @param req
+   * @param res
+   * @param next
+   */
   create( req, res, next ) {
     console.log( 'controller:req.body', req.body );
     this.profileBL.save( req.body, ( err, doc ) => {

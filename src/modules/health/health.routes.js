@@ -3,9 +3,9 @@ import HealthController from './health.controller';
 
 export function routes() {
   let routes = Router();
-  let healthController = new HealthController();
+  //let healthController = new HealthController();
 
-  routes.get( '/', healthController.get );
+  routes.get( '/', HealthController.get );
 
   return routes;
 }

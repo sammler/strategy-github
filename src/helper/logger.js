@@ -1,5 +1,6 @@
 import * as winston from 'winston';
 
+//Todo: some refactoring based on http://stackoverflow.com/questions/27980996/return-a-value-other-than-the-class-in-es6
 let defaultOpts = {
   name: 'debug-console',
   level: 'silly',
