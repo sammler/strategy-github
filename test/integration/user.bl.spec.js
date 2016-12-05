@@ -2,7 +2,7 @@ import UsersBL from './../../src/modules/users/users.bl';
 import Context from './../../src/config/context';
 import DBHelpers from './../lib/db-helpers';
 
-describe( 'users.bl', () => {
+describe.only( 'users.bl', () => {
 
   let usersBL;
   let dbHelpers;

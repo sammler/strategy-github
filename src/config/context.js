@@ -1,16 +1,19 @@
 import mongoose from 'mongoose' ;
-import winster from 'winster';
+import Logger from './../helper/logger';
 
 let instance;
 export default class Context {
   constructor( ) {
     this.db;
-    this.logger = new winster();
+    this.logger = new Logger();
+
+
+
 
     mongoose.Promise = global.Promise;
     mongoose.set( 'debug', false );
 
-    console.log('this.db', this.db);
+    console.log( 'this.db', this.db );
     if ( !this.db ) {
       this.dbConnect();
     }
