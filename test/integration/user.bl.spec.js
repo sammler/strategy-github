@@ -17,7 +17,7 @@ describe( 'users.bl', () => {
 
   } );
   after( () => {
-    context.dbDisconnect();
+    //context.dbDisconnect();
   } );
 
   it( 'BL has some basic functions', () => {
