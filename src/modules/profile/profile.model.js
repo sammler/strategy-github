@@ -13,6 +13,10 @@ let ProfileSchema = new Schema( {
     null: false
   },
 
+  //last_check_deps: {
+  //  type:
+  //},
+
   id: {
     type: Number,
     null: false,
