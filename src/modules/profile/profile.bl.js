@@ -15,7 +15,7 @@ export default class ProfileBL {
 
   save( data ) {
 
-    let query = { id: data.id, lastUpdate: data.lastUpdate };
+    let query = { id: data.id, lastUpdate: data.last_check };
     let Profile = new ProfileModel( data );
 
     let error = Profile.validateSync();

@@ -2,7 +2,7 @@ import ProfileBL from './../../src/modules/profile/profile.bl';
 import Context from './../../src/config/context';
 import DBHelpers from './../lib/db-helpers';
 
-describe( 'profile.bl', () => {
+describe.only( 'profile.bl', () => {
 
   let profileBL;
   let dbHelpers;
@@ -17,7 +17,7 @@ describe( 'profile.bl', () => {
 
   } );
   after( () => {
-    context.dbDisconnect();
+    //context.dbDisconnect();
   } );
 
   it( 'removeAll removes all existing profiles', () => {
@@ -92,14 +92,14 @@ describe( 'profile.bl', () => {
           login: 'stefanwalther',
           name: 'Stefan Walther',
           foo: 'baz',
-          lastUpdate: new Date().setUTCHours( 0, 0, 0, 0 )
+          last_check: new Date().setUTCHours( 0, 0, 0, 0 )
         };
         let doc2 = {
           id: 1,
           login: 'stefanwalther',
           name: 'Stefan Walther',
           foo: 'bar',
-          lastUpdate: new Date().setUTCHours( 0, 0, 0, 0 )
+          last_check: new Date().setUTCHours( 0, 0, 0, 0 )
         };
         return profileBL.save( doc1 )
           .then( () => {
@@ -128,14 +128,14 @@ describe( 'profile.bl', () => {
           login: 'stefanwalther',
           name: 'Stefan Walther',
           foo: 'baz',
-          lastUpdate: new Date().setUTCHours( 0, 0, 0, 0 )
+          last_check: new Date().setUTCHours( 0, 0, 0, 0 )
         };
         let profile2 = {
           id: 2,
           login: 'stefanwalther2',
           name: 'Stefan Walther2',
           foo: 'bar',
-          lastUpdate: new Date().setUTCHours( 0, 0, 0, 0 )
+          last_check: new Date().setUTCHours( 0, 0, 0, 0 )
         };
 
         return Promise.all( [

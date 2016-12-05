@@ -48,7 +48,6 @@
     "mongoose": "^4.7.1",
     "mongoose-timestamp": "^0.6.0",
     "mongoose-unique-validator": "^1.0.3",
-    "service-manager": "stefanwalther/service-manager",
     "winston": "^2.3.0",
     "winston-mongodb": "^1.6.5",
     "yarn": "^0.17.10"

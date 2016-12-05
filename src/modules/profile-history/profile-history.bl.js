@@ -11,7 +11,7 @@ export default class ProfileHistoryBL {
 
   save( data ) {
 
-    let query = { id: data.id, lastUpdate: data.lastUpdate };
+    let query = { id: data.id, lastUpdate: data.last_check };
     let profileHistory = new ProfileHistoryModel( data );
 
     let error = profileHistory.validateSync();

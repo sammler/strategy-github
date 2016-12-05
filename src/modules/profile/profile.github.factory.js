@@ -1,12 +1,12 @@
 import * as ghUtils from './../../helper/github-utils';
-import ServiceManager from 'service-manager';
 
+//Todo: Rename to just GitHubProfile
 export default class GithubProfileFactory {
-  constructor(  ) {
+  constructor( context ) {
     this.ghClient = ghUtils.getGhClient();
 
     // shortcuts
-    this.logger = ServiceManager.instance().get('logger');
+    this.logger = context.logger;
   }
 
   /**

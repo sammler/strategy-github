@@ -7,7 +7,7 @@ const timeStamps = require( 'mongoose-timestamp' );
 let ProfileSchema = new Schema( {
 
   // last time the data was updated in the MongoDb (not on GitHub!)
-  lastUpdate: {
+  last_check: {
     type: Date,
     default: new Date().setUTCHours( 0, 0, 0, 0 ),
     null: false

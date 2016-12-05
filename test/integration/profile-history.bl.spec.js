@@ -19,7 +19,7 @@ describe( 'profile-history.bl', () => {
       id: 1,
       login: 'stefanwalther',
       foo: 'profile-history',
-      lastUpdate: new Date().setUTCHours( 0, 0, 0, 0 )
+      last_check: new Date().setUTCHours( 0, 0, 0, 0 )
     };
     return profileHistoryBL.save( doc )
       .then( result => {
@@ -37,7 +37,7 @@ describe( 'profile-history.bl', () => {
       id: 1,
       login: 'stefanwalther',
       foo: 'profile-history',
-      lastUpdate: dateToday.setUTCHours( 0, 0, 0, 0 )
+      last_check: dateToday.setUTCHours( 0, 0, 0, 0 )
     };
 
     let dateYesterday = new Date( dateToday.setDate( dateToday.getDate() - 1 ) );
@@ -46,7 +46,7 @@ describe( 'profile-history.bl', () => {
       id: 1,
       login: 'stefanwalther',
       foo: 'profile-history',
-      lastUpdate: dateYesterday
+      last_check: dateYesterday
     };
 
     return profileHistoryBL.removeAll()
@@ -68,14 +68,14 @@ describe( 'profile-history.bl', () => {
       id: 1,
       login: 'stefanwalther',
       foo: 'profile-history',
-      lastUpdate: new Date().setUTCHours( 0, 0, 0, 0 )
+      last_check: new Date().setUTCHours( 0, 0, 0, 0 )
     };
 
     let doc2 = {
       id: 1,
       login: 'stefanwalther',
       foo: 'profile-history2',
-      lastUpdate: new Date().setUTCHours( 0, 0, 0, 0 )
+      last_check: new Date().setUTCHours( 0, 0, 0, 0 )
     };
 
     return profileHistoryBL.removeAll()
