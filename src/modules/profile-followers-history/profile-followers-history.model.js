@@ -12,8 +12,8 @@ let ProfileFollowersHistorySchema = new Schema( {
     required: true
   },
 
-  // Todo: ref to the user
-  follower_id: {
+  // Todo: ref to the user (if we decide to keep the user)
+  user_id: {
     type: Number,
     null: false,
     required: true
@@ -27,6 +27,12 @@ let ProfileFollowersHistorySchema = new Schema( {
     type: Date,
     null: true,
     required: false
+  },
+
+  last_check: {
+    type: Date,
+    null: false,
+    default: new Date().setUTCHours( 0, 0, 0, 0 )
   }
 } );
 

@@ -9,35 +9,40 @@ export default class ProfileFollowersHistoryBL {
     this.logger = context.logger;
   }
 
-  removeByProfileId( profileId ) {
-
+  removeAll() {
+    return ProfileFollowersHistoryModel
+      .remove()
+      .exec();
   }
 
-  save( data ) {
+  removeByProfileId( profileId ) {
+    return ProfileFollowersHistoryModel
+      .remove( { profile_id: profileId } )
+      .exec();
+  }
+
+  create( data ) {
 
     let profileFollower = new ProfileFollowersHistoryModel( data );
     let error = profileFollower.validateSync();
     if ( error && error.errors ) {
       return Promise.reject( error );
     }
+
+    return ProfileFollowersHistoryModel
+      .create( data );
   }
 
-  //saveFollowers( profileId, followers ) {
-  //  let query = { profile_id: profileId };
-  //  let Profile = new ProfileModel( data );
-  //
-  //  let error = Profile.validateSync();
-  //  if ( error && error.errors ) {
-  //    return Promise.reject( error );
-  //  }
-  //
-  //  return ProfileModel
-  //    .findOneAndUpdate( query, data, {
-  //      upsert: true,
-  //      setDefaultsOnInsert: true,
-  //      new: true
-  //    } );
-  //}
+  getActiveFollowersByProfile( profileId ) {
+
+    return ProfileFollowersHistoryModel
+      .find( {
+        profile_id: profileId,
+        date_to: null
+      } )
+      .exec();
+
+  }
 
 }
 
