@@ -1,10 +1,9 @@
 import { Model as ProfileModel } from './profile.model';
-import Context from './../../config/context';
 
 export default class ProfileBL {
   constructor( context ) {
     if ( !context ) {
-      context = Context.instance();
+      throw new Error( 'No context provided.' );
     }
     this.logger = context.logger;
   }
@@ -15,7 +14,11 @@ export default class ProfileBL {
 
   save( data ) {
 
-    let query = { id: data.id, lastUpdate: data.last_check };
+    if ( !data ) {
+      throw new Error( 'No data provided' );
+    }
+
+    let query = { id: data.id, last_check: data.last_check };
     let Profile = new ProfileModel( data );
 
     let error = Profile.validateSync();
@@ -28,7 +31,8 @@ export default class ProfileBL {
         upsert: true,
         setDefaultsOnInsert: true,
         new: true
-      } );
+      } )
+      .exec();
   }
 
 }

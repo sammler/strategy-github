@@ -23,20 +23,18 @@ describe.only( 'Sync a profile', () => {
       per_page: 100
     };
 
-    return gitHubProfile.getProfile( cfg )
-      .then( ( profile ) => {
-        return Promise.resolve( profile );
-      } )
+    return profileBL.removeAll()
+      .then( () => { return gitHubProfile.getProfile( cfg ) } )
       .then( ( profile ) => {
         expect( profile ).to.exist;
-        expect( profile ).to.be.an.array;
-        return profileBL.save( profile )
+        return Promise.resolve( profile );
       } )
-      //.then( ( profile ) => { profileBL.save( profile )} )
+      .then( ( profile ) => { return profileBL.save( profile ) } )
+      .then( () => {
+        return Promise.resolve();
+      } )
       .catch( ( err ) => {
         expect( err ).to.not.exist;
       } )
-
   } );
-
 } );

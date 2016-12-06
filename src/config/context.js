@@ -6,11 +6,10 @@ export default class Context {
   constructor( ) {
     this.db;
     this.logger = new Logger();
-
-
-
-
+    
     mongoose.Promise = global.Promise;
+
+    //Todo: make this configurable
     mongoose.set( 'debug', false );
 
     if ( !this.db ) {
@@ -26,6 +25,7 @@ export default class Context {
   }
 
   dbConnect() {
+    //Todo: make this configurable
     let uri = 'mongodb://localhost:27017/s5r-s-github';
     let options = {
       server: {
