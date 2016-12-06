@@ -1,12 +1,18 @@
+First install yarn:
+
+```
+npm install -g yarn
+```
+
 
 **Production environment**
 
 ```sh
-$ npm run docker-compose
+$ yarn run docker-compose
 ```
 
 **Development environment**
 
 ```sh
-$ npm run docker-compose-dev
+$ yarn run dc-dev-up
 ```

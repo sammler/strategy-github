@@ -1,15 +1,15 @@
 {
-  "name": "sammler-middleware-github",
+  "name": "sammler-strategy-github",
   "version": "0.0.3",
-  "description": "Sammler middleware to collect GitHub content.",
+  "description": "Sammler strategy to collect GitHub content.",
   "keywords": [
     "github",
     "sammler",
-    "sammler-middleware"
+    "sammler-strategy"
   ],
-  "homepage": "https://github.com/sammler/sammler-middleware-github",
+  "homepage": "https://github.com/sammler/sammler-strategy-github",
   "bugs": {
-    "url": "https://github.com/sammler/sammler-middleware-github/issues"
+    "url": "https://github.com/sammler/sammler-strategy-github/issues"
   },
   "license": "MIT",
   "author": {
@@ -21,7 +21,7 @@
     "/dist"
   ],
   "main": "/dist/index.js",
-  "repository": "sammler/sammler-middleware-github",
+  "repository": "sammler/sammler-strategy-github",
   "scripts": {
     "build": "gulp build",
     "docker-compose": "docker-compose up --build",
