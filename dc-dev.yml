@@ -1,0 +1,38 @@
+version: "2"
+
+volumes:
+  postgres_data:
+
+services:
+
+  # Base services
+  s5r-rabbitmq:
+    extends:
+      file: ./node_modules/sammler-base/docker-compose.yml
+      service: "s5r-rabbitmq"
+
+  s5r-scheduler:
+    extends:
+      file: ./node_modules/sammler-base/docker-compose.yml
+      service: "s5r-scheduler"
+
+  # Middleware GitHub
+  sammler-middleware-github-db:
+    container_name: "s5r-mw-github-db"
+    image: mongo
+    ports:
+      - "27017:27017"
+
+#  sammler-middleware-github:
+#    build: .
+#    links:
+#      - s5r-rabbitmq
+#      - s5r-scheduler
+#      - sammler-middleware-github-db
+#
+#    environment:
+#      - SAMMLER_MIDDLEWARE_GITHUB_PORT=3010
+#      - SAMMLER_RABBITMQ_URL=amqp://guest:guest@s5r-rabbitmq:5672
+#      - SAMMLER_MIDDLEWARE_GITHUB_DB_URL=mongodb://mongo:pwd@sammler-middleware-github-db:27017/s5r-mw-github
+
+

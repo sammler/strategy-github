@@ -25,7 +25,10 @@ describe( 'unit::GitHub', () => {
 } );
 
 describe( 'unit:appServer', () => {
-  it( 'bla', () => {
-    expect( true ).to.be.true;
+  it( 'should have a method start', () => {
+    expect( appServer ).to.have.property( 'start' );
   } );
-});
+  it( 'should have a method stop', () => {
+    expect( appServer ).to.have.property( 'stop' );
+  } );
+} );

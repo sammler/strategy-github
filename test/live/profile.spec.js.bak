@@ -1,9 +1,9 @@
 /*global before, beforeEach, describe, expect, it, beforeEach*/
 import * as flyway from './../lib/flyway';
 import GitHub from './../../src/index';
-import Logger from 'sammler-nodelib-logger';
+import winster from 'winster';
 
-let logger = new Logger();
+let logger = new winster();
 
 describe( 'int::profile', () => {
 

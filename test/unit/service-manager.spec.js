@@ -1,0 +1,14 @@
+import ServiceManager from './../../src/config/service-manager';
+
+describe.only( 'service-manager', () => {
+
+  it( 'instance should be a method', () => {
+    console.log( ServiceManager );
+    expect( ServiceManager ).to.have.a.property( 'instance' ).to.be.a.function;
+  } );
+
+  it( 'instance returns a ServiceManager', () => {
+    expect( ServiceManager.instance() ).to.be.an.object;
+  } )
+
+} );

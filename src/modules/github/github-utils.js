@@ -1,4 +1,16 @@
-//import Logger from './logger';
+const GitHubApi = require( 'github' );
+const auth = require( './../../../.github-auth.json' );
+
+export function getGhClient() {
+
+  //Todo: Use bluebird for promises
+  let clientInstance = new GitHubApi( {
+    debug: false,
+    // bluebird could be used here
+  } );
+  clientInstance.authenticate( auth );
+  return clientInstance;
+}
 
 /**
  * Get results from all pages
@@ -11,8 +23,6 @@
  * @see https://github.com/mikedeboer/node-github/blob/master/examples/getStarred.js
  */
 export function getAll( ghClient, fnName, options, cb ) {
-
-  //let logger = new Logger();
 
   if ( !cb || typeof cb !== 'function' ) {
     throw new Error( 'No callback defined' );
