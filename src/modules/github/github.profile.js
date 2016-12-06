@@ -1,4 +1,4 @@
-import * as ghUtils from './../../helper/github-utils';
+import * as ghUtils from './github-utils';
 
 //Todo: Rename to just GitHubProfile
 export default class GithubProfileFactory {

@@ -48,9 +48,9 @@ describe( 'profile-followers-history.bl', () => {
     expect( true ).to.be.false;
   } );
 
-  it('`create` can also handle multiple entries', () => {
-    expect(true).to.be.false;
-  });
+  it( '`create` can also handle multiple entries', () => {
+    expect( true ).to.be.false;
+  } );
 
   it( '`removeByProfile` removes only the entries for the profile', () => {
     expect( true ).to.be.false;
