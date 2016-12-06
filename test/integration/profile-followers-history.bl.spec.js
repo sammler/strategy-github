@@ -3,7 +3,7 @@ import Context from './../../src/config/context';
 import DBHelpers from './../lib/db-helpers';
 
 
-describe.only( 'profile-followers-history.bl', () => {
+describe( 'profile-followers-history.bl', () => {
 
   let profileFollowersHistoryBL;
   let dbHelpers;

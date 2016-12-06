@@ -9,6 +9,7 @@ export default class UsersBL {
     this.logger = context.logger;
   }
 
+
   save( data ) {
 
     let query = { id: data.id };
@@ -23,11 +24,14 @@ export default class UsersBL {
         upsert: true,
         setDefaultsOnInsert: true,
         new: true
-      } );
+      } )
+      .exec();
   }
 
   remove( userId ) {
-
+    return UserModel
+      .remove( { id: userId } )
+      .exec()
   }
 
   removeAll() {
@@ -36,12 +40,16 @@ export default class UsersBL {
       .exec();
   }
 
-  getByName( userName ) {
-
+  getById( userId ) {
+    return UserModel
+      .findOne( { id: userId } )
+      .exec();
   }
 
-  getById( userId) {
-
+  getByLogin( login ) {
+    return UserModel
+      .findOne( { login: login } )
+      .exec();
   }
 
 }
