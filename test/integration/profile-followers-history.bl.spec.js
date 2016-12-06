@@ -2,7 +2,7 @@ import ProfileFollowersHistoryBL from './../../src/modules/profile-followers-his
 import Context from './../../src/config/context';
 import DBHelpers from './../lib/db-helpers';
 
-describe.only( 'profile-followers-history.bl', () => {
+describe( 'profile-followers-history.bl', () => {
 
   let profileFollowersHistoryBL;
   let dbHelpers;
@@ -28,7 +28,7 @@ describe.only( 'profile-followers-history.bl', () => {
 
     return profileFollowersHistoryBL
       .removeAll()
-      .then( profileFollowersHistoryBL.create.bind( null, entry ) )
+      .then( () => profileFollowersHistoryBL.create( entry ) )
       .then( ( result ) => {
         expect( result ).to.exist;
         expect( result ).to.have.property( 'profile_id' );
@@ -61,7 +61,7 @@ describe.only( 'profile-followers-history.bl', () => {
     let profileId = 1;
 
     return profileFollowersHistoryBL.removeAll()
-      .then( profileFollowersHistoryBL.getActiveFollowersByProfile.bind( null, profileId ) )
+      .then( () => profileFollowersHistoryBL.getActiveFollowersByProfile( profileId ) )
       .then( ( result ) => {
         expect( result ).to.exist.and.to.be.an.array;
         expect( result ).to.have.length( 1 );

@@ -61,8 +61,8 @@ describe( 'users.bl', () => {
 
     return usersBL
       .removeAll()
-      .then( usersBL.save.bind( null, user ) )
-      .then( usersBL.remove.bind( null, user.id ) )
+      .then( () => usersBL.save( user ) )
+      .then( () => usersBL.remove( user.id ) )
       .then( ( result ) => {
         expect( result ).to.exist;
         expect( result.message.numberReturned ).to.equal( 1 );
@@ -80,8 +80,8 @@ describe( 'users.bl', () => {
     };
     return usersBL
       .removeAll()
-      .then( usersBL.save.bind( null, user ) )
-      .then( usersBL.getById.bind( null, user.id ) )
+      .then( () => usersBL.save( user ) )
+      .then( () => usersBL.getById( user.id ) )
       .then( ( result ) => {
         expect( result ).to.exist;
         expect( result ).to.have.a.property( 'id' ).to.be.equal( user.id );
@@ -96,8 +96,8 @@ describe( 'users.bl', () => {
 
     return usersBL
       .removeAll()
-      .then( usersBL.save.bind( null, user ) )
-      .then( usersBL.getByLogin.bind( null, user.login ) )
+      .then( () => usersBL.save( user ) )
+      .then( () => usersBL.getByLogin( user.login ) )
       .then( ( result ) => {
         expect( result ).to.exist;
         //Todo: Research the _doc stuff
@@ -126,8 +126,8 @@ describe( 'users.bl', () => {
 
     return usersBL
       .removeAll()
-      .then( usersBL.save.bind( null, user ) )
-      .then( usersBL.save.bind( null, userUpdated ) )
+      .then( () => usersBL.save( user ) )
+      .then( () => usersBL.save( userUpdated ) )
       .then( ( result ) => {
         expect( result ).to.exist;
         //Todo: Why not returning a model, do some research ...
