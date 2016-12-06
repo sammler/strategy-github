@@ -1,4 +1,5 @@
-import GitHubProfile from './../../src/modules/github-profile';
+import Context from './../../src/config/context';
+import GitHubProfile from './../../src/modules/github/github.profile';
 
 describe( 'GitHubProfile', () => {
 
@@ -25,8 +26,9 @@ describe( 'GitHubProfile', () => {
 
     return ghProfile.getProfile( cfg, filter )
       .then( ( res ) => {
-        expect( res ).to.be.an.array;
-        expect( res ).to.have.lengthOf( 1 );
+        expect( res ).to.not.be.an.array;
+        expect( res ).to.have.property( 'name' );
+        expect( res ).to.have.property( 'login' );
       } )
       .catch( ( err ) => {
         expect( err ).to.not.exist;

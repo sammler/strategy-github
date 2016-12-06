@@ -1,7 +1,6 @@
 import * as ghUtils from './github-utils';
 
-//Todo: Rename to just GitHubProfile
-export default class GithubProfileFactory {
+export default class GitHubProfile {
   constructor( context ) {
     this.ghClient = ghUtils.getGhClient();
 
@@ -12,13 +11,10 @@ export default class GithubProfileFactory {
   /**
    * Get the GitHub profile.
    * @param options
-   * @param filter
    * @param cb
    * @private
    */
-  getProfile( options, filter ) {
-
-    filter = filter || {};
+  getProfile( options ) {
 
     this.logger.silly( 'getProfile' );
 
@@ -28,7 +24,7 @@ export default class GithubProfileFactory {
           this.logger.error( 'err', err );
           return reject( err );
         }
-        return resolve( res );
+        return resolve( res[ 0 ] );
       } );
     } );
 

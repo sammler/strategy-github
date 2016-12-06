@@ -1,8 +1,5 @@
 version: "2"
 
-volumes:
-  postgres_data:
-
 services:
 
   # Base services
@@ -17,8 +14,8 @@ services:
       service: "s5r-scheduler"
 
   # Middleware GitHub
-  sammler-middleware-github-db:
-    container_name: "s5r-mw-github-db"
+  sammler-strategy-github-db:
+    container_name: "s5r-s-github-db"
     image: mongo
     ports:
       - "27017:27017"
