@@ -2,6 +2,8 @@
 
 > Sammler strategy to collect GitHub content.
 
+**Note: Work in progress, nothing to show, yet**
+
 ## Install
 
 First install yarn:
@@ -21,6 +23,10 @@ $ yarn run docker-compose
 ```sh
 $ yarn run dc-dev-up
 ```
+
+## Todos
+
+* [ ] Base model for all mongoose based models to enforce e.g. timestamp
 
 ## Author
 

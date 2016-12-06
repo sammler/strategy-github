@@ -1,0 +1,1 @@
+- [ ] Base model for all mongoose based models to enforce e.g. timestamp
