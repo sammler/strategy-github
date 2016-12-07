@@ -3,17 +3,31 @@ import { Schema } from 'mongoose';
 
 let ProfileHistorySchema = new Schema( {
 
-  id: {
+  profile_id: {
     type: Number,
     null: false
   },
 
-  lastUpdate: {
-    type: Date,
+  login: {
+    type: String,
     null: false
   },
 
-}, { collection: 'profile-history', strict: false } );
+  last_check: {
+    type: Date,
+    null: false
+  }
+
+}, { collection: 'profile-history', strict: true } );
+
+ProfileHistorySchema.options.toJSON = {
+  transform: (doc, ret, options) => {
+    ret.id = ret._id;
+    delete ret._id;
+    delete ret.__v;
+    return ret;
+  }
+};
 
 module.exports.Schema = ProfileHistorySchema;
 module.exports.Model = mongoose.model( 'profile-history', ProfileHistorySchema );

@@ -132,9 +132,7 @@ describe( 'users.bl', () => {
         expect( result ).to.exist;
         //Todo: Why not returning a model, do some research ...
         expect( result._doc ).to.have.a.property( 'foo' ).to.be.equal( 'baz' );
-
-        //Todo: date conversion
-        expect( result._doc.last_check ).to.be.equal( expectedDate );
+        expect( result._doc.last_check ).to.be.equal( new Date( expectedDate ) );
       } )
   } )
 

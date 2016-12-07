@@ -16,7 +16,7 @@ describe( 'profile-history.bl', () => {
 
   it( 'save should just save the item', () => {
     let doc = {
-      id: 1,
+      profile_id: 1,
       login: 'stefanwalther',
       foo: 'profile-history',
       last_check: new Date().setUTCHours( 0, 0, 0, 0 )
@@ -25,7 +25,7 @@ describe( 'profile-history.bl', () => {
       .then( result => {
         expect( result ).to.exist;
         expect( result._doc ).to.have.property( 'login' );
-        expect( result._doc ).to.have.property( 'lastUpdate' );
+        expect( result._doc ).to.have.property( 'last_check' ).to.be.eql( new Date( doc.last_check) );
       } );
   } );
 
@@ -34,7 +34,7 @@ describe( 'profile-history.bl', () => {
     let dateToday = new Date();
 
     let doc1 = {
-      id: 1,
+      profile_id: 1,
       login: 'stefanwalther',
       foo: 'profile-history',
       last_check: dateToday.setUTCHours( 0, 0, 0, 0 )
@@ -43,7 +43,7 @@ describe( 'profile-history.bl', () => {
     let dateYesterday = new Date( dateToday.setDate( dateToday.getDate() - 1 ) );
     dateYesterday = dateYesterday.setUTCHours( 0, 0, 0, 0 );
     let doc2 = {
-      id: 1,
+      profile_id: 1,
       login: 'stefanwalther',
       foo: 'profile-history',
       last_check: dateYesterday
@@ -65,14 +65,14 @@ describe( 'profile-history.bl', () => {
   it( 'updates and existing item automatically (per profile/day)', () => {
 
     let doc1 = {
-      id: 1,
+      profile_id: 1,
       login: 'stefanwalther',
       foo: 'profile-history',
       last_check: new Date().setUTCHours( 0, 0, 0, 0 )
     };
 
     let doc2 = {
-      id: 1,
+      profile_id: 1,
       login: 'stefanwalther',
       foo: 'profile-history2',
       last_check: new Date().setUTCHours( 0, 0, 0, 0 )

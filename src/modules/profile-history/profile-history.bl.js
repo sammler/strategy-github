@@ -11,7 +11,7 @@ export default class ProfileHistoryBL {
 
   save( data ) {
 
-    let query = { id: data.id, lastUpdate: data.last_check };
+    let query = { profile_id: data.profile_id, last_check: data.last_check };
     let profileHistory = new ProfileHistoryModel( data );
 
     let error = profileHistory.validateSync();
@@ -30,7 +30,7 @@ export default class ProfileHistoryBL {
 
   countPerProfileId( profileId ) {
     return ProfileHistoryModel
-      .count( { id: profileId } )
+      .count( { profile_id: profileId } )
       .exec();
   }
 
