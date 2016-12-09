@@ -89,7 +89,7 @@ let schema = new Schema( {
 }, { collection: 'profiles', strict: false } );
 
 schema.plugin( uniqueValidator, null );
-schema.plugin( timeStamps, { createdAt: 'created_at', updatedAt: 'updated_at' } );
+schema.plugin( timeStamps, { createdAt: 's54_created_at', updatedAt: 's5r_updated_at' } );
 
 /**
  * Methods

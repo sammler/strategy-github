@@ -1,4 +1,9 @@
 
+## General Todos
+- [ ] We have a conflict in the date-fields, GitHub is also using `created_at` and `updated_at`. 
+Change the fields to `s5r_created_at` and `s5r_updated_at`
+- [ ] Move to airbnb lint style, seems to be more widely used than idiomatic.
+
 ## Sync profile task
 
 The sync profile task is the core of the GitHub strategy:
@@ -23,7 +28,14 @@ _(Note: The entire message structure of RabbitMQ has to be designed properly as 
     - [ ] Update the history of received-events    
   - [ ] Set `last_sync` to current date
   - [ ] Acknowledge `strategy.github.profile.sync` to be finished in `queue` in RabbitMQ.
-  
+ 
+## Sync repos
 
+- [ ] Iterate for each of the GitHub repos of a profile (determined by filter if only public or also private ones)
+  - For each repo
+    - [ ] Save the history (stargazers, etc.) per day
+    - [ ] Save changes of stargazers
+    - [ ] Save changes of subscribers
+    - [ ] 
   
  

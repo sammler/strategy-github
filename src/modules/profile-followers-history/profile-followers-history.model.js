@@ -37,7 +37,7 @@ let schema = new Schema( {
 } );
 
 schema.plugin( uniqueValidator, null );
-schema.plugin( timeStamps, { createdAt: 'created_at', updatedAt: 'updated_at' } );
+schema.plugin( timeStamps, { createdAt: 's5r_created_at', updatedAt: 's5r_updated_at' } );
 
 module.exports.Schema = schema;
 module.exports.Model = mongoose.model( 'profile_followers_history', schema );
