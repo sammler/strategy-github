@@ -1,7 +1,10 @@
 import mongoose from 'mongoose';
 import { Schema } from 'mongoose';
 
-let ProfileHistorySchema = new Schema( {
+const uniqueValidator = require( 'mongoose-unique-validator' );
+const timeStamps = require( 'mongoose-timestamp' );
+
+let schema = new Schema( {
 
   profile_id: {
     type: Number,
@@ -20,14 +23,8 @@ let ProfileHistorySchema = new Schema( {
 
 }, { collection: 'profile-history', strict: true } );
 
-ProfileHistorySchema.options.toJSON = {
-  transform: (doc, ret, options) => {
-    ret.id = ret._id;
-    delete ret._id;
-    delete ret.__v;
-    return ret;
-  }
-};
+schema.plugin( uniqueValidator, null );
+schema.plugin( timeStamps, { createdAt: 'created_at', updatedAt: 'updated_at' } );
 
-module.exports.Schema = ProfileHistorySchema;
-module.exports.Model = mongoose.model( 'profile-history', ProfileHistorySchema );
+module.exports.Schema = schema;
+module.exports.Model = mongoose.model( 'profile-history', schema );

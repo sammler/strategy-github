@@ -4,7 +4,7 @@ import { Schema } from 'mongoose';
 const uniqueValidator = require( 'mongoose-unique-validator' );
 const timeStamps = require( 'mongoose-timestamp' );
 
-let ProfileSchema = new Schema( {
+let schema = new Schema( {
 
   // last time the data was updated in the MongoDb (not on GitHub!)
   last_check: {
@@ -80,8 +80,8 @@ let ProfileSchema = new Schema( {
 
 }, { collection: 'profiles', strict: false } );
 
-ProfileSchema.plugin( uniqueValidator, null );
-ProfileSchema.plugin( timeStamps );
+schema.plugin( uniqueValidator, null );
+schema.plugin( timeStamps, { createdAt: 'created_at', updatedAt: 'updated_at' } );
 
 /**
  * Methods
@@ -93,5 +93,5 @@ ProfileSchema.plugin( timeStamps );
  */
 //ProfileSchema.static( {} );
 
-module.exports.Schema = ProfileSchema;
-module.exports.Model = mongoose.model( 'profile', ProfileSchema );
+module.exports.Schema = schema;
+module.exports.Model = mongoose.model( 'profile', schema );

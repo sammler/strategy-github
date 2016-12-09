@@ -6,7 +6,7 @@ const timeStamps = require( 'mongoose-timestamp' );
 
 //Todo: Think of renaming `id` to `user_id`.
 //Todo: Think of using type ObjectId for the userId ==> Don't think that we can use a Number to be an ObjectId
-let UserSchema = new Schema( {
+let schema = new Schema( {
 
   // last time the data was updated in the MongoDb (not on GitHub!)
   last_check: {
@@ -29,10 +29,8 @@ let UserSchema = new Schema( {
   }
 }, { collection: 'users', strict: false } );
 
-UserSchema.plugin( uniqueValidator, null );
+schema.plugin( uniqueValidator, null );
+schema.plugin( timeStamps, { createdAt: 'created_at', updatedAt: 'updated_at' } );
 
-//Todo: Create the defaults for the timeStamp in every model, probably even better, create a base model.
-UserSchema.plugin( timeStamps, { createdAt: 'created_at', updatedAt: 'updated_at' } );
-
-module.exports.Schema = UserSchema;
-module.exports.Model = mongoose.model( 'user', UserSchema );
+module.exports.Schema = schema;
+module.exports.Model = mongoose.model( 'user', schema );

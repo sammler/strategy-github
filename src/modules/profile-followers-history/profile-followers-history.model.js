@@ -3,7 +3,7 @@ import { Schema } from 'mongoose';
 const uniqueValidator = require( 'mongoose-unique-validator' );
 const timeStamps = require( 'mongoose-timestamp' );
 
-let ProfileFollowersHistorySchema = new Schema( {
+let schema = new Schema( {
 
   // Todo: ref to profile
   profile_id: {
@@ -36,8 +36,8 @@ let ProfileFollowersHistorySchema = new Schema( {
   }
 } );
 
-ProfileFollowersHistorySchema.plugin( uniqueValidator, null );
-ProfileFollowersHistorySchema.plugin( timeStamps );
+schema.plugin( uniqueValidator, null );
+schema.plugin( timeStamps, { createdAt: 'created_at', updatedAt: 'updated_at' } );
 
-module.exports.Schema = ProfileFollowersHistorySchema;
-module.exports.Model = mongoose.model( 'profile_followers_history', ProfileFollowersHistorySchema );
+module.exports.Schema = schema;
+module.exports.Model = mongoose.model( 'profile_followers_history', schema );

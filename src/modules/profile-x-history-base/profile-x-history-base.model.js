@@ -4,7 +4,7 @@ const uniqueValidator = require( 'mongoose-unique-validator' );
 const timeStamps = require( 'mongoose-timestamp' );
 
 // see http://stackoverflow.com/questions/14228882/inheritance-in-mongoose
-let ProfileXHistoryBaseSchema = new Schema( {
+let schema = new Schema( {
   profile_id: {
     type: Schema.Types.ObjectId,
     ref: 'profiles'
@@ -34,8 +34,8 @@ let ProfileXHistoryBaseSchema = new Schema( {
   }
 } );
 
-ProfileXHistoryBaseSchema.plugin( uniqueValidator, null );
-ProfileXHistoryBaseSchema.plugin( timeStamps );
+schema.plugin( uniqueValidator, null );
+schema.plugin( timeStamps, { createdAt: 'created_at', updatedAt: 'updated_at' } );
 
-module.exports.Schema = ProfileXHistoryBaseSchema;
-module.exports.Model = mongoose.model( 'profile', ProfileXHistoryBaseSchema );
+module.exports.Schema = schema;
+module.exports.Model = mongoose.model( 'profile', schema );
