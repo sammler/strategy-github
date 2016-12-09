@@ -4,6 +4,6 @@ import { routes as profileRoutes } from './modules/profile/profile.routes';
 export function config( app ) {
 
   app.use( '/health-check', healthRoutes() );
-  app.use( '/profile', profileRoutes() );
+  app.use( '/profiles', profileRoutes() );
 
 }

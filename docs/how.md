@@ -3,6 +3,7 @@
 - [ ] We have a conflict in the date-fields, GitHub is also using `created_at` and `updated_at`. 
 Change the fields to `s5r_created_at` and `s5r_updated_at`
 - [ ] Move to airbnb lint style, seems to be more widely used than idiomatic.
+- [ ] API design: Go with `profile` or `profiles` in the endpoint => document as standard
 
 ## Sync profile task
 
