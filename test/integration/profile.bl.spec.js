@@ -2,14 +2,14 @@ import ProfileBL from './../../src/modules/profile/profile.bl';
 import Context from './../../src/config/context';
 import DBHelpers from './../lib/db-helpers';
 
-describe( 'profile.bl', () => {
+describe.only( 'profile.bl', () => {
 
   let profileBL;
   let dbHelpers;
   let context;
   before( ( done ) => {
     context = Context.instance();
-    profileBL = new ProfileBL();
+    profileBL = new ProfileBL( context );
     dbHelpers = new DBHelpers();
     dbHelpers.dropDatabase( done );
   } );
@@ -26,40 +26,61 @@ describe( 'profile.bl', () => {
   } );
 
   it( 'requires some parameters', () => {
-    let doc = {
+    let gitHubProfile = {
       id: 1,
       login: 'stefanwalther',
       foo: 'baz'
     };
-    return profileBL.save( doc )
+    return profileBL.save( gitHubProfile )
       .catch( ( err ) => {
         expect( err ).to.exist;
         expect( err ).to.have.property( 'name' );
       } )
   } );
 
+  it( 'will return unnecessary objects', () => {
+    let gitHubProfile = {
+      id: 1,
+      login: 'stefanwalther',
+      foo: 'bar',
+      name: 'Stefan Walther',
+      plan: {
+        name: 'personal'
+      },
+      meta: {
+        'x-ratelimit-limit': '5000'
+      }
+    };
+    return profileBL.save( gitHubProfile )
+      .then( ( result ) => {
+        expect( result._doc ).to.not.have.a.property( 'plan' );
+        expect( result._doc ).to.not.have.a.property( 'meta' );
+      } )
+      .catch( ( err ) => {
+        expect( err ).to.not.exist;
+      } );
+  } );
+
   it( 'can save a profile', () => {
 
-    let doc = {
+    let gitHubProfile = {
       id: 1,
       login: 'stefanwalther',
       foo: 'bar',
       name: 'Stefan Walther'
     };
 
-    return profileBL.save( doc )
+    return profileBL.save( gitHubProfile )
       .then( ( doc ) => {
         expect( doc ).to.exist;
         expect( doc ).to.be.an.object;
-        expect( doc.id ).to.be.equal( doc.id );
-        expect( doc.login ).to.be.equal( doc.login );
-        expect( doc.foo ).to.be.equal( doc.foo );
-
+        expect( doc ).to.not.have.property( 'id' ); // should be removed
+        expect( doc._doc ).to.not.have.property( 'id' ); // should be removed
+        expect( doc.login ).to.be.equal( gitHubProfile.login );
+        expect( doc ).to.have.property( 's5r_created_at' ).to.exist;
+        expect( doc ).to.have.property( 's5r_updated_at' ).to.not.exist;
+        expect( doc ).to.have.property( 'last_check' ).to.exist;
       } )
-      .catch( ( err ) => {
-        expect( err ).to.not.exist;
-        expect( err ).to.be.an.object;
-      } );
   } );
 
   it( 'can update a profile', () => {
@@ -109,6 +130,7 @@ describe( 'profile.bl', () => {
                 expect( result2 ).to.exist;
                 expect( result2._doc ).to.have.property( 'foo' );
                 expect( result2._doc.foo ).to.be.equal( doc2.foo );
+                expect( result2 ).to.have.property( 's5r_updated_at' );
               } )
               .catch( ( err ) => {
                 expect( err ).to.not.exist;

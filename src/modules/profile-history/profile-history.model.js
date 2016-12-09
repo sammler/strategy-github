@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { Schema } from 'mongoose';
+import Context from './../../config/context';
 
 const uniqueValidator = require( 'mongoose-unique-validator' );
 const timeStamps = require( 'mongoose-timestamp' );
@@ -21,10 +22,10 @@ let schema = new Schema( {
     null: false
   }
 
-}, { collection: 'profile-history', strict: true } );
+}, { collection: Context.TABLE_PREFIX + 'profile-history', strict: true } );
 
 schema.plugin( uniqueValidator, null );
-schema.plugin( timeStamps, { createdAt: 's5r_created_at', updatedAt: 's5r_updated_at' } );
+schema.plugin( timeStamps, { createdAt: Context.FIELD_CREATED_AT, updatedAt: Context.FIELD_UPDATED_AT } );
 
 module.exports.Schema = schema;
 module.exports.Model = mongoose.model( 'profile-history', schema );

@@ -4,7 +4,7 @@ import ProfileBL from './../../src/modules/profile/profile.bl';
 import ProfileHistoryBL from './../../src/modules/profile-history/profile-history.bl';
 import * as mUtils from './../../src/helper/m-utils';
 
-describe.only( 'Sync a profile', () => {
+describe( 'Sync a profile', () => {
 
   let context;
   let gitHubProfile;
@@ -40,6 +40,8 @@ describe.only( 'Sync a profile', () => {
         expect( profile ).to.exist;
         delete profile.plan;
         delete profile.meta;
+        delete profile[Context.FIELD_CREATED_AT];
+        delete profile[Context.FIELD_UPDATED_AT];
         return Promise.resolve( profile );
       } )
       .then( ( profile ) => { return profileBL.save( profile ) } )

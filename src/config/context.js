@@ -3,10 +3,10 @@ import Logger from './../helper/logger';
 
 let instance;
 export default class Context {
-  constructor( ) {
+  constructor() {
     this.db;
     this.logger = new Logger();
-    
+
     mongoose.Promise = global.Promise;
 
     //Todo: make this configurable
@@ -17,6 +17,10 @@ export default class Context {
     }
   }
 
+  static TABLE_PREFIX = 'github~~';
+  static FIELD_CREATED_AT = 's5r_created_at';
+  static FIELD_UPDATED_AT = 's5r_updated_at';
+
   static instance() {
     if ( !instance ) {
       instance = new Context();
@@ -25,14 +29,17 @@ export default class Context {
   }
 
   dbConnect() {
-    //Todo: make this configurable
-    let uri = 'mongodb://localhost:27017/s5r-s-github';
-    let options = {
-      server: {
-        poolSize: 5
-      }
-    };
-    this.db = mongoose.connect( uri, options );
+
+      //Todo: Check for mongoose.connection.readyState: http://stackoverflow.com/questions/19599543/check-mongoose-connection-state-without-creating-new-connection
+      //Todo: make this configurable
+      let uri = 'mongodb://localhost:27017/s5r-s-github';
+      let options = {
+        server: {
+          poolSize: 5
+        }
+      };
+      this.db = mongoose.connect( uri, options );
+
   }
 
   dbDisconnect() {

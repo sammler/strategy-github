@@ -20,11 +20,16 @@ export default class ProfileHistoryBL {
     }
 
     return ProfileHistoryModel
-      .findOneAndUpdate( query, data, {
-        upsert: true,
-        setDefaultsOnInsert: true,
-        new: true
-      } )
+      .find( query, (err, result) => {
+        if (err) {
+          throw new Error(err);
+        }
+        if (!result) {
+          return ProfileHistoryModel.create(data);
+        } else {
+          return Promise.resolve(result);
+        }
+      })
       .exec();
   }
 

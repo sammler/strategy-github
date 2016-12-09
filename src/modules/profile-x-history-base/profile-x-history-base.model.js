@@ -27,11 +27,6 @@ let schema = new Schema( {
     null: false,
     required: true
   }
-}, {
-  timestamps: {
-    created_at: 'created_at',
-    updated_at: 'updated_at'
-  }
 } );
 
 schema.plugin( uniqueValidator, null );

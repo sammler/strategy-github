@@ -1,34 +1,22 @@
 'use strict';
 import mongoose from 'mongoose';
 import { Schema } from 'mongoose';
+import Context from './../../config/context';
+
 const uniqueValidator = require( 'mongoose-unique-validator' );
-const timeStamps = require( 'mongoose-timestamp' );
 
 let schema = new Schema( {
+
+  // GitHub Profile Id
+  _id: {
+    type: Number
+  },
 
   // last time the data was updated in the MongoDb (not on GitHub!)
   last_check: {
     type: Date,
     default: new Date().setUTCHours( 0, 0, 0, 0 ),
     null: false
-  },
-
-  //last_check_deps: {
-  //  type:
-  //},
-
-  profile_id: {
-    type: number,
-    null: false,
-    unique: true
-  },
-
-
-  //Todo: obsolote!
-  id: {
-    type: Number,
-    null: false,
-    unique: false
   },
 
   login: {
@@ -84,13 +72,21 @@ let schema = new Schema( {
     type: Number,
     null: false,
     default: 0
+  },
+
+  s5r_created_at: {
+    type: Date,
+    null: false,
+    default: new Date()
+  },
+  s5r_updated_at: {
+    type: Date,
+    null: true
   }
 
-}, { collection: 'profiles', strict: false } );
+}, { noId: true, noVirtualId: true, collection: Context.TABLE_PREFIX + 'profiles', strict: false } );
 
 schema.plugin( uniqueValidator, null );
-schema.plugin( timeStamps, { createdAt: 's54_created_at', updatedAt: 's5r_updated_at' } );
-
 /**
  * Methods
  */
@@ -100,6 +96,11 @@ schema.plugin( timeStamps, { createdAt: 's54_created_at', updatedAt: 's5r_update
  * Statics
  */
 //ProfileSchema.static( {} );
+
+schema.pre( 'save', ( next ) => {
+  this.s5r_updated_at = Date.now;
+  next();
+} );
 
 module.exports.Schema = schema;
 module.exports.Model = mongoose.model( 'profile', schema );

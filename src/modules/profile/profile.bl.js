@@ -17,21 +17,26 @@ export default class ProfileBL {
     if ( !data ) {
       throw new Error( 'No data provided' );
     }
+    data._id = data.id;
+    delete data.id;
+    delete data.plan;
+    delete data.meta;
 
-    let query = { id: data.id, last_check: data.last_check };
-    let Profile = new ProfileModel( data );
+    //let query = { profile_id: data.profile_id };
+    //let Profile = new ProfileModel( data );
+    //
+    //let error = Profile.validateSync();
+    //if ( error && error.errors ) {
+    //  return Promise.reject( error );
+    //}
 
-    let error = Profile.validateSync();
-    if ( error && error.errors ) {
-      return Promise.reject( error );
-    }
+    let options = {
+      upsert: true,
+      new: true
+    };
 
     return ProfileModel
-      .findOneAndUpdate( query, data, {
-        upsert: true,
-        setDefaultsOnInsert: true,
-        new: true
-      } )
+      .findByIdAndUpdate( data._id, data, options )
       .exec();
   }
 
