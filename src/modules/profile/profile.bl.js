@@ -22,14 +22,6 @@ export default class ProfileBL {
     delete data.plan;
     delete data.meta;
 
-    //let query = { profile_id: data.profile_id };
-    //let Profile = new ProfileModel( data );
-    //
-    //let error = Profile.validateSync();
-    //if ( error && error.errors ) {
-    //  return Promise.reject( error );
-    //}
-
     let options = {
       upsert: true,
       new: true

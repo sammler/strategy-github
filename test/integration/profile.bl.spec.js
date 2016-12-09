@@ -25,7 +25,7 @@ describe.only( 'profile.bl', () => {
     return profileBL.removeAll();
   } );
 
-  it( 'requires some parameters', () => {
+  it( 'throws an error if parameters are missing', () => {
     let gitHubProfile = {
       id: 1,
       login: 'stefanwalther',
@@ -34,11 +34,12 @@ describe.only( 'profile.bl', () => {
     return profileBL.save( gitHubProfile )
       .catch( ( err ) => {
         expect( err ).to.exist;
-        expect( err ).to.have.property( 'name' );
+        expect( err ).to.have.property( 'name' ).to.be.equal( 'ValidationError' );
+        expect( err.errors.name ).to.deep.include( { path: 'name' } );
       } )
   } );
 
-  it( 'will return unnecessary objects', () => {
+  it( 'will remove unnecessary objects', () => {
     let gitHubProfile = {
       id: 1,
       login: 'stefanwalther',
@@ -84,13 +85,23 @@ describe.only( 'profile.bl', () => {
   } );
 
   it( 'can update a profile', () => {
-    let doc = {
+
+    let doc1 = {
+      id: 1,
+      login: 'stefanwalther',
+      foo: 'bar',
+      name: 'Stefan Walther'
+    };
+
+    let doc2 = {
       id: 1,
       login: 'stefanwalther',
       name: 'Stefan Walther',
       foo: 'baz'
     };
-    return profileBL.save( doc )
+    return profileBL.removeAll()
+      .then( () => profileBL.save(doc1))
+      .then( () => profileBL.save( doc2 ))
       .then( ( doc ) => {
         expect( doc ).to.exist;
         expect( doc ).to.be.an.object;
@@ -102,7 +113,6 @@ describe.only( 'profile.bl', () => {
         expect( err ).to.not.exist;
         expect( err ).to.be.an.object;
       } );
-
   } );
 
   it( 'can only create one entry per profile per day', () => {
@@ -175,7 +185,5 @@ describe.only( 'profile.bl', () => {
       .catch( ( err ) => {
         expect( err ).to.not.exist;
       } );
-
   } )
-
 } );
