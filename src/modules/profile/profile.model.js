@@ -17,10 +17,18 @@ let schema = new Schema( {
   //  type:
   //},
 
+  profile_id: {
+    type: number,
+    null: false,
+    unique: true
+  },
+
+
+  //Todo: obsolote!
   id: {
     type: Number,
     null: false,
-    unique: true
+    unique: false
   },
 
   login: {

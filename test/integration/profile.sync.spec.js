@@ -27,6 +27,13 @@ describe.only( 'Sync a profile', () => {
       per_page: 100
     };
 
+    //Todos: for the profile:
+    //Todo: Add tests for created timestamps
+    //Todo: Use the objectId ?
+    //Todo: Use profile_id instead of id
+    //Todo: unique index for profile_id & login (two separate indices, not a combined one!)
+    //Todo: Move some methods to the Model
+    //Todo: Actually mock all responses from GitHub, so that we can run the tests, offline.
     return profileBL.removeAll()
       .then( () => { return gitHubProfile.getProfile( cfg ) } )
       .then( ( profile ) => {

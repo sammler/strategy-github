@@ -16,6 +16,7 @@ describe( 'GitHubProfile', () => {
     expect( ghProfile ).to.have.a.property( 'ghClient' ).to.be.an.object;
   } );
 
+  //Todo: The filter is not implemented, yet
   it( 'should fetch the profile data', () => {
 
     let cfg = {
@@ -29,6 +30,7 @@ describe( 'GitHubProfile', () => {
         expect( res ).to.not.be.an.array;
         expect( res ).to.have.property( 'name' );
         expect( res ).to.have.property( 'login' );
+        expect( res ).to.have.property( 'created_at' ).to.exist;
       } )
       .catch( ( err ) => {
         expect( err ).to.not.exist;
@@ -46,6 +48,7 @@ describe( 'GitHubProfile', () => {
     return ghProfile.getProfile( cfg );
   } );
 
+  //Todo: check the result, not sure if this test is really correct.
   it( 'should fetch the profile data (without config)', () => {
     return ghProfile.getProfile();
   } );
