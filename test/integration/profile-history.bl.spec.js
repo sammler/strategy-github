@@ -2,7 +2,7 @@ import ProfileHistoryBL from './../../src/modules/profile-history/profile-histor
 import Context from './../../src/config/context';
 import DBHelpers from './../lib/db-helpers';
 
-describe( 'profile-history.bl', () => {
+xdescribe( 'profile-history.bl', () => {
 
   let profileHistoryBL;
   let dbHelpers;

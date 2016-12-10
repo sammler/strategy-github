@@ -1,8 +1,9 @@
 import ProfileBL from './../../src/modules/profile/profile.bl';
 import Context from './../../src/config/context';
 import DBHelpers from './../lib/db-helpers';
+import _ from 'lodash';
 
-describe.only( 'profile.bl', () => {
+describe( 'profile.bl', () => {
 
   let profileBL;
   let dbHelpers;
@@ -62,7 +63,7 @@ describe.only( 'profile.bl', () => {
       } );
   } );
 
-  it( 'can save a profile', () => {
+  it( 'can save a new profile', () => {
 
     let gitHubProfile = {
       id: 1,
@@ -71,7 +72,8 @@ describe.only( 'profile.bl', () => {
       name: 'Stefan Walther'
     };
 
-    return profileBL.save( gitHubProfile )
+    return profileBL.removeAll()
+      .then( () => profileBL.save( _.clone( gitHubProfile ) ) )
       .then( ( doc ) => {
         expect( doc ).to.exist;
         expect( doc ).to.be.an.object;
@@ -82,10 +84,45 @@ describe.only( 'profile.bl', () => {
         expect( doc ).to.have.property( 's5r_updated_at' ).to.not.exist;
         expect( doc ).to.have.property( 'last_check' ).to.exist;
       } )
+      .then( () => {
+        return profileBL.getById( 1 )
+          .then( ( result ) => {
+            expect( result ).to.exist;
+            expect( result ).to.have.a.property( 'login' ).to.be.equal( gitHubProfile.login );
+            expect( result._doc ).to.have.a.property( 'foo' ).to.be.equal( gitHubProfile.foo );
+          } )
+      } )
   } );
 
-  it( 'can update a profile', () => {
+  it.only( 'can update a profile', () => {
 
+    let doc1 = {
+      id: 1,
+      login: 'stefanwalther',
+      name: 'Stefan Walther'
+    };
+
+    let doc2 = {
+      id: 1,
+      login: 'stefanwalther',
+      name: 'Stefan Walther 2'
+    };
+    return profileBL.removeAll()
+      .then( () => profileBL.save( _.clone( doc1 ), {} ) )
+      .then( () => profileBL.save( _.clone( doc2 ), {} ) )
+      .then( ( doc ) => {
+        expect( doc ).to.exist;
+        expect( doc ).to.be.an.object;
+        expect( doc ).to.have.a.property( 'nModified' ).to.be.equal( 1 );
+        return profileBL.getById( doc2.id )
+          .then( ( updatedDoc ) => {
+            expect( updatedDoc ).to.exist;
+            expect( updatedDoc ).to.have.a.property( 'name' ).to.be.equal( doc2.name )
+          } )
+      } )
+  } );
+
+  it( 'will save the history, if the profile was updated', () => {
     let doc1 = {
       id: 1,
       login: 'stefanwalther',
@@ -99,20 +136,7 @@ describe.only( 'profile.bl', () => {
       name: 'Stefan Walther',
       foo: 'baz'
     };
-    return profileBL.removeAll()
-      .then( () => profileBL.save(doc1))
-      .then( () => profileBL.save( doc2 ))
-      .then( ( doc ) => {
-        expect( doc ).to.exist;
-        expect( doc ).to.be.an.object;
-        expect( doc.id ).to.be.equal( doc.id );
-        expect( doc.login ).to.be.equal( doc.login );
-        expect( doc.foo ).to.be.equal( doc.foo );
-      } )
-      .catch( ( err ) => {
-        expect( err ).to.not.exist;
-        expect( err ).to.be.an.object;
-      } );
+
   } );
 
   it( 'can only create one entry per profile per day', () => {
@@ -133,14 +157,17 @@ describe.only( 'profile.bl', () => {
           foo: 'bar',
           last_check: new Date().setUTCHours( 0, 0, 0, 0 )
         };
-        return profileBL.save( doc1 )
+        return profileBL.save( _.clone( doc1 ) )
           .then( () => {
-            return profileBL.save( doc2 )
+            return profileBL.save( _.clone( doc2 ) )
               .then( ( result2 ) => {
                 expect( result2 ).to.exist;
-                expect( result2._doc ).to.have.property( 'foo' );
-                expect( result2._doc.foo ).to.be.equal( doc2.foo );
-                expect( result2 ).to.have.property( 's5r_updated_at' );
+                expect( result2 ).to.have.a.property( 'nModified' ).to.be.equal( 1 );
+                return profileBL.getById( doc2.id )
+                  .then( ( resultUpdated ) => {
+                    expect( resultUpdated ).to.exist;
+                    expect( resultUpdated._doc ).to.have.a.property( 'foo' ).to.be.equal( doc2.foo );
+                  } )
               } )
               .catch( ( err ) => {
                 expect( err ).to.not.exist;

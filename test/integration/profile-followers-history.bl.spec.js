@@ -2,7 +2,7 @@ import ProfileFollowersHistoryBL from './../../src/modules/profile-followers-his
 import Context from './../../src/config/context';
 import DBHelpers from './../lib/db-helpers';
 
-describe( 'profile-followers-history.bl', () => {
+xdescribe( 'profile-followers-history.bl', () => {
 
   let profileFollowersHistoryBL;
   let dbHelpers;
