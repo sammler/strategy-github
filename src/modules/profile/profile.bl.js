@@ -52,9 +52,17 @@ export default class ProfileBL {
       } );
   }
 
+  //Todo: need explicit testing
   getById( profileId ) {
     return ProfileModel
       .findById( profileId )
+      .exec();
+  }
+
+  //Todo: Need testing
+  getByLogin( login ) {
+    return ProfileModel
+      .find( {login: login})
       .exec();
   }
 }

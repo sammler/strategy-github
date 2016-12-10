@@ -9,28 +9,24 @@ export default class ProfileHistoryBL {
     this.logger = context.logger;
   }
 
-  save( data ) {
+  save( gitHubProfile ) {
 
-    let query = { profile_id: data.profile_id, last_check: data.last_check };
-    let profileHistory = new ProfileHistoryModel( data );
+    gitHubProfile.profile_id = gitHubProfile.id;
 
-    let error = profileHistory.validateSync();
-    if ( error && error.errors ) {
-      return Promise.reject( error.errors );
-    }
+    let query = {
+      profile_id: gitHubProfile.profile_id,
+      date: gitHubProfile.date
+    };
 
-    return ProfileHistoryModel
-      .find( query, (err, result) => {
-        if (err) {
-          throw new Error(err);
-        }
-        if (!result) {
-          return ProfileHistoryModel.create(data);
-        } else {
-          return Promise.resolve(result);
-        }
-      })
+    let options = {
+      new: true,
+      upsert: true,
+      setDefaultsOnInsert: true
+    };
+
+    return ProfileHistoryModel.findOneAndUpdate( query, gitHubProfile, options )
       .exec();
+
   }
 
   countPerProfileId( profileId ) {

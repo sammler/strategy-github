@@ -1,8 +1,9 @@
 import ProfileHistoryBL from './../../src/modules/profile-history/profile-history.bl';
 import Context from './../../src/config/context';
 import DBHelpers from './../lib/db-helpers';
+import _ from 'lodash';
 
-xdescribe( 'profile-history.bl', () => {
+describe.only( 'profile-history.bl', () => {
 
   let profileHistoryBL;
   let dbHelpers;
@@ -16,16 +17,50 @@ xdescribe( 'profile-history.bl', () => {
 
   it( 'save should just save the item', () => {
     let doc = {
-      profile_id: 1,
+      id: 1,
       login: 'stefanwalther',
       foo: 'profile-history',
-      last_check: new Date().setUTCHours( 0, 0, 0, 0 )
+      date: new Date().setUTCHours( 0, 0, 0, 0 )
     };
-    return profileHistoryBL.save( doc )
+    return profileHistoryBL.save( _.clone( doc ) )
       .then( result => {
         expect( result ).to.exist;
-        expect( result._doc ).to.have.property( 'login' );
-        expect( result._doc ).to.have.property( 'last_check' ).to.be.eql( new Date( doc.last_check) );
+        expect( result ).to.have.property( 'profile_id' ).to.be.equal( doc.id );
+        expect( result ).to.have.property( 'login' ).to.be.equal( doc.login );
+        expect( result._doc ).to.have.property( 'foo' ).to.be.equal( doc.foo );
+        expect( result._doc ).to.have.property( 'date' ).to.be.eql( new Date( doc.date ) );
+      } );
+  } );
+
+  it.only( 'should update the item if already existing', () => {
+    let dateToday = new Date();
+    let doc1 = {
+      id: 1,
+      login: 'stefanwalther',
+      foo: 'profile-history',
+      date: dateToday.setUTCHours( 0, 0, 0, 0 )
+    };
+
+    let doc2 = {
+      id: 1,
+      login: 'stefanwalther',
+      foo: 'profile-history2',
+      date: dateToday.setUTCHours( 0, 0, 0, 0 )
+    };
+    return profileHistoryBL.removeAll()
+      .then( () => {
+        return Promise.all( [
+          profileHistoryBL.save( _.clone( doc1 ) ),
+          profileHistoryBL.save( _.clone( doc2 ) )
+          .then( () => {
+            return profileHistoryBL.countPerProfileId( 1 )
+              .then( ( count ) => {
+                expect( count ).to.be.equal( 1 );
+              } )
+          } )
+          .catch( ( err ) => {
+            expect( err ).to.not.exist;
+          } );
       } );
   } );
 
@@ -34,19 +69,19 @@ xdescribe( 'profile-history.bl', () => {
     let dateToday = new Date();
 
     let doc1 = {
-      profile_id: 1,
+      id: 1,
       login: 'stefanwalther',
       foo: 'profile-history',
-      last_check: dateToday.setUTCHours( 0, 0, 0, 0 )
+      date: dateToday.setUTCHours( 0, 0, 0, 0 )
     };
 
     let dateYesterday = new Date( dateToday.setDate( dateToday.getDate() - 1 ) );
     dateYesterday = dateYesterday.setUTCHours( 0, 0, 0, 0 );
     let doc2 = {
-      profile_id: 1,
+      id: 1,
       login: 'stefanwalther',
       foo: 'profile-history',
-      last_check: dateYesterday
+      date: dateYesterday
     };
 
     return profileHistoryBL.removeAll()
@@ -65,17 +100,17 @@ xdescribe( 'profile-history.bl', () => {
   it( 'updates and existing item automatically (per profile/day)', () => {
 
     let doc1 = {
-      profile_id: 1,
+      id: 1,
       login: 'stefanwalther',
       foo: 'profile-history',
-      last_check: new Date().setUTCHours( 0, 0, 0, 0 )
+      date: new Date().setUTCHours( 0, 0, 0, 0 )
     };
 
     let doc2 = {
-      profile_id: 1,
+      id: 1,
       login: 'stefanwalther',
       foo: 'profile-history2',
-      last_check: new Date().setUTCHours( 0, 0, 0, 0 )
+      date: new Date().setUTCHours( 0, 0, 0, 0 )
     };
 
     return profileHistoryBL.removeAll()

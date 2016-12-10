@@ -7,22 +7,26 @@ const timeStamps = require( 'mongoose-timestamp' );
 
 let schema = new Schema( {
 
-  profile_id: {
-    type: Number,
-    null: false
+  _id: {
+    type: Number
   },
 
+  profile_id: {
+    type: Number
+  },
+
+  // Duplicate data
   login: {
     type: String,
     null: false
   },
 
-  last_check: {
+  date: {
     type: Date,
     null: false
   }
 
-}, { collection: Context.TABLE_PREFIX + 'profile-history', strict: true } );
+}, { collection: Context.TABLE_PREFIX + 'profile-history', strict: false } );
 
 schema.plugin( uniqueValidator, null );
 schema.plugin( timeStamps, { createdAt: Context.FIELD_CREATED_AT, updatedAt: Context.FIELD_UPDATED_AT } );

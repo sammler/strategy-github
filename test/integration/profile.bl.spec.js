@@ -94,7 +94,7 @@ describe( 'profile.bl', () => {
       } )
   } );
 
-  it.only( 'can update a profile', () => {
+  it( 'can update a profile', () => {
 
     let doc1 = {
       id: 1,
@@ -108,8 +108,8 @@ describe( 'profile.bl', () => {
       name: 'Stefan Walther 2'
     };
     return profileBL.removeAll()
-      .then( () => profileBL.save( _.clone( doc1 ), {} ) )
-      .then( () => profileBL.save( _.clone( doc2 ), {} ) )
+      .then( () => profileBL.save( _.clone( doc1 ), {saveHistory: true} ) )
+      .then( () => profileBL.save( _.clone( doc2 ), {saveHistory: true} ) )
       .then( ( doc ) => {
         expect( doc ).to.exist;
         expect( doc ).to.be.an.object;

@@ -3,7 +3,7 @@ import HttpStatus from 'http-status';
 
 export default class ReposController {
   constructor( context ) {
-    this.reposBL = new ReposBL( context );
+    this.profileBL = new ReposBL( context );
   }
 
   get( req, res, next) {
