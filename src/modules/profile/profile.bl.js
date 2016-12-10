@@ -12,25 +12,50 @@ export default class ProfileBL {
     return ProfileModel.remove( {} );
   }
 
-  save( data ) {
+  /**
+   * Save a GitHub profile.
+   *
+   * @param {object} gitHubProfile - The data to save.
+   *
+   * @param {Object} saveOptions - Save options.
+   * @param {Boolean} saveOptions.saveHistory - Save the history to profile_history table. Default to false.
+   *
+   * @returns {Promise}
+   */
+  save( gitHubProfile, saveOptions = {} ) {
 
-    if ( !data ) {
+    if ( !gitHubProfile ) {
       throw new Error( 'No data provided' );
     }
-    data._id = data.id;
-    delete data.id;
-    delete data.plan;
-    delete data.meta;
+    gitHubProfile._id = gitHubProfile.id;
+    delete gitHubProfile.id;
+    delete gitHubProfile.plan;
+    delete gitHubProfile.meta;
 
-    let options = {
-      upsert: true,
-      new: true
-    };
-
+    /**
+     * I have tried several variants with FindByIdAndUpdate but never get back whether the document
+     * is a new one or not, therefore using .findById, even if that means that we have one more
+     * roundtrip to the database for now.
+     */
     return ProfileModel
-      .findByIdAndUpdate( data._id, data, options )
-      .exec();
+      .findById( gitHubProfile._id )
+      .exec()
+      .then( ( result ) => {
+
+        if ( result ) {
+          return ProfileModel
+            .update( { _id: gitHubProfile._id }, gitHubProfile, { setDefaultsOnInsert: true } )
+            .exec()
+        } else {
+          return ProfileModel.create( gitHubProfile )
+        }
+      } );
   }
 
+  getById( profileId ) {
+    return ProfileModel
+      .findById( profileId )
+      .exec();
+  }
 }
 

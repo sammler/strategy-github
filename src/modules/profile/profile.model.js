@@ -22,8 +22,7 @@ let schema = new Schema( {
   login: {
     type: String,
     null: false,
-    required: true,
-    unique: true
+    required: true
   },
 
   name: {
@@ -97,10 +96,41 @@ schema.plugin( uniqueValidator, null );
  */
 //ProfileSchema.static( {} );
 
-schema.pre( 'save', ( next ) => {
+// Don't use arrow functions here, will not work ...
+schema.pre( 'save', function( next ) { //eslint-disable-line func-names
   this.s5r_updated_at = Date.now;
+  this.wasNew = this.isNew;
+  if ( !this.isNew ) {
+    console.log( 'hey, we are updating' );
+  }
   next();
 } );
+
+schema.post( 'save', function() { //eslint-disable-line func-names
+  if ( !this.wasNew ) {
+    console.log( 'was not new' );
+  } else {
+    console.log('was new');
+  }
+} );
+
+schema.pre( 'update', function( next ) { //eslint-disable-line func-names
+  this.s5r_updated_at = Date.now;
+  this.wasNew = this.isNew;
+  if ( !this.isNew ) {
+    console.log( 'update: hey, we are updating' );
+  }
+  next();
+} );
+
+schema.post( 'update', function() { //eslint-disable-line func-names
+  if ( !this.wasNew ) {
+    console.log( 'was not new' );
+  } else {
+    console.log('was new');
+  }
+} );
+
 
 module.exports.Schema = schema;
 module.exports.Model = mongoose.model( 'profile', schema );
