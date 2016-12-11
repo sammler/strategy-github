@@ -1,4 +1,6 @@
 import { Model as ProfileModel } from './profile.model';
+import ProfileHistoryBL from './../../../src/modules/profile-history/profile-history.bl';
+import _ from 'lodash';
 
 export default class ProfileBL {
   constructor( context ) {
@@ -8,7 +10,7 @@ export default class ProfileBL {
     this.logger = context.logger;
   }
 
-  removeAll() {
+  static removeAll() {
     return ProfileModel.remove( {} );
   }
 
@@ -43,26 +45,30 @@ export default class ProfileBL {
       .then( ( result ) => {
 
         if ( result ) {
-          return ProfileModel
-            .update( { _id: gitHubProfile._id }, gitHubProfile, { setDefaultsOnInsert: true } )
-            .exec()
+
+          return ProfileHistoryBL.save( gitHubProfile )
+            .then( () => {
+              return ProfileModel
+                .update( { _id: gitHubProfile._id }, _.clone(gitHubProfile), { setDefaultsOnInsert: true } )
+                .exec()
+            } )
         } else {
-          return ProfileModel.create( gitHubProfile )
+          return ProfileModel.create( _.clone(gitHubProfile) )
         }
       } );
   }
 
   //Todo: need explicit testing
-  getById( profileId ) {
+  static getById( profileId ) {
     return ProfileModel
       .findById( profileId )
       .exec();
   }
 
   //Todo: Need testing
-  getByLogin( login ) {
+  static getByLogin( login ) {
     return ProfileModel
-      .find( {login: login})
+      .find( { login: login } )
       .exec();
   }
 }

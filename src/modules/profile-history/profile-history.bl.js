@@ -9,9 +9,9 @@ export default class ProfileHistoryBL {
     this.logger = context.logger;
   }
 
-  save( gitHubProfile ) {
+  static save( gitHubProfile ) {
 
-    gitHubProfile.profile_id = gitHubProfile.id;
+    gitHubProfile.profile_id = gitHubProfile.id || gitHubProfile._id;
 
     let query = {
       profile_id: gitHubProfile.profile_id,
@@ -29,13 +29,13 @@ export default class ProfileHistoryBL {
 
   }
 
-  countPerProfileId( profileId ) {
+  static countPerProfileId( profileId ) {
     return ProfileHistoryModel
       .count( { profile_id: profileId } )
       .exec();
   }
 
-  removeAll() {
+  static removeAll() {
     return ProfileHistoryModel
       .remove( {} )
       .exec();

@@ -3,7 +3,7 @@ import Context from './../../src/config/context';
 import DBHelpers from './../lib/db-helpers';
 import _ from 'lodash';
 
-describe.only( 'profile-history.bl', () => {
+describe( 'profile-history.bl', () => {
 
   let profileHistoryBL;
   let dbHelpers;
@@ -22,7 +22,7 @@ describe.only( 'profile-history.bl', () => {
       foo: 'profile-history',
       date: new Date().setUTCHours( 0, 0, 0, 0 )
     };
-    return profileHistoryBL.save( _.clone( doc ) )
+    return ProfileHistoryBL.save( _.clone( doc ) )
       .then( result => {
         expect( result ).to.exist;
         expect( result ).to.have.property( 'profile_id' ).to.be.equal( doc.id );
@@ -32,7 +32,7 @@ describe.only( 'profile-history.bl', () => {
       } );
   } );
 
-  it.only( 'should update the item if already existing', () => {
+  it( 'should update the item if already existing', () => {
     let dateToday = new Date();
     let doc1 = {
       id: 1,
@@ -47,20 +47,21 @@ describe.only( 'profile-history.bl', () => {
       foo: 'profile-history2',
       date: dateToday.setUTCHours( 0, 0, 0, 0 )
     };
-    return profileHistoryBL.removeAll()
+    return ProfileHistoryBL.removeAll()
       .then( () => {
         return Promise.all( [
-          profileHistoryBL.save( _.clone( doc1 ) ),
-          profileHistoryBL.save( _.clone( doc2 ) )
+          ProfileHistoryBL.save( _.clone( doc1 ) ),
+          ProfileHistoryBL.save( _.clone( doc2 ) )
+        ] )
           .then( () => {
-            return profileHistoryBL.countPerProfileId( 1 )
+            return ProfileHistoryBL.countPerProfileId( 1 )
               .then( ( count ) => {
                 expect( count ).to.be.equal( 1 );
               } )
           } )
           .catch( ( err ) => {
             expect( err ).to.not.exist;
-          } );
+          } )
       } );
   } );
 
@@ -84,11 +85,11 @@ describe.only( 'profile-history.bl', () => {
       date: dateYesterday
     };
 
-    return profileHistoryBL.removeAll()
+    return ProfileHistoryBL.removeAll()
       .then( () => {
         return Promise.all( [
-          profileHistoryBL.save( doc1 ),
-          profileHistoryBL.save( doc2 )
+          ProfileHistoryBL.save( doc1 ),
+          ProfileHistoryBL.save( doc2 )
         ] )
           .catch( ( err ) => {
             expect( err ).to.not.exist;
@@ -113,14 +114,14 @@ describe.only( 'profile-history.bl', () => {
       date: new Date().setUTCHours( 0, 0, 0, 0 )
     };
 
-    return profileHistoryBL.removeAll()
+    return ProfileHistoryBL.removeAll()
       .then( () => {
         return Promise.all( [
-          profileHistoryBL.save( doc1 ),
-          profileHistoryBL.save( doc2 )
+          ProfileHistoryBL.save( doc1 ),
+          ProfileHistoryBL.save( doc2 )
         ] )
           .then( () => {
-            return profileHistoryBL.countPerProfileId( 1 )
+            return ProfileHistoryBL.countPerProfileId( 1 )
               .then( ( count ) => {
                 expect( count ).to.be.equal( 1 )
               } )

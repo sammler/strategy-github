@@ -23,7 +23,7 @@ describe( 'profile.bl', () => {
   } );
 
   it( 'removeAll removes all existing profiles', () => {
-    return profileBL.removeAll();
+    return ProfileBL.removeAll();
   } );
 
   it( 'throws an error if parameters are missing', () => {
@@ -72,7 +72,7 @@ describe( 'profile.bl', () => {
       name: 'Stefan Walther'
     };
 
-    return profileBL.removeAll()
+    return ProfileBL.removeAll()
       .then( () => profileBL.save( _.clone( gitHubProfile ) ) )
       .then( ( doc ) => {
         expect( doc ).to.exist;
@@ -85,7 +85,7 @@ describe( 'profile.bl', () => {
         expect( doc ).to.have.property( 'last_check' ).to.exist;
       } )
       .then( () => {
-        return profileBL.getById( 1 )
+        return ProfileBL.getById( 1 )
           .then( ( result ) => {
             expect( result ).to.exist;
             expect( result ).to.have.a.property( 'login' ).to.be.equal( gitHubProfile.login );
@@ -107,14 +107,14 @@ describe( 'profile.bl', () => {
       login: 'stefanwalther',
       name: 'Stefan Walther 2'
     };
-    return profileBL.removeAll()
-      .then( () => profileBL.save( _.clone( doc1 ), {saveHistory: true} ) )
-      .then( () => profileBL.save( _.clone( doc2 ), {saveHistory: true} ) )
+    return ProfileBL.removeAll()
+      .then( () => profileBL.save( _.clone( doc1 ), { saveHistory: true } ) )
+      .then( () => profileBL.save( _.clone( doc2 ), { saveHistory: true } ) )
       .then( ( doc ) => {
         expect( doc ).to.exist;
         expect( doc ).to.be.an.object;
         expect( doc ).to.have.a.property( 'nModified' ).to.be.equal( 1 );
-        return profileBL.getById( doc2.id )
+        return ProfileBL.getById( doc2.id )
           .then( ( updatedDoc ) => {
             expect( updatedDoc ).to.exist;
             expect( updatedDoc ).to.have.a.property( 'name' ).to.be.equal( doc2.name )
@@ -140,7 +140,7 @@ describe( 'profile.bl', () => {
   } );
 
   it( 'can only create one entry per profile per day', () => {
-    return profileBL.removeAll()
+    return ProfileBL.removeAll()
       .then( () => {
 
         let doc1 = {
@@ -163,7 +163,7 @@ describe( 'profile.bl', () => {
               .then( ( result2 ) => {
                 expect( result2 ).to.exist;
                 expect( result2 ).to.have.a.property( 'nModified' ).to.be.equal( 1 );
-                return profileBL.getById( doc2.id )
+                return ProfileBL.getById( doc2.id )
                   .then( ( resultUpdated ) => {
                     expect( resultUpdated ).to.exist;
                     expect( resultUpdated._doc ).to.have.a.property( 'foo' ).to.be.equal( doc2.foo );
@@ -181,7 +181,7 @@ describe( 'profile.bl', () => {
 
   it( 'allows to create entries on different days for the same profiles', () => {
 
-    return profileBL.removeAll()
+    return ProfileBL.removeAll()
       .then( () => {
         let profile1 = {
           id: 1,
