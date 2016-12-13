@@ -3,7 +3,7 @@ import Context from './../../src/config/context';
 import DBHelpers from './../lib/db-helpers';
 import _ from 'lodash';
 
-describe.only( 'profile-history.bl', () => {
+describe( 'profile-history.bl', () => {
 
   let dbHelpers;
   let context;
@@ -97,8 +97,7 @@ describe.only( 'profile-history.bl', () => {
     expect( true ).to.be.false;
   } );
 
-  //Todo: Doesn't seem to be robust, return 2 instead of 1 from time to time ... ?!
-  it.only( 'updates and existing item automatically (per profile/day)', () => {
+  it( 'updates and existing item automatically (per profile/day)', () => {
 
     let dateToday = new Date();
     let dateYesterday = new Date( dateToday.setDate( dateToday.getDate() - 1 ) );
