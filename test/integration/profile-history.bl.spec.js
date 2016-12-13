@@ -5,14 +5,17 @@ import _ from 'lodash';
 
 describe( 'profile-history.bl', () => {
 
-  let profileHistoryBL;
   let dbHelpers;
   let context;
+
   before( ( done ) => {
     context = Context.instance();
-    profileHistoryBL = new ProfileHistoryBL();
     dbHelpers = new DBHelpers();
     dbHelpers.dropDatabase( done );
+  } );
+
+  beforeEach( () => {
+    return ProfileHistoryBL.removeAll();
   } );
 
   it( 'save should just save the item', () => {
@@ -25,7 +28,7 @@ describe( 'profile-history.bl', () => {
     return ProfileHistoryBL.save( _.clone( doc ) )
       .then( result => {
         expect( result ).to.exist;
-        expect( result ).to.have.property( 'profile_id' ).to.be.equal( doc.id );
+        expect( result ).to.have.property( '_id' ).to.be.equal( doc.id );
         expect( result ).to.have.property( 'login' ).to.be.equal( doc.login );
         expect( result._doc ).to.have.property( 'foo' ).to.be.equal( doc.foo );
         expect( result._doc ).to.have.property( 'date' ).to.be.eql( new Date( doc.date ) );
@@ -47,22 +50,19 @@ describe( 'profile-history.bl', () => {
       foo: 'profile-history2',
       date: dateToday.setUTCHours( 0, 0, 0, 0 )
     };
-    return ProfileHistoryBL.removeAll()
+    return Promise.all( [
+      ProfileHistoryBL.save( _.clone( doc1 ) ),
+      ProfileHistoryBL.save( _.clone( doc2 ) )
+    ] )
       .then( () => {
-        return Promise.all( [
-          ProfileHistoryBL.save( _.clone( doc1 ) ),
-          ProfileHistoryBL.save( _.clone( doc2 ) )
-        ] )
-          .then( () => {
-            return ProfileHistoryBL.countPerProfileId( 1 )
-              .then( ( count ) => {
-                expect( count ).to.be.equal( 1 );
-              } )
+        return ProfileHistoryBL.countPerProfileId( 1 )
+          .then( ( count ) => {
+            expect( count ).to.be.equal( 1 );
           } )
-          .catch( ( err ) => {
-            expect( err ).to.not.exist;
-          } )
-      } );
+      } )
+      .catch( ( err ) => {
+        expect( err ).to.not.exist;
+      } )
   } );
 
   it( 'if the date is different a new rec will be created', () => {
@@ -85,16 +85,17 @@ describe( 'profile-history.bl', () => {
       date: dateYesterday
     };
 
-    return ProfileHistoryBL.removeAll()
-      .then( () => {
-        return Promise.all( [
-          ProfileHistoryBL.save( doc1 ),
-          ProfileHistoryBL.save( doc2 )
-        ] )
-          .catch( ( err ) => {
-            expect( err ).to.not.exist;
-          } );
+    return Promise.all( [
+      ProfileHistoryBL.save( doc1 ),
+      ProfileHistoryBL.save( doc2 )
+    ] )
+      .catch( ( err ) => {
+        expect( err ).to.not.exist;
       } );
+  } );
+
+  it( 'the history will be updated by its combined key', () => {
+    expect( true ).to.be.false;
   } );
 
   //Todo: Doesn't seem to be robust, return 2 instead of 1 from time to time ... ?!
@@ -103,30 +104,33 @@ describe( 'profile-history.bl', () => {
     let doc1 = {
       id: 1,
       login: 'stefanwalther',
-      foo: 'profile-history',
+      name: 'Stefan Walther',
       date: new Date().setUTCHours( 0, 0, 0, 0 )
     };
 
     let doc2 = {
       id: 1,
       login: 'stefanwalther',
-      foo: 'profile-history2',
+      name: 'Stefan Walther 2',
       date: new Date().setUTCHours( 0, 0, 0, 0 )
     };
 
-    return ProfileHistoryBL.removeAll()
+    return Promise.all( [
+      ProfileHistoryBL.save( doc1 ),
+      ProfileHistoryBL.save( doc2 )
+    ] )
       .then( () => {
-        return Promise.all( [
-          ProfileHistoryBL.save( doc1 ),
-          ProfileHistoryBL.save( doc2 )
-        ] )
+        return ProfileHistoryBL.countPerProfileId( 1 )
+          .then( ( count ) => {
+            expect( count ).to.be.equal( 1 )
+          } )
           .then( () => {
-            return ProfileHistoryBL.countPerProfileId( 1 )
-              .then( ( count ) => {
-                expect( count ).to.be.equal( 1 )
+            return ProfileHistoryBL.getByProfileId( 1 )
+              .then( ( result ) => {
+                expect( result ).not.to.be.empty;
+                expect( result ).to.have.a.property( 'name' ).to.be.equal( 'Stefan Walther 2' );
               } )
           } )
       } )
   } );
-
 } );

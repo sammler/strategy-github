@@ -1,17 +1,14 @@
 import { Model as ProfileHistoryModel } from './profile-history.model';
 import Context from './../../config/context';
+import _ from 'lodash';
 
 export default class ProfileHistoryBL {
-  constructor( context ) {
-    if ( !context ) {
-      context = Context.instance();
-    }
-    this.logger = context.logger;
-  }
 
   static save( gitHubProfile ) {
 
-    gitHubProfile.profile_id = gitHubProfile.id || gitHubProfile._id;
+    gitHubProfile.profile_id = _.clone( gitHubProfile.id || gitHubProfile._id );
+    delete gitHubProfile.id;
+    delete gitHubProfile._id;
 
     let query = {
       profile_id: gitHubProfile.profile_id,
@@ -27,6 +24,12 @@ export default class ProfileHistoryBL {
     return ProfileHistoryModel.findOneAndUpdate( query, gitHubProfile, options )
       .exec();
 
+  }
+
+  static getByProfileId( profileId ) {
+    return ProfileHistoryModel
+      .findOne( { profile_id: profileId } )
+      .exec();
   }
 
   static countPerProfileId( profileId ) {

@@ -3,12 +3,6 @@ import ProfileHistoryBL from './../../../src/modules/profile-history/profile-his
 import _ from 'lodash';
 
 export default class ProfileBL {
-  constructor( context ) {
-    if ( !context ) {
-      throw new Error( 'No context provided.' );
-    }
-    this.logger = context.logger;
-  }
 
   static removeAll() {
     return ProfileModel.remove( {} );
@@ -24,7 +18,7 @@ export default class ProfileBL {
    *
    * @returns {Promise}
    */
-  save( gitHubProfile, saveOptions = {} ) {
+  static save( gitHubProfile, saveOptions = {} ) {
 
     if ( !gitHubProfile ) {
       throw new Error( 'No data provided' );
@@ -39,6 +33,7 @@ export default class ProfileBL {
      * is a new one or not, therefore using .findById, even if that means that we have one more
      * roundtrip to the database for now.
      */
+
     return ProfileModel
       .findById( gitHubProfile._id )
       .exec()
@@ -46,14 +41,25 @@ export default class ProfileBL {
 
         if ( result ) {
 
-          return ProfileHistoryBL.save( gitHubProfile )
+          console.log( 'update rec' );
+          // update existing record
+          return ProfileHistoryBL.save( _.clone( gitHubProfile ) )
             .then( () => {
+              let updateOpts = { new: true, setDefaultsOnInsert: true };
               return ProfileModel
-                .update( { _id: gitHubProfile._id }, _.clone(gitHubProfile), { setDefaultsOnInsert: true } )
+                .findByIdAndUpdate( gitHubProfile._id, gitHubProfile, updateOpts )
                 .exec()
             } )
+
         } else {
-          return ProfileModel.create( _.clone(gitHubProfile) )
+
+          // create a new one
+          console.log( 'create a new rec' );
+          let insertOpts = { new: true, upsert: true, setDefaultsOnInsert: true };
+          return ProfileModel
+            .findByIdAndUpdate( gitHubProfile._id, gitHubProfile, insertOpts )
+            .exec();
+
         }
       } );
   }
@@ -69,6 +75,18 @@ export default class ProfileBL {
   static getByLogin( login ) {
     return ProfileModel
       .find( { login: login } )
+      .exec();
+  }
+
+  static countTotal() {
+    return ProfileModel
+      .count()
+      .exec();
+  }
+
+  static countByLogin( login ) {
+    return ProfileModel
+      .count( { login } )
       .exec();
   }
 }
