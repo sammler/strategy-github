@@ -20,6 +20,11 @@ export default class ProfileBL {
    */
   static save( gitHubProfile, saveOptions = {} ) {
 
+    let defaultOpts = {
+      saveHistory: true
+    };
+    saveOptions = _.assignIn( defaultOpts, saveOptions );
+
     if ( !gitHubProfile ) {
       throw new Error( 'No data provided' );
     }
@@ -34,6 +39,15 @@ export default class ProfileBL {
      * roundtrip to the database for now.
      */
 
+    function savePromiseHistory( doIt ) {
+      if ( doIt ) {
+        return ProfileHistoryBL.save( _.clone( gitHubProfile ) )
+      }
+      else {
+        return Promise.resolve();
+      }
+    }
+
     return ProfileModel
       .findById( gitHubProfile._id )
       .exec()
@@ -41,9 +55,8 @@ export default class ProfileBL {
 
         if ( result ) {
 
-          console.log( 'update rec' );
           // update existing record
-          return ProfileHistoryBL.save( _.clone( gitHubProfile ) )
+          return savePromiseHistory( saveOptions.saveHistory )
             .then( () => {
               let updateOpts = { new: true, setDefaultsOnInsert: true };
               return ProfileModel
@@ -54,7 +67,6 @@ export default class ProfileBL {
         } else {
 
           // create a new one
-          console.log( 'create a new rec' );
           let insertOpts = { new: true, upsert: true, setDefaultsOnInsert: true };
           return ProfileModel
             .findByIdAndUpdate( gitHubProfile._id, gitHubProfile, insertOpts )

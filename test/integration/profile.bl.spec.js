@@ -1,4 +1,5 @@
 import ProfileBL from './../../src/modules/profile/profile.bl';
+import ProfileHistoryBL from './../../src/modules/profile-history/profile-history.bl';
 import Context from './../../src/config/context';
 import DBHelpers from './../lib/db-helpers';
 import _ from 'lodash';
@@ -14,7 +15,10 @@ describe.only( 'profile.bl', () => {
   } );
 
   beforeEach( () => {
-    return ProfileBL.removeAll();
+    return Promise.all( [
+      ProfileBL.removeAll(),
+      ProfileHistoryBL.removeAll()
+    ] );
   } );
 
   it( 'removeAll removes all existing profiles', () => {
@@ -35,8 +39,68 @@ describe.only( 'profile.bl', () => {
       } )
   } );
 
-  xit( 'will not save the history in case of `saveOptions.saveHistory` === false', () => {
-    expect( true ).to.be.false;
+  it( 'saves the history', () => {
+
+    let dateToday = new Date();
+    let dateYesterday = new Date( dateToday.setDate( dateToday.getDate() - 1 ) );
+    dateYesterday = dateYesterday.setUTCHours( 0, 0, 0, 0 );
+
+    let doc1 = {
+      id: 1,
+      login: 'stefanwalther',
+      public_repos: 1,
+      last_check: dateToday.setUTCHours( 0, 0, 0, 0 )
+    };
+
+    let doc2 = {
+      id: 1,
+      login: 'stefanwalther',
+      public_repos: 1,
+      last_check: new Date( dateYesterday ).setUTCHours( 0, 0, 0, 0 )
+    };
+
+    return ProfileBL.save( _.clone( doc1 ) )
+      .then( () => {return ProfileBL.save( _.clone( doc2 ) )} )
+      .then( () => {return ProfileHistoryBL.countPerProfileId( doc2.id ) } )
+      .then( ( countProfile ) => {
+        expect( countProfile ).to.be.equal( 1 );
+      } )
+      .then( () => {return ProfileBL.countTotal()} )
+      .then( ( countHistory ) => {
+        expect( countHistory ).to.be.equal( 1 )
+      } )
+
+  } );
+
+  it( 'will not save the history in case of `saveOptions.saveHistory` === false', () => {
+    let dateToday = new Date();
+    let dateYesterday = new Date( dateToday.setDate( dateToday.getDate() - 1 ) );
+    dateYesterday = dateYesterday.setUTCHours( 0, 0, 0, 0 );
+
+    let doc1 = {
+      id: 1,
+      login: 'stefanwalther',
+      public_repos: 1,
+      last_check: dateToday.setUTCHours( 0, 0, 0, 0 )
+    };
+
+    let doc2 = {
+      id: 1,
+      login: 'stefanwalther',
+      public_repos: 1,
+      last_check: new Date( dateYesterday ).setUTCHours( 0, 0, 0, 0 )
+    };
+
+    return ProfileBL.save( _.clone( doc1 ) )
+      .then( () => {return ProfileBL.save( _.clone( doc2 ), { saveHistory: false } )} )
+      .then( () => {return ProfileHistoryBL.countPerProfileId( doc2.id ) } )
+      .then( ( countProfile ) => {
+        expect( countProfile ).to.be.equal( 0 );
+      } )
+      .then( () => {return ProfileBL.countTotal()} )
+      .then( ( countHistory ) => {
+        expect( countHistory ).to.be.equal( 1 )
+      } )
   } );
 
   it( 'will remove unnecessary objects', () => {
@@ -177,7 +241,6 @@ describe.only( 'profile.bl', () => {
 
   it( 'allows to create entries for different profiles', () => {
 
-
     let doc1 = {
       id: 1,
       login: 'stefanwalther',
@@ -204,10 +267,10 @@ describe.only( 'profile.bl', () => {
       } )
       .then( () => {
         return ProfileBL.countTotal()
-          .then( (countTotal) => {
-            expect(countTotal).to.be.equal(2);
-          })
-      })
+          .then( ( countTotal ) => {
+            expect( countTotal ).to.be.equal( 2 );
+          } )
+      } )
 
   } );
 
