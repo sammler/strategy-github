@@ -1,5 +1,6 @@
 const GitHubApi = require( 'github' );
-const auth = require( './../../../.github-auth.json' );
+//const auth = require( './../../../.github-auth.json' );
+const auth = require('./github.auth');
 
 export function getGhClient() {
 
