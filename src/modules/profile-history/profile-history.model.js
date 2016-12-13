@@ -15,6 +15,11 @@ let schema = new Schema( {
     type: Number
   },
 
+  name: {
+    type: String,
+    null: false
+  },
+
   // Duplicate data
   login: {
     type: String,

@@ -4,7 +4,7 @@ import Context from './../../src/config/context';
 import DBHelpers from './../lib/db-helpers';
 import _ from 'lodash';
 
-describe.only( 'profile.bl', () => {
+describe( 'profile.bl', () => {
 
   let dbHelpers;
   let context;

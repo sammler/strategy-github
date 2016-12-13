@@ -10,6 +10,7 @@ export default class ProfileHistoryBL {
     delete gitHubProfile.id;
     delete gitHubProfile._id;
 
+    //Todo: Create a combined _id out of that ...
     let query = {
       profile_id: gitHubProfile.profile_id,
       date: gitHubProfile.date
@@ -21,7 +22,8 @@ export default class ProfileHistoryBL {
       setDefaultsOnInsert: true
     };
 
-    return ProfileHistoryModel.findOneAndUpdate( query, gitHubProfile, options )
+    return ProfileHistoryModel
+      .findOneAndUpdate( query, gitHubProfile, options )
       .exec();
 
   }
