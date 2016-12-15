@@ -1,5 +1,5 @@
 import supertest from 'supertest'
-import AppServer from './../../src/appServer';
+import AppServer from './../../src/api/appServer';
 
 describe( 'health-check', () => {
 

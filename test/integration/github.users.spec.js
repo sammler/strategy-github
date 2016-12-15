@@ -1,5 +1,5 @@
-import GithubUsers from './../../src/modules/github/github.users';
-import Context from './../../src/config/context';
+import GithubUsers from './../../src/api/modules/github/github.users';
+import Context from './../../src/api/config/context';
 
 describe( 'integration => github.profile.follwers =>', () => {
 

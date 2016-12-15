@@ -1,5 +1,5 @@
-import Context from './../../src/config/context';
-import GitHubProfile from './../../src/modules/github/github.profile';
+import Context from './../../src/api/config/context';
+import GitHubProfile from './../../src/api/modules/github/github.profile';
 
 describe( 'integration => github-profile => ', () => {
 

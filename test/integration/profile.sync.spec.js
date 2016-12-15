@@ -1,8 +1,8 @@
-import Context from './../../src/config/context';
-import GitHubProfile from './../../src/modules/github/github.profile';
-import ProfileBL from './../../src/modules/profile/profile.bl';
-import ProfileHistoryBL from './../../src/modules/profile-history/profile-history.bl';
-import * as mUtils from './../../src/helper/m-utils';
+import Context from './../../src/api/config/context';
+import GitHubProfile from './../../src/api/modules/github/github.profile';
+import ProfileBL from './../../src/api/modules/profile/profile.bl';
+import ProfileHistoryBL from './../../src/api/modules/profile-history/profile-history.bl';
+import * as mUtils from './../../src/api/helper/m-utils';
 
 xdescribe( 'Sync a profile', () => {
 

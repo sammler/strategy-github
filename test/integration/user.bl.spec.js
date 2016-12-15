@@ -1,5 +1,5 @@
-import UsersBL from './../../src/modules/users/users.bl';
-import Context from './../../src/config/context';
+import UsersBL from './../../src/api/modules/users/users.bl';
+import Context from './../../src/api/config/context';
 import DBHelpers from './../lib/db-helpers';
 
 xdescribe( 'users.bl', () => {

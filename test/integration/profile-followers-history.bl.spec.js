@@ -1,5 +1,5 @@
-import ProfileFollowersHistoryBL from './../../src/modules/profile-followers-history/profile-followers-history.bl';
-import Context from './../../src/config/context';
+import ProfileFollowersHistoryBL from './../../src/api/modules/profile-followers-history/profile-followers-history.bl';
+import Context from './../../src/api/config/context';
 import DBHelpers from './../lib/db-helpers';
 
 xdescribe( 'profile-followers-history.bl', () => {

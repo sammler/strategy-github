@@ -1,5 +1,5 @@
 import { Model as ProfileModel } from './profile.model';
-import ProfileHistoryBL from './../../../src/modules/profile-history/profile-history.bl';
+import ProfileHistoryBL from './../../modules/profile-history/profile-history.bl';
 import _ from 'lodash';
 
 export default class ProfileBL {

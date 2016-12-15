@@ -1,4 +1,4 @@
-let Profile = require( './../../src/modules/profile/profile.model' ).Model;
+let Profile = require( './../../src/api/modules/profile/profile.model' ).Model;
 
 describe( 'unit:Profile ==>', () => {
 

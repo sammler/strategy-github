@@ -1,5 +1,5 @@
-import ProfileHistoryBL from './../../src/modules/profile-history/profile-history.bl';
-import Context from './../../src/config/context';
+import ProfileHistoryBL from './../../src/api/modules/profile-history/profile-history.bl';
+import Context from './../../src/api/config/context';
 import DBHelpers from './../lib/db-helpers';
 import _ from 'lodash';
 
@@ -18,7 +18,7 @@ describe( 'profile-history.bl', () => {
     return ProfileHistoryBL.removeAll();
   } );
 
-  it.only( '`save` handles saving a record for the same profile_id and date', () => {
+  it( '`save` handles saving a record for the same profile_id and date', () => {
     let doc1 = {
       id: 1,
       login: 'stefanwalther',

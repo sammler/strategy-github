@@ -1,4 +1,4 @@
-import Context from './../../src/config/context';
+import Context from './../../src/api/config/context';
 
 export default class DBHelpers {
   constructor( context ) {

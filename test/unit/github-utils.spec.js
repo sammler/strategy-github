@@ -1,4 +1,4 @@
-import * as ghLib from './../../src/helper/github-utils';
+import * as ghLib from './../../src/api/helper/github-utils';
 
 describe( 'github-utils', () => {
 

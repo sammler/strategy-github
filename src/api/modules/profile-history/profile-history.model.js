@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { Schema } from 'mongoose';
 import Context from './../../config/context';
 
-const uniqueValidator = require( 'mongoose-unique-validator' );
+//const uniqueValidator = require( 'mongoose-unique-validator' );
 const timeStamps = require( 'mongoose-timestamp' );
 
 let schema = new Schema( {

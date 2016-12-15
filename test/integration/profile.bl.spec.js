@@ -1,6 +1,6 @@
-import ProfileBL from './../../src/modules/profile/profile.bl';
-import ProfileHistoryBL from './../../src/modules/profile-history/profile-history.bl';
-import Context from './../../src/config/context';
+import ProfileBL from './../../src/api/modules/profile/profile.bl';
+import ProfileHistoryBL from './../../src/api/modules/profile-history/profile-history.bl';
+import Context from './../../src/api/config/context';
 import DBHelpers from './../lib/db-helpers';
 import _ from 'lodash';
 
