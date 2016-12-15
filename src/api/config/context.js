@@ -21,6 +21,9 @@ export default class Context {
   static FIELD_CREATED_AT = 's5r_created_at';
   static FIELD_UPDATED_AT = 's5r_updated_at';
 
+  static COLLECTION_PROFILES = 'profiles';
+  static COLLECTION_PROFILE_HISTORY = 'profile-history';
+
   static instance() {
     if ( !instance ) {
       instance = new Context();

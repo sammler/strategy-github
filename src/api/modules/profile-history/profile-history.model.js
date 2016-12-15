@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import { Schema } from 'mongoose';
 import Context from './../../config/context';
 
-//const uniqueValidator = require( 'mongoose-unique-validator' );
 const timeStamps = require( 'mongoose-timestamp' );
 
 let schema = new Schema( {
@@ -12,7 +11,8 @@ let schema = new Schema( {
   },
 
   profile_id: {
-    type: Number
+    type: Number,
+    ref: Context.COLLECTION_PROFILES
   },
 
   name: {
@@ -32,11 +32,10 @@ let schema = new Schema( {
     null: false
   }
 
-}, { collection: Context.TABLE_PREFIX + 'profile-history', strict: false } );
+}, { collection: Context.TABLE_PREFIX + Context.COLLECTION_PROFILE_HISTORY, strict: false } );
 
-//schema.plugin( uniqueValidator, null );
 schema.plugin( timeStamps, { createdAt: Context.FIELD_CREATED_AT, updatedAt: Context.FIELD_UPDATED_AT } );
 schema.index( { profile_id: 1, date: 1 }, { unique: true } );
 
 module.exports.Schema = schema;
-module.exports.Model = mongoose.model( 'profile-history', schema );
+module.exports.Model = mongoose.model( Context.COLLECTION_PROFILE_HISTORY, schema );

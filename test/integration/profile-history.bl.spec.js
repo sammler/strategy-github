@@ -3,8 +3,10 @@ import Context from './../../src/api/config/context';
 import DBHelpers from './../lib/db-helpers';
 import _ from 'lodash';
 
-describe( 'profile-history.bl', () => {
+// Don't use arrow functions here, otherwise we don't have access to `this.timeout`
+describe( 'profile-history.bl', function( suite ) { //eslint-disable-line func-names
 
+  this.timeout( 2000 );
   let dbHelpers;
   let context;
 
@@ -16,6 +18,22 @@ describe( 'profile-history.bl', () => {
 
   beforeEach( () => {
     return ProfileHistoryBL.removeAll();
+  } );
+
+  it( 'save should just save the item', () => {
+    let doc = {
+      id: 1,
+      login: 'stefanwalther',
+      foo: 'profile-history',
+      date: new Date().setUTCHours( 0, 0, 0, 0 )
+    };
+    return ProfileHistoryBL.save( _.clone( doc ) )
+      .then( result => {
+        expect( result ).to.exist;
+        expect( result ).to.have.property( 'login' ).to.be.equal( doc.login );
+        expect( result._doc ).to.have.property( 'foo' ).to.be.equal( doc.foo );
+        expect( result._doc ).to.have.property( 'date' ).to.be.eql( new Date( doc.date ) );
+      } );
   } );
 
   it( '`save` handles saving a record for the same profile_id and date', () => {
@@ -38,22 +56,6 @@ describe( 'profile-history.bl', () => {
       .then( ( count ) => {
         expect( count ).to.be.equal( 1 );
       } )
-  } );
-
-  it( 'save should just save the item', () => {
-    let doc = {
-      id: 1,
-      login: 'stefanwalther',
-      foo: 'profile-history',
-      date: new Date().setUTCHours( 0, 0, 0, 0 )
-    };
-    return ProfileHistoryBL.save( _.clone( doc ) )
-      .then( result => {
-        expect( result ).to.exist;
-        expect( result ).to.have.property( 'login' ).to.be.equal( doc.login );
-        expect( result._doc ).to.have.property( 'foo' ).to.be.equal( doc.foo );
-        expect( result._doc ).to.have.property( 'date' ).to.be.eql( new Date( doc.date ) );
-      } );
   } );
 
   it( 'should update the item if already existing', () => {

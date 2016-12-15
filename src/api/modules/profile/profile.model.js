@@ -83,7 +83,7 @@ let schema = new Schema( {
     null: true
   }
 
-}, { noId: true, noVirtualId: true, collection: Context.TABLE_PREFIX + 'profiles', strict: false } );
+}, { noId: true, noVirtualId: true, collection: Context.TABLE_PREFIX + Context.COLLECTION_PROFILES, strict: false } );
 
 schema.plugin( uniqueValidator, null );
 /**
@@ -134,4 +134,4 @@ schema.post( 'update', function() { //eslint-disable-line func-names
 } );
 
 module.exports.Schema = schema;
-module.exports.Model = mongoose.model( 'profile', schema );
+module.exports.Model = mongoose.model( Context.COLLECTION_PROFILES, schema );

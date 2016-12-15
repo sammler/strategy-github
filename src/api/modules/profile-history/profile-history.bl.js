@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { Model as ProfileHistoryModel } from './profile-history.model';
 import Context from './../../config/context';
 import _ from 'lodash';

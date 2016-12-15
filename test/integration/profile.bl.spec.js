@@ -4,7 +4,9 @@ import Context from './../../src/api/config/context';
 import DBHelpers from './../lib/db-helpers';
 import _ from 'lodash';
 
-describe( 'profile.bl', () => {
+describe( 'profile.bl', function() {
+
+  this.timeout(1000);
 
   let dbHelpers;
   let context;
