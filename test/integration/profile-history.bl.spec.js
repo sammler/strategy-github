@@ -18,6 +18,28 @@ describe( 'profile-history.bl', () => {
     return ProfileHistoryBL.removeAll();
   } );
 
+  it.only( '`save` handles saving a record for the same profile_id and date', () => {
+    let doc1 = {
+      id: 1,
+      login: 'stefanwalther',
+      foo: 'profile-history',
+      date: new Date().setUTCHours( 0, 0, 0, 0 )
+    };
+    let doc2 = {
+      id: 1,
+      login: 'stefanwalther',
+      foo: 'profile-history',
+      date: new Date().setUTCHours( 0, 0, 0, 0 )
+    };
+
+    return ProfileHistoryBL.save( _.clone( doc1 ) )
+      .then( () => { return ProfileHistoryBL.save( _.clone( doc2 ) ) } )
+      .then( () => { return ProfileHistoryBL.count()} )
+      .then( ( count ) => {
+        expect( count ).to.be.equal( 1 );
+      } )
+  } );
+
   it( 'save should just save the item', () => {
     let doc = {
       id: 1,
@@ -49,10 +71,8 @@ describe( 'profile-history.bl', () => {
       foo: 'profile-history2',
       date: dateToday.setUTCHours( 0, 0, 0, 0 )
     };
-    return Promise.all( [
-      ProfileHistoryBL.save( _.clone( doc1 ) ),
-      ProfileHistoryBL.save( _.clone( doc2 ) )
-    ] )
+    return ProfileHistoryBL.save( _.clone( doc1 ) )
+      .then( () => { return ProfileHistoryBL.save( _.clone( doc2 ) ) } )
       .then( () => {
         return ProfileHistoryBL.countPerProfileId( 1 )
           .then( ( count ) => {
@@ -84,10 +104,8 @@ describe( 'profile-history.bl', () => {
       date: dateYesterday
     };
 
-    return Promise.all( [
-      ProfileHistoryBL.save( doc1 ),
-      ProfileHistoryBL.save( doc2 )
-    ] )
+    return ProfileHistoryBL.save( doc1 )
+      .then( () => { return ProfileHistoryBL.save( doc2 )} )
       .catch( ( err ) => {
         expect( err ).to.not.exist;
       } );

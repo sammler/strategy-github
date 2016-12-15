@@ -26,6 +26,7 @@ let schema = new Schema( {
     null: false
   },
 
+  // history date
   date: {
     type: Date,
     null: false
@@ -33,8 +34,9 @@ let schema = new Schema( {
 
 }, { collection: Context.TABLE_PREFIX + 'profile-history', strict: false } );
 
-schema.plugin( uniqueValidator, null );
+//schema.plugin( uniqueValidator, null );
 schema.plugin( timeStamps, { createdAt: Context.FIELD_CREATED_AT, updatedAt: Context.FIELD_UPDATED_AT } );
+schema.index( { profile_id: 1, date: 1 }, { unique: true } );
 
 module.exports.Schema = schema;
 module.exports.Model = mongoose.model( 'profile-history', schema );

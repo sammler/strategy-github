@@ -28,6 +28,12 @@ export default class ProfileHistoryBL {
 
   }
 
+  static count() {
+    return ProfileHistoryModel
+      .count( {})
+      .exec();
+  }
+
   static getByProfileId( profileId ) {
     return ProfileHistoryModel
       .findOne( { profile_id: profileId } )

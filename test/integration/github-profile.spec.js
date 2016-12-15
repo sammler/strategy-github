@@ -1,7 +1,7 @@
 import Context from './../../src/config/context';
 import GitHubProfile from './../../src/modules/github/github.profile';
 
-describe( 'GitHubProfile', () => {
+describe( 'integration => github-profile => ', () => {
 
   let ghProfile;
   beforeEach( () => {
