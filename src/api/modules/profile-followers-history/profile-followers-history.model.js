@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { Schema } from 'mongoose';
-const uniqueValidator = require( 'mongoose-unique-validator' );
+import Context from './../../config/context';
+
 const timeStamps = require( 'mongoose-timestamp' );
 
 let schema = new Schema( {
@@ -8,6 +9,7 @@ let schema = new Schema( {
   // Todo: ref to profile
   profile_id: {
     type: Number,
+    ref: Context.COLLECTION_PROFILES,
     null: false,
     required: true
   },
@@ -34,10 +36,16 @@ let schema = new Schema( {
     null: false,
     default: new Date().setUTCHours( 0, 0, 0, 0 )
   }
+}, { collection: Context.COLLECTION_PREFIX + Context.COLLECTION_PROFILE_FOLLOWERS_HISTORY } );
+
+
+schema.pre( 'findOneAndUpdate', function( next ) { //eslint-disable-line func-names
+  this._update.last_check = new Date();
+  next();
 } );
 
-schema.plugin( uniqueValidator, null );
+schema.index( { profile_id: 1, user_id: 1, date_from: 1 } );
 schema.plugin( timeStamps, { createdAt: 's5r_created_at', updatedAt: 's5r_updated_at' } );
 
 module.exports.Schema = schema;
-module.exports.Model = mongoose.model( 'profile_followers_history', schema );
+module.exports.Model = mongoose.model( Context.COLLECTION_PROFILE_FOLLOWERS_HISTORY, schema );

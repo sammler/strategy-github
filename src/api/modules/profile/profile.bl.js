@@ -4,10 +4,6 @@ import _ from 'lodash';
 
 export default class ProfileBL {
 
-  static removeAll() {
-    return ProfileModel.remove( {} );
-  }
-
   /**
    * Save a GitHub profile.
    *
@@ -100,6 +96,10 @@ export default class ProfileBL {
     return ProfileModel
       .count( { login } )
       .exec();
+  }
+
+  static removeAll() {
+    return ProfileModel.remove( {} );
   }
 }
 

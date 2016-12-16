@@ -1,6 +1,8 @@
 'use strict';
 import mongoose from 'mongoose';
 import { Schema } from 'mongoose';
+import Context from './../../config/context';
+
 const uniqueValidator = require( 'mongoose-unique-validator' );
 const timeStamps = require( 'mongoose-timestamp' );
 
@@ -27,10 +29,10 @@ let schema = new Schema( {
     null: false,
     unique: true
   }
-}, { collection: 'users', strict: false } );
+}, { collection: Context.COLLECTION_PREFIX + Context.COLLECTION_USERS, strict: false } );
 
 schema.plugin( uniqueValidator, null );
 schema.plugin( timeStamps, { createdAt: 'created_at', updatedAt: 'updated_at' } );
 
 module.exports.Schema = schema;
-module.exports.Model = mongoose.model( 'user', schema );
+module.exports.Model = mongoose.model( Context.COLLECTION_USERS, schema );

@@ -17,12 +17,14 @@ export default class Context {
     }
   }
 
-  static TABLE_PREFIX = 'github~~';
+  static COLLECTION_PREFIX = 'github~~';
   static FIELD_CREATED_AT = 's5r_created_at';
   static FIELD_UPDATED_AT = 's5r_updated_at';
 
   static COLLECTION_PROFILES = 'profiles';
   static COLLECTION_PROFILE_HISTORY = 'profile-history';
+  static COLLECTION_PROFILE_FOLLOWERS_HISTORY = 'profile-followers-history';
+  static COLLECTION_USERS = 'users';
 
   static instance() {
     if ( !instance ) {

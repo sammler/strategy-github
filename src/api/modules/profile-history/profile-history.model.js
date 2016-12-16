@@ -32,7 +32,7 @@ let schema = new Schema( {
     null: false
   }
 
-}, { collection: Context.TABLE_PREFIX + Context.COLLECTION_PROFILE_HISTORY, strict: false } );
+}, { collection: Context.COLLECTION_PREFIX + Context.COLLECTION_PROFILE_HISTORY, strict: false } );
 
 schema.plugin( timeStamps, { createdAt: Context.FIELD_CREATED_AT, updatedAt: Context.FIELD_UPDATED_AT } );
 schema.index( { profile_id: 1, date: 1 }, { unique: true } );
