@@ -2,7 +2,9 @@ version: "2"
 
 services:
 
+  # ----------------------------------------------------------
   # Base services
+  # ----------------------------------------------------------
   s5r-rabbitmq:
     extends:
       file: ./node_modules/sammler-base/docker-compose.yml
@@ -12,6 +14,30 @@ services:
     extends:
       file: ./node_modules/sammler-base/docker-compose.yml
       service: "s5r-scheduler"
+
+  # ELK
+  elasticsearch:
+    extends:
+      file: ./node_modules/sammler-base/docker-compose.yml
+      service: "elasticsearch"
+
+  logstash:
+    extends:
+      file: ./node_modules/sammler-base/docker-compose.yml
+      service: "logstash"
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    extends:
+      file: ./node_modules/sammler-base/docker-compose.yml
+      service: "kibana"
+    depends_on:
+      - elasticsearch
+
+  # ----------------------------------------------------------
+  # Strategies
+  # ----------------------------------------------------------
 
   # Strategy GitHub
   s5r-s-github-db:
