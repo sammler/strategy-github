@@ -13,8 +13,8 @@ services:
       file: ./node_modules/sammler-base/docker-compose.yml
       service: "s5r-scheduler"
 
-  # Middleware GitHub
-  sammler-strategy-github-db:
+  # Strategy GitHub
+  s5r-s-github-db:
     container_name: "s5r-s-github-db"
     image: mongo
     ports:
