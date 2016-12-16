@@ -40,7 +40,7 @@ describe( 'profile-followers-history.bl', () => {
       } );
   } );
 
-  it.only( '`ensure` creates a new entry (with default values)', () => {
+  it( '`ensure` creates a new entry (with default values)', () => {
 
     let doc = {
       profile_id: 1,
