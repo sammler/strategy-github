@@ -1,8 +1,8 @@
 import Context from './../../src/api/config/context';
 
 export default class DBHelpers {
-  constructor( context ) {
-    if ( !context ) {
+  constructor(context) {
+    if (!context) {
       context = Context.instance();
     }
     this.context = context;
@@ -10,16 +10,16 @@ export default class DBHelpers {
     this.db = this.context.db;
   }
 
-  dropDatabase( done ) {
-    this.context.db.connection.dropDatabase( ( err ) => {
-      done( err );
-    } )
+  dropDatabase(done) {
+    this.context.db.connection.dropDatabase((err) => {
+      done(err);
+    });
   }
 
-  //dropProfileCollection( done ) {
+  // dropProfileCollection( done ) {
   //  this.context.db.connection.db.dropCollection( 's5r-mw-github.profile', ( err, result ) => {
   //    return done( err, result );
   //  } )
-  //}
+  // }
 
 }

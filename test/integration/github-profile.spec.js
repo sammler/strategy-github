@@ -2,7 +2,6 @@
 import GitHubProfile from './../../src/api/modules/github/github.profile';
 
 describe('integration => github-profile => ', () => {
-
   let ghProfile;
   beforeEach(() => {
     ghProfile = new GitHubProfile(global.Context);
@@ -16,14 +15,13 @@ describe('integration => github-profile => ', () => {
     expect(ghProfile).to.have.a.property('ghClient').to.be.an.object;
   });
 
-  //Todo: The filter is not implemented, yet
+  // Todo: The filter is not implemented, yet
   it('should fetch the profile data', () => {
-
-    let cfg = {
+    const cfg = {
       affiliation: 'owner',
-      per_page: 100
+      per_page: 100,
     };
-    let filter = {};
+    const filter = {};
 
     return ghProfile.getProfile(cfg, filter)
       .then((res) => {
@@ -35,22 +33,17 @@ describe('integration => github-profile => ', () => {
       .catch((err) => {
         expect(err).to.not.exist;
       });
-
   });
 
   it('should fetch the profile data (without filter)', () => {
-
-    let cfg = {
+    const cfg = {
       affiliation: 'owner',
-      per_page: 100
+      per_page: 100,
     };
 
     return ghProfile.getProfile(cfg);
   });
 
-  //Todo: check the result, not sure if this test is really correct.
-  it('should fetch the profile data (without config)', () => {
-    return ghProfile.getProfile();
-  });
-
+  // Todo: check the result, not sure if this test is really correct.
+  it('should fetch the profile data (without config)', () => ghProfile.getProfile());
 });

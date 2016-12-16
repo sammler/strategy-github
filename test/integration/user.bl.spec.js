@@ -3,7 +3,6 @@ import Context from './../../src/api/config/context';
 import DBHelpers from './../lib/db-helpers';
 
 xdescribe('users.bl', () => {
-
   let usersBL;
   let dbHelpers;
   let context;
@@ -17,7 +16,7 @@ xdescribe('users.bl', () => {
 
   });
   after(() => {
-    //context.dbDisconnect();
+    // context.dbDisconnect();
   });
 
   it('BL has some basic functions', () => {
@@ -28,14 +27,12 @@ xdescribe('users.bl', () => {
     expect(usersBL).to.have.a.property('removeAll');
   });
 
-  it('`removeAll` => removes all existing users', () => {
-    return usersBL.removeAll();
-  });
+  it('`removeAll` => removes all existing users', () => usersBL.removeAll());
 
   it('`save` => saves a new user (with defaults)', () => {
-    let user = {
+    const user = {
       id: 1,
-      login: 'foo'
+      login: 'foo',
     };
     return usersBL
       .save(user)
@@ -46,17 +43,16 @@ xdescribe('users.bl', () => {
         expect(result).to.have.a.property('last_check').to.be.equal(new Date(new Date().setUTCHours(0, 0, 0, 0)));
         expect(result).to.have.a.property('created_at');
         expect(result).to.have.a.property('updated_at');
-
       })
       .catch((err) => {
         expect(err).to.not.exist;
-      })
+      });
   });
 
   it('`remove` removes a user', () => {
-    let user = {
+    const user = {
       id: 1,
-      login: 'foo'
+      login: 'foo',
     };
 
     return usersBL
@@ -70,13 +66,12 @@ xdescribe('users.bl', () => {
       .catch((err) => {
         expect(err).to.not.exist;
       });
-
   });
 
   it('`getById` returns an existing user', () => {
-    let user = {
+    const user = {
       id: 100,
-      login: 'foo'
+      login: 'foo',
     };
     return usersBL
       .removeAll()
@@ -85,13 +80,13 @@ xdescribe('users.bl', () => {
       .then((result) => {
         expect(result).to.exist;
         expect(result).to.have.a.property('id').to.be.equal(user.id);
-      })
+      });
   });
 
   it('`getByLogin` returns the desired user', () => {
-    let user = {
+    const user = {
       id: 100,
-      login: 'foo'
+      login: 'foo',
     };
 
     return usersBL
@@ -100,26 +95,29 @@ xdescribe('users.bl', () => {
       .then(() => usersBL.getByLogin(user.login))
       .then((result) => {
         expect(result).to.exist;
-        //Todo: Research the _doc stuff
+        // Todo: Research the _doc stuff
         expect(result).to.have.a.property('_doc');
+
+        /* eslint-disable no-underscore-dangle */
         expect(result._doc).to.have.a.property('id').to.be.equal(user.id);
         expect(result._doc).to.have.a.property('login').to.be.equal(user.login);
-      })
-
+        /* eslint-enable no-underscore-dangle */
+      });
   });
 
   it('`save` => updates an existing user (and updates last_check)', () => {
-
-    let user = {
+    const user = {
       id: 1,
       login: 'foo',
       foo: 'bar',
-      last_check: new Date(new Date - 24 * 60 * 60 * 1000).setUTCHours(0, 0, 0, 0)
+      // eslint-disable-next-line no-mixed-operators
+      last_check: new Date(new Date() - 24 * 60 * 60 * 1000).setUTCHours(0, 0, 0, 0),
     };
-    let userUpdated = {
+
+    const userUpdated = {
       id: 1,
       login: 'foo',
-      foo: 'baz'
+      foo: 'baz',
     };
 
     const expectedDate = new Date(new Date().setUTCHours(0, 0, 0, 0));
@@ -130,11 +128,13 @@ xdescribe('users.bl', () => {
       .then(() => usersBL.save(userUpdated))
       .then((result) => {
         expect(result).to.exist;
-        //Todo: Why not returning a model, do some research ...
+
+        /* eslint-disable no-underscore-dangle */
+        // Todo: Why not returning a model, do some research ...
         expect(result._doc).to.have.a.property('foo').to.be.equal('baz');
         expect(result._doc.last_check).to.be.equal(new Date(expectedDate));
+        /* eslint-enable no-underscore-dangle */
       });
   });
-
 });
 
