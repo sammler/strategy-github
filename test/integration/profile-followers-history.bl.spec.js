@@ -55,10 +55,10 @@ describe( 'profile-followers-history.bl', () => {
         expect( result ).to.have.a.property( 'date_to' ).to.not.exist;
         expect( result ).to.have.a.property( 'last_check' ).to.exist;
       } )
-      .then( () => { return ProfileFollowersHistoryBL.countByProfileId( doc.profile_id ) })
-      .then( (count) => {
-        expect(count).to.be.equal(1);
-      })
+      .then( () => { return ProfileFollowersHistoryBL.countByProfileId( doc.profile_id ) } )
+      .then( ( count ) => {
+        expect( count ).to.be.equal( 1 );
+      } )
 
   } );
 
