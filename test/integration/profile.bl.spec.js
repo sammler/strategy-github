@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 describe( 'profile.bl', function() {
 
-  this.timeout(1000);
+  this.timeout( 1000 );
 
   let dbHelpers;
   let context;

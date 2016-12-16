@@ -35,15 +35,15 @@ export default class Context {
 
   dbConnect() {
 
-      //Todo: Check for mongoose.connection.readyState: http://stackoverflow.com/questions/19599543/check-mongoose-connection-state-without-creating-new-connection
-      //Todo: make this configurable
-      let uri = 'mongodb://localhost:27017/s5r-s-github';
-      let options = {
-        server: {
-          poolSize: 5
-        }
-      };
-      this.db = mongoose.connect( uri, options );
+    //Todo: Check for mongoose.connection.readyState: http://stackoverflow.com/questions/19599543/check-mongoose-connection-state-without-creating-new-connection
+    //Todo: make this configurable
+    let uri = 'mongodb://localhost:27017/s5r-s-github';
+    let options = {
+      server: {
+        poolSize: 5
+      }
+    };
+    this.db = mongoose.connect( uri, options );
 
   }
 

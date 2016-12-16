@@ -1,6 +1,6 @@
+import _ from 'lodash';
 import { Model as ProfileModel } from './profile.model';
 import ProfileHistoryBL from './../../modules/profile-history/profile-history.bl';
-import _ from 'lodash';
 
 export default class ProfileBL {
 
@@ -14,15 +14,14 @@ export default class ProfileBL {
    *
    * @returns {Promise}
    */
-  static save( gitHubProfile, saveOptions = {} ) {
-
-    let defaultOpts = {
-      saveHistory: true
+  static save(gitHubProfile, saveOptions = {}) {
+    const defaultOpts = {
+      saveHistory: true,
     };
-    saveOptions = _.assignIn( defaultOpts, saveOptions );
+    saveOptions = _.assignIn(defaultOpts, saveOptions);
 
-    if ( !gitHubProfile ) {
-      throw new Error( 'No data provided' );
+    if (!gitHubProfile) {
+      throw new Error('No data provided');
     }
     gitHubProfile._id = gitHubProfile.id;
     delete gitHubProfile.id;
@@ -35,54 +34,48 @@ export default class ProfileBL {
      * roundtrip to the database for now.
      */
 
-    function savePromiseHistory( doIt ) {
-      if ( doIt ) {
-        return ProfileHistoryBL.save( _.clone( gitHubProfile ) )
-      }
-      else {
+    function savePromiseHistory(doIt) {
+      if (doIt) {
+        return ProfileHistoryBL.save(_.clone(gitHubProfile));
+      } else {
         return Promise.resolve();
       }
     }
 
     return ProfileModel
-      .findById( gitHubProfile._id )
+      .findById(gitHubProfile._id)
       .exec()
-      .then( ( result ) => {
-
-        if ( result ) {
-
+      .then((result) => {
+        if (result) {
           // update existing record
-          return savePromiseHistory( saveOptions.saveHistory )
-            .then( () => {
-              let updateOpts = { new: true, setDefaultsOnInsert: true };
+          return savePromiseHistory(saveOptions.saveHistory)
+            .then(() => {
+              const updateOpts = { new: true, setDefaultsOnInsert: true };
               return ProfileModel
-                .findByIdAndUpdate( gitHubProfile._id, gitHubProfile, updateOpts )
-                .exec()
-            } )
-
+                .findByIdAndUpdate(gitHubProfile._id, gitHubProfile, updateOpts)
+                .exec();
+            });
         } else {
-
           // create a new one
-          let insertOpts = { new: true, upsert: true, setDefaultsOnInsert: true };
+          const insertOpts = { new: true, upsert: true, setDefaultsOnInsert: true };
           return ProfileModel
-            .findByIdAndUpdate( gitHubProfile._id, gitHubProfile, insertOpts )
+            .findByIdAndUpdate(gitHubProfile._id, gitHubProfile, insertOpts)
             .exec();
-
         }
-      } );
+      });
   }
 
-  //Todo: need explicit testing
-  static getById( profileId ) {
+  // Todo: need explicit testing
+  static getById(profileId) {
     return ProfileModel
-      .findById( profileId )
+      .findById(profileId)
       .exec();
   }
 
-  //Todo: Need testing
-  static getByLogin( login ) {
+  // Todo: Need testing
+  static getByLogin(login) {
     return ProfileModel
-      .find( { login: login } )
+      .find({ login })
       .exec();
   }
 
@@ -92,14 +85,14 @@ export default class ProfileBL {
       .exec();
   }
 
-  static countByLogin( login ) {
+  static countByLogin(login) {
     return ProfileModel
-      .count( { login } )
+      .count({ login })
       .exec();
   }
 
   static removeAll() {
-    return ProfileModel.remove( {} );
+    return ProfileModel.remove({});
   }
 }
 

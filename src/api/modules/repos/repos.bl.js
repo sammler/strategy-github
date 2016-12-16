@@ -12,8 +12,8 @@ export default class ReposBL {
 
   }
 
-  remove( repoId ) {
-
+  remove(repoId) {
+    console.log('remove', repoId);
   }
 
 

@@ -2,53 +2,52 @@ import { Model as UserModel } from './users.model';
 import Context from './../../config/context';
 
 export default class UsersBL {
-  constructor( context ) {
-    if ( !context ) {
+  constructor(context) {
+    if (!context) {
       context = Context.instance();
     }
     this.logger = context.logger;
   }
 
 
-  save( data ) {
-
-    let query = { id: data.id };
-    let User = new UserModel( data );
-    let error = User.validateSync();
-    if ( error && error.errors ) {
-      return Promise.reject( error );
+  static save(data) {
+    const query = { id: data.id };
+    const User = new UserModel(data);
+    const error = User.validateSync();
+    if (error && error.errors) {
+      return Promise.reject(error);
     }
 
     return UserModel
-      .findOneAndUpdate( query, data, {
+      .findOneAndUpdate(query, data, {
         upsert: true,
         setDefaultsOnInsert: true,
-        new: true
-      } )
+        new: true,
+      })
       .exec();
   }
 
-  remove( userId ) {
+  static remove(userId) {
     return UserModel
-      .remove( { id: userId } )
-      .exec()
-  }
-
-  removeAll() {
-    return UserModel
-      .remove( {} )
+      .remove({ id: userId })
       .exec();
   }
 
-  getById( userId ) {
+  static removeAll() {
     return UserModel
-      .findOne( { id: userId } )
+      .remove({})
       .exec();
   }
 
-  getByLogin( login ) {
+  static getById(userId) {
     return UserModel
-      .findOne( { login: login } )
+      .findOne({ id: userId })
+      .exec();
+  }
+
+  getByLogin(login) {
+    return UserModel
+      .findOne({ login })
       .exec();
   }
 

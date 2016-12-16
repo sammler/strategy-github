@@ -1,15 +1,14 @@
-const GitHubApi = require( 'github' );
-//const auth = require( './../../../.github-auth.json' );
+const GitHubApi = require('github');
+// const auth = require( './../../../.github-auth.json' );
 const auth = require('./github.auth');
 
 export function getGhClient() {
-
-  //Todo: Use bluebird for promises
-  let clientInstance = new GitHubApi( {
+  // Todo: Use bluebird for promises
+  const clientInstance = new GitHubApi({
     debug: false,
     // bluebird could be used here
-  } );
-  clientInstance.authenticate( auth );
+  });
+  clientInstance.authenticate(auth);
   return clientInstance;
 }
 
@@ -23,38 +22,36 @@ export function getGhClient() {
  *
  * @see https://github.com/mikedeboer/node-github/blob/master/examples/getStarred.js
  */
-export function getAll( ghClient, fnName, options, cb ) {
-
-  if ( !cb || typeof cb !== 'function' ) {
-    throw new Error( 'No callback defined' );
+export function getAll(ghClient, fnName, options, cb) {
+  if (!cb || typeof cb !== 'function') {
+    throw new Error('No callback defined');
   }
 
   let items = [];
 
-  let nameSpace = ( fnName ).toString().split( '.' );
+  const nameSpace = (fnName).toString().split('.');
   let resolvedFnName = ghClient;
-  if ( nameSpace.length > 0 ) {
-    nameSpace.forEach( ( name ) => {
-      resolvedFnName = resolvedFnName[ name ];
-    } );
+  if (nameSpace.length > 0) {
+    nameSpace.forEach((name) => {
+      resolvedFnName = resolvedFnName[name];
+    });
   }
-  resolvedFnName( options, fetchResult );
+  resolvedFnName(options, fetchResult);
 
-  function fetchResult( err, res ) {
-    if ( err ) {
-      return cb( err );
+  function fetchResult(err, res) {
+    if (err) {
+      return cb(err);
     }
 
-    items = items.concat( res );
-    if ( ghClient.hasNextPage( res ) ) {
-      ghClient.getNextPage( res, fetchResult );
+    items = items.concat(res);
+    if (ghClient.hasNextPage(res)) {
+      ghClient.getNextPage(res, fetchResult);
     } else {
       returnResult();
     }
   }
 
   function returnResult() {
-    return cb( null, items );
+    return cb(null, items);
   }
-
 }

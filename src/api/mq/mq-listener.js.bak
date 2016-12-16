@@ -1,0 +1,33 @@
+import winster from 'winster';
+const amqp = require('amqplib');
+// import Base from './../index';
+
+export default class MqListener {
+  //constructor() {
+  //
+  //}
+
+  listen() {
+    if (!process.env.SAMMLER_RABBITMQ_URL) {
+      const msg = 'SAMMLER_RABBITMQ_URL environment variable needs to be defined.';
+      //logger.error(msg);
+      throw new Error(msg);
+    }
+
+    const open = amqp.connect(process.env.SAMMLER_RABBITMQ_URL);
+    const queue = 'queue';
+
+    open.then(conn => conn.createChannel())
+      .then(ch => ch.assertQueue(queue)
+          .then(() => ch.consume(queue, (msg) => {
+            if (msg !== null) {
+              logger.silly('Got message from MQ: ', JSON.parse(msg.content));
+              ch.ack(msg);
+
+                // let base = new Base();
+                // base.profile.sync();
+            }
+          }))).catch(console.warn);
+  }
+}
+

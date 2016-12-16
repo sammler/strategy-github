@@ -1,11 +1,11 @@
-import { Model as ProfileFollowersHistoryModel } from './profile-followers-history.model';
-import Context from './../../config/context';
 import _ from 'lodash';
 import Promise from 'bluebird';
+import { Model as ProfileFollowersHistoryModel } from './profile-followers-history.model';
+import Context from './../../config/context';
 
 export default class ProfileFollowersHistoryBL {
-  constructor( context ) {
-    if ( !context ) {
+  constructor(context) {
+    if (!context) {
       context = Context.instance();
     }
     this.logger = context.logger;
@@ -21,43 +21,36 @@ export default class ProfileFollowersHistoryBL {
    * @param data
    * @returns {Promise}
    */
-  static ensure( data ) {
-
-    if ( _.isArray( data ) ) {
-
-      return Promise.map( data, ( item ) => {
-        return ProfileFollowersHistoryBL.ensureSingle( item )
-      } )
-
+  static ensure(data) {
+    if (_.isArray(data)) {
+      return Promise.map(data, item => ProfileFollowersHistoryBL.ensureSingle(item));
     } else {
-      return ProfileFollowersHistoryBL.ensureSingle( data );
+      return ProfileFollowersHistoryBL.ensureSingle(data);
     }
   }
 
-  static ensureSingle( data ) {
-
-    //Todo: That's a hack, not sure how to tackle better => investigate
+  static ensureSingle(data) {
+    // Todo: That's a hack, not sure how to tackle better => investigate
     // (we will similar problems and patterns in other use cases)
     // Could be that we have a static method on the schema to solve that problem
-    if ( !data.date_from ) {
-      data.date_from = new Date().setUTCHours( 0, 0, 0, 0 );
+    if (!data.date_from) {
+      data.date_from = new Date().setUTCHours(0, 0, 0, 0);
     }
 
-    let updateOpts = { new: true, upsert: true, setDefaultsOnInsert: true };
-    let query = { profile_id: data.profile_id, user_id: data.user_id, date_from: data.date_from };
+    const updateOpts = { new: true, upsert: true, setDefaultsOnInsert: true };
+    const query = { profile_id: data.profile_id, user_id: data.user_id, date_from: data.date_from };
 
     return ProfileFollowersHistoryModel
-      .findOneAndUpdate( query, data, updateOpts )
+      .findOneAndUpdate(query, data, updateOpts)
       .exec();
   }
 
-  static getActiveFollowersByProfile( profileId ) {
-
+  static getActiveFollowersByProfile(profileId) {
     return ProfileFollowersHistoryModel
-      .find( {
+      .find({
         profile_id: profileId,
-        date_to: { $exists: false }
-      } )
+        date_to: { $exists: false },
+      })
       .exec();
   }
 
@@ -67,21 +60,21 @@ export default class ProfileFollowersHistoryBL {
       .exec();
   }
 
-  static countByProfileId( profileId ) {
+  static countByProfileId(profileId) {
     return ProfileFollowersHistoryModel
-      .count( { profile_id: profileId } )
+      .count({ profile_id: profileId })
       .exec();
   }
 
-  static removeByProfileId( profileId ) {
+  static removeByProfileId(profileId) {
     return ProfileFollowersHistoryModel
-      .remove( { profile_id: profileId } )
+      .remove({ profile_id: profileId })
       .exec();
   }
 
   static removeAll() {
     return ProfileFollowersHistoryModel
-      .remove( {} );
+      .remove({});
   }
 
 }

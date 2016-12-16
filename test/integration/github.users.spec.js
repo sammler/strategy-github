@@ -1,7 +1,7 @@
 import GithubUsers from './../../src/api/modules/github/github.users';
 import Context from './../../src/api/config/context';
 
-describe( 'integration => github.profile.follwers =>', () => {
+xdescribe( 'integration => github.profile.follwers =>', () => {
 
   let gitHubUsers;
   let context;

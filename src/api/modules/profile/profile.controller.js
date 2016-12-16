@@ -1,10 +1,10 @@
-//import { Model as profileModel } from './profile.model';
-import ProfileBL from './profile.bl';
+// import { Model as profileModel } from './profile.model';
 import HttpStatus from 'http-status';
+import ProfileBL from './profile.bl';
 
 export default class ProfileController {
-  constructor( context ) {
-    this.profileBL = new ProfileBL( context );
+  constructor(context) {
+    this.profileBL = new ProfileBL(context);
   }
 
   /**
@@ -13,19 +13,19 @@ export default class ProfileController {
    * @param res
    * @param next
    */
-  create( req, res, next ) {
-    console.log( 'controller:req.body', req.body );
-    this.profileBL.save( req.body, ( err, doc ) => {
-      if ( err ) { return next( err ); }
-      return res.status( 200 ).json( doc );
-    } );
+  create(req, res, next) {
+    console.log('controller:req.body', req.body);
+    this.profileBL.save(req.body, (err, doc) => {
+      if (err) { return next(err); }
+      return res.status(200).json(doc);
+    });
   }
 
   /**
    * Return all profiles
    */
-  get( req, res, next ) {
-    return res.status( HttpStatus.NOT_IMPLEMENTED );
+  get(req, res) {
+    return res.status(HttpStatus.NOT_IMPLEMENTED);
   }
 
   /**
@@ -34,8 +34,8 @@ export default class ProfileController {
    * @param res
    * @param next
    */
-  getById( req, res, next) {
-    return res.status( HttpStatus.NOT_IMPLEMENTED );
+  getById(req, res) {
+    return res.status(HttpStatus.NOT_IMPLEMENTED);
   }
 
   /**
@@ -44,12 +44,12 @@ export default class ProfileController {
    * @param res
    * @param next
    */
-  getByLogin(req, res, next) {
-    return res.status( HttpStatus.NOT_IMPLEMENTED );
+  getByLogin(req, res) {
+    return res.status(HttpStatus.NOT_IMPLEMENTED);
   }
 
-  remove( req, res, next ) {
-    return res.status( HttpStatus.NOT_IMPLEMENTED );
+  remove(req, res) {
+    return res.status(HttpStatus.NOT_IMPLEMENTED);
   }
 
 }

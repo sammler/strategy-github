@@ -1,5 +1,5 @@
 import AppServer from './appServer';
 
-let appServer = new AppServer();
+const appServer = new AppServer();
 appServer.start();
 appServer.dbConnect();

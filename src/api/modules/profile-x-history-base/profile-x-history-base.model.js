@@ -1,36 +1,36 @@
+const uniqueValidator = require('mongoose-unique-validator');
+const timeStamps = require('mongoose-timestamp');
 import mongoose from 'mongoose';
 import { Schema } from 'mongoose';
-const uniqueValidator = require( 'mongoose-unique-validator' );
-const timeStamps = require( 'mongoose-timestamp' );
 
 // see http://stackoverflow.com/questions/14228882/inheritance-in-mongoose
-let schema = new Schema( {
+const schema = new Schema({
   profile_id: {
     type: Schema.Types.ObjectId,
-    ref: 'profiles'
+    ref: 'profiles',
   },
   user_id: {
     type: Number,
     null: false,
-    required: true
+    required: true,
   },
   date_from: {
     type: Date,
-    null: false
+    null: false,
   },
   date_to: {
     type: Date,
-    null: false
+    null: false,
   },
   last_check: {
     type: Date,
     null: false,
-    required: true
-  }
-} );
+    required: true,
+  },
+});
 
-schema.plugin( uniqueValidator, null );
-schema.plugin( timeStamps, { createdAt: 's5r_created_at', updatedAt: 's5r_updated_at' } );
+schema.plugin(uniqueValidator, null);
+schema.plugin(timeStamps, { createdAt: 's5r_created_at', updatedAt: 's5r_updated_at' });
 
 module.exports.Schema = schema;
-module.exports.Model = mongoose.model( 'profile', schema );
+module.exports.Model = mongoose.model('profile', schema);

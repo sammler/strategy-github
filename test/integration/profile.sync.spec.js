@@ -4,7 +4,7 @@ import ProfileBL from './../../src/api/modules/profile/profile.bl';
 import ProfileHistoryBL from './../../src/api/modules/profile-history/profile-history.bl';
 import * as mUtils from './../../src/api/helper/m-utils';
 
-xdescribe( 'Sync a profile', () => {
+describe( 'Sync a profile', () => {
 
   let context;
   let gitHubProfile;
@@ -14,37 +14,35 @@ xdescribe( 'Sync a profile', () => {
   before( () => {
     context = Context.instance();
     gitHubProfile = new GitHubProfile( context );
-    profileBL = new ProfileBL( context );
-    profileHistoryBL = new ProfileHistoryBL( context );
     logger = context.logger;
-  } );
+  });
 
   // All to be moved to moved to other areas, just for testing purposes
-  it( 'should sync', () => {
+  it('should sync', () => {
 
-    let cfg = {
+    const cfg = {
       affiliation: 'owner',
       per_page: 100
     };
 
-    //Todos: for the profile:
-    //Todo: Add tests for created timestamps
-    //Todo: Use the objectId ?
-    //Todo: Use profile_id instead of id
-    //Todo: unique index for profile_id & login (two separate indices, not a combined one!)
-    //Todo: Move some methods to the Model
-    //Todo: Actually mock all responses from GitHub, so that we can run the tests, offline.
+    // Todos: for the profile:
+    // Todo: Add tests for created timestamps
+    // Todo: Use the objectId ?
+    // Todo: Use profile_id instead of id
+    // Todo: unique index for profile_id & login (two separate indices, not a combined one!)
+    // Todo: Move some methods to the Model
+    // Todo: Actually mock all responses from GitHub, so that we can run the tests, offline.
     return ProfileBL.removeAll()
-      .then( () => { return gitHubProfile.getProfile( cfg ) } )
+      .then(() => { return gitHubProfile.getProfile(cfg) })
       .then( ( profile ) => {
         expect( profile ).to.exist;
         delete profile.plan;
         delete profile.meta;
-        delete profile[Context.FIELD_CREATED_AT];
-        delete profile[Context.FIELD_UPDATED_AT];
+        delete profile[ Context.FIELD_CREATED_AT ];
+        delete profile[ Context.FIELD_UPDATED_AT ];
         return Promise.resolve( profile );
       } )
-      .then( ( profile ) => { return profileBL.save( profile ) } )
+      .then( ( profile ) => { return ProfileBL.save( profile ) } )
       .then( ( savedProfile ) => {
         expect( savedProfile ).to.exist;
         expect( savedProfile ).to.contain.property( 'name' );
@@ -53,13 +51,10 @@ xdescribe( 'Sync a profile', () => {
         expect( savedProfile ).to.not.contain.property( 'plan' );
         expect( savedProfile ).to.not.contain.property( 'meta' );
 
-        return Promise.resolve( mUtils.modelToJSON( savedProfile) );
-      } )
-      .then( ( result ) => {
-        return ProfileHistoryBL.save( result );
-      } )
-      .catch( ( err ) => {
-        expect( err ).to.not.exist;
-      } )
+        return Promise.resolve( mUtils.modelToJSON( savedProfile ) );
+      } );
+    //.then( ( result ) => {
+    //  return ProfileHistoryBL.save( result );
+    //} )
   } );
 } );

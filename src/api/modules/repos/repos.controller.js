@@ -1,12 +1,12 @@
-import ReposBL from './repos.bl';
 import HttpStatus from 'http-status';
+import ReposBL from './repos.bl';
 
 export default class ReposController {
-  constructor( context ) {
-    this.profileBL = new ReposBL( context );
+  constructor(context) {
+    this.profileBL = new ReposBL(context);
   }
 
-  get( req, res, next) {
+  get(req, res) {
     return res.status(HttpStatus.NOT_IMPLEMENTED);
   }
 }

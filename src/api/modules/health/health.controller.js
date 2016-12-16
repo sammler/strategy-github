@@ -9,9 +9,9 @@ export default class HealthController {
    * @param req
    * @param res
    */
-  static get( req, res ) {
-    res.setHeader( 'Content-Type', 'application/json' );
-    res.send( { ts: new Date().toJSON(), bla: 'test' } );
+  static get(req, res) {
+    res.setHeader('Content-Type', 'application/json');
+    res.send({ ts: new Date().toJSON(), bla: 'test' });
   }
 
 }

@@ -1,17 +1,22 @@
 {
-  "rules": {
-    "quotes": [2, "single"],
-    "no-console": 0,
-    "one-var": ["error", "never"],
-    "brace-style": ["error", "1tbs", { "allowSingleLine": true }]
-  },
+  "extends": "airbnb/base",
   "env": {
-    "browser": false,
     "node": true,
     "es6": true
   },
-  "parserOptions": {
-    "sourceType": "module"
+  "rules": {
+    "quotes": [2, "single"],
+    "no-console": 0,
+    "one-var": [2, "never"],
+    "brace-style": [2, "1tbs", { "allowSingleLine": true }],
+    "no-underscore-dangle": [1]
   },
-  "extends": "idiomatic"
+
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  }
 }
