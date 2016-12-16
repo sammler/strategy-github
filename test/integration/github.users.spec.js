@@ -1,12 +1,12 @@
 import GithubUsers from './../../src/api/modules/github/github.users';
-import Context from './../../src/api/config/context';
+// import Context from './../../src/api/config/context';
 
-xdescribe( 'integration => github.profile.follwers =>', () => {
+describe( 'integration => github.profile.follwers =>', () => {
 
   let gitHubUsers;
-  let context;
+  // let context;
   before( () => {
-    context = Context.instance();
+    // context = Context.instance();
     gitHubUsers = new GithubUsers();
   } );
 

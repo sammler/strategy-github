@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { Schema } from 'mongoose';
+const Schema = mongoose.Schema;
 
 const uniqueValidator = require('mongoose-unique-validator');
 const timeStamps = require('mongoose-timestamp');

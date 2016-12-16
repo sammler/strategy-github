@@ -20,7 +20,7 @@ export default class AppServer {
   initApp() {
     this.app.use(bodyParser.json({ limit: '10mb' }));
     this.app.get('/*', (req, res, next) => {
-      console.log(req.path + '\n');
+      console.log(`${req.path}\n`);
       next();
     });
     routes.config(this.app);

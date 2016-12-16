@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { Schema } from 'mongoose';
+const Schema = mongoose.Schema;
 import Context from './../../config/context';
 
 const uniqueValidator = require('mongoose-unique-validator');

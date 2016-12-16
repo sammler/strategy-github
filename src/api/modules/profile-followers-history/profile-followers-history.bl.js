@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import Promise from 'bluebird';
+
 import { Model as ProfileFollowersHistoryModel } from './profile-followers-history.model';
 import Context from './../../config/context';
 

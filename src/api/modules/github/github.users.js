@@ -1,5 +1,5 @@
 import * as ghUtils from './github-utils';
-import { Context } from './../../config/context';
+import Context from './../../config/context';
 
 export default class GithubUsers {
   constructor(context) {

@@ -1,7 +1,7 @@
+import mongoose from 'mongoose';
+const Schema = mongoose.Schema;
 const uniqueValidator = require('mongoose-unique-validator');
 const timeStamps = require('mongoose-timestamp');
-import mongoose from 'mongoose';
-import { Schema } from 'mongoose';
 
 // see http://stackoverflow.com/questions/14228882/inheritance-in-mongoose
 const schema = new Schema({
