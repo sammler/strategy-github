@@ -2,7 +2,7 @@
 
 > Sammler strategy to collect GitHub content.
 
-[![CircleCI](https://circleci.com/gh/sammler/sammler-strategy-github/tree/master.svg?style=svg)](https://circleci.com/gh/sammler/sammler-strategy-github/tree/master)
+[![CircleCI master](https://img.shields.io/circleci/project/github/sammler/sammler-strategy-github/master.svg)]()
 [![XO code style](https://img.shields.io/badge/code_style-XO--space-5ed9c7.svg)](https://github.com/sindresorhus/xo-space)
 
 **Note: Work in progress, nothing to show, yet**
