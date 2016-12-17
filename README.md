@@ -1,6 +1,7 @@
 ## sammler-strategy-github
 
 > Sammler strategy to collect GitHub content.
+
 [![CircleCI](https://circleci.com/gh/sammler/sammler-strategy-github/tree/master.svg?style=svg)](https://circleci.com/gh/sammler/sammler-strategy-github/tree/master)
 [![XO code style](https://img.shields.io/badge/code_style-XO--space-5ed9c7.svg)](https://github.com/sindresorhus/xo-space)
 
