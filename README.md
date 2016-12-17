@@ -2,7 +2,7 @@
 
 > Sammler strategy to collect GitHub content.
 
-[![XO code style](https://img.shields.io/badge/code_style-XO-space-5ed9c7.svg)](https://github.com/sindresorhus/xo-space)
+[![XO code style](https://img.shields.io/badge/code_style-XO--space-5ed9c7.svg)](https://github.com/sindresorhus/xo-space)
 
 **Note: Work in progress, nothing to show, yet**
 
