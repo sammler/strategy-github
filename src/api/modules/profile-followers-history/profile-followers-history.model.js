@@ -39,9 +39,9 @@ const schema = new Schema({
 }, {collection: GlobalConfig.COLLECTION_PREFIX + GlobalConfig.COLLECTION_PROFILE_FOLLOWERS_HISTORY});
 
 // eslint-disable-next-line func-names
-schema.pre('findOneAndUpdate', next => {
-  // this._update.last_check = new Date();
-  next();
+schema.pre('findOneAndUpdate', function (next) {
+  this._update.last_check = new Date();
+  return next();
 });
 
 schema.index({profile_id: 1, user_id: 1, date_from: 1});

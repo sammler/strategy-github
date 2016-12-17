@@ -35,7 +35,7 @@
     "lint:test": "eslint test",
     "lint:test:fix": "eslint test --fix",
     "start": "yarn run build && node ./dist/index.js",
-    "test": "linit:src && lint:test && yarn run test:integration",
+    "test": "yarn run lint:src && yarn run lint:test && yarn run test:integration",
     "test:integration": "mocha './test/integration/**/*.spec.js' --compilers js:babel-core/register --require './test/mocha.conf.js' --timeout 6000",
     "test:unit": "mocha './test/unit/**/*.spec.js' --compilers js:babel-core/register --require './test/mocha.conf.js'"
   },
