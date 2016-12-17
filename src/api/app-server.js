@@ -1,7 +1,7 @@
-import bodyParser from 'body-parser';
-import express from 'express';
-import Context from './config/context';
-import * as routes from './routes';
+const bodyParser = require('body-parser');
+const express = require('express');
+const Context = require('./config/context');
+const routes = require('./routes');
 
 // import * as mqListener from './modules/mq-listener';
 
@@ -18,7 +18,7 @@ export default class AppServer {
   }
 
   initApp() {
-    this.app.use(bodyParser.json({ limit: '10mb' }));
+    this.app.use(bodyParser.json({limit: '10mb'}));
     this.app.get('/*', (req, res, next) => {
       console.log(`${req.path}\n`);
       next();
@@ -32,7 +32,7 @@ export default class AppServer {
    */
   start() {
     return new Promise((resolve, reject) => {
-      this.server = this.app.listen(this.PORT, (err) => {
+      this.server = this.app.listen(this.PORT, err => {
         if (err) {
           return reject(err);
         }
@@ -43,7 +43,7 @@ export default class AppServer {
   }
 
   stop() {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.context.dbDisconnect();
 
       this.server.close();

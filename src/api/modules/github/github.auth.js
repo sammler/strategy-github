@@ -9,7 +9,7 @@ if (fs.existsSync(p)) {
 } else {
   config = {
     type: 'oauth',
-    token: process.env.S5R_STRATEGY_GITHUB__TOKEN,
+    token: process.env.S5R_STRATEGY_GITHUB__TOKEN
   };
 }
 

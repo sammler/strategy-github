@@ -1,88 +1,90 @@
-import mongoose from 'mongoose';
-const Schema = mongoose.Schema;
-import Context from './../../config/context';
-
+const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
+const GlobalConfig = require('./../../config/config');
 
+const Schema = mongoose.Schema;
+
+/* eslint-disable camelcase */
 const schema = new Schema({
 
   // GitHub Profile Id
   _id: {
-    type: Number,
+    type: Number
   },
 
   // last time the data was updated in the MongoDb (not on GitHub!)
   last_check: {
     type: Date,
     default: new Date().setUTCHours(0, 0, 0, 0),
-    null: false,
+    null: false
   },
 
   login: {
     type: String,
     null: false,
-    required: true,
+    required: true
   },
 
   name: {
     type: String,
     null: false,
-    required: true,
+    required: true
   },
 
   public_repos: {
     type: Number,
     null: false,
-    default: 0,
+    default: 0
   },
 
   public_gists: {
     type: Number,
     null: false,
-    default: 0,
+    default: 0
   },
 
   followers: {
     type: Number,
     null: false,
-    default: 0,
+    default: 0
   },
 
   following: {
     type: Number,
     null: false,
-    default: 0,
+    default: 0
   },
 
   total_private_repos: {
     type: Number,
     null: false,
-    default: 0,
+    default: 0
   },
 
   owned_private_repos: {
     type: Number,
     null: false,
-    default: 0,
+    default: 0
   },
 
   collaborators: {
     type: Number,
     null: false,
-    default: 0,
+    default: 0
   },
 
   s5r_created_at: {
     type: Date,
     null: false,
-    default: new Date(),
+    default: new Date()
   },
   s5r_updated_at: {
     type: Date,
-    null: true,
-  },
+    null: true
+  }
 
-}, { noId: true, noVirtualId: true, collection: Context.COLLECTION_PREFIX + Context.COLLECTION_PROFILES, strict: false });
+}, {noId: true, noVirtualId: true, collection: GlobalConfig.COLLECTION_PREFIX + GlobalConfig.COLLECTION_PROFILES, strict: false});
+/* eslint-enable camelcase */
 
 schema.plugin(uniqueValidator, null);
 /**
@@ -96,7 +98,7 @@ schema.plugin(uniqueValidator, null);
 // ProfileSchema.static( {} );
 
 // Don't use arrow functions here, will not work ...
-schema.pre('save', (next) => { // eslint-disable-line func-names
+schema.pre('save', next => { // eslint-disable-line func-names
   // this.s5r_updated_at = Date.now;
   // this.wasNew = this.isNew;
   // if ( !this.isNew ) {
@@ -114,7 +116,7 @@ schema.post('save', () => { // eslint-disable-line func-names
   // }
 });
 
-schema.pre('update', (next) => { // eslint-disable-line func-names
+schema.pre('update', next => { // eslint-disable-line func-names
   // this.s5r_updated_at = Date.now;
   // this.wasNew = this.isNew;
   // if ( !this.isNew ) {
@@ -133,4 +135,4 @@ schema.post('update', () => { // eslint-disable-line func-names
 });
 
 module.exports.Schema = schema;
-module.exports.Model = mongoose.model(Context.COLLECTION_PROFILES, schema);
+module.exports.Model = mongoose.model(GlobalConfig.COLLECTION_PROFILES, schema);

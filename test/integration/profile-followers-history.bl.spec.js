@@ -8,8 +8,7 @@ describe('profile-followers-history.bl', () => {
   let dbHelpers;
   // let context;
 
-  before((done) => {
-    // context = Context.instance();
+  before(done => {
     dbHelpers = new DBHelpers();
     dbHelpers.dropDatabase(done);
   });
@@ -26,12 +25,12 @@ describe('profile-followers-history.bl', () => {
   });
 
   it('`removeAll` removes all documents', () => ProfileFollowersHistoryBL.removeAll()
-      .then((result) => {
-        expect(result).to.exist;
-        expect(result).to.have.property('message');
-        expect(result).to.have.property('result');
-        expect(result).to.have.property('result').to.have.property('ok');
-      }));
+    .then(result => {
+      expect(result).to.exist;
+      expect(result).to.have.property('message');
+      expect(result).to.have.property('result');
+      expect(result).to.have.property('result').to.have.property('ok');
+    }));
 
   it('`ensure` creates a new entry (with default values)', () => {
     const doc = {

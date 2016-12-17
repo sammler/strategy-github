@@ -1,8 +1,9 @@
-import _ from 'lodash';
-import Promise from 'bluebird';
-
-import { Model as ProfileFollowersHistoryModel } from './profile-followers-history.model';
+/* eslint-disable camelcase, no-underscore-dangle */
+import {Model as ProfileFollowersHistoryModel} from './profile-followers-history.model';
 import Context from './../../config/context';
+
+const _ = require('lodash');
+const Promise = require('bluebird');
 
 export default class ProfileFollowersHistoryBL {
   constructor(context) {
@@ -25,9 +26,8 @@ export default class ProfileFollowersHistoryBL {
   static ensure(data) {
     if (_.isArray(data)) {
       return Promise.map(data, item => ProfileFollowersHistoryBL.ensureSingle(item));
-    } else {
-      return ProfileFollowersHistoryBL.ensureSingle(data);
     }
+    return ProfileFollowersHistoryBL.ensureSingle(data);
   }
 
   static ensureSingle(data) {
@@ -35,11 +35,13 @@ export default class ProfileFollowersHistoryBL {
     // (we will similar problems and patterns in other use cases)
     // Could be that we have a static method on the schema to solve that problem
     if (!data.date_from) {
+      // eslint-disable-next-line camelcase
       data.date_from = new Date().setUTCHours(0, 0, 0, 0);
     }
 
-    const updateOpts = { new: true, upsert: true, setDefaultsOnInsert: true };
-    const query = { profile_id: data.profile_id, user_id: data.user_id, date_from: data.date_from };
+    const updateOpts = {new: true, upsert: true, setDefaultsOnInsert: true};
+
+    const query = {profile_id: data.profile_id, user_id: data.user_id, date_from: data.date_from};
 
     return ProfileFollowersHistoryModel
       .findOneAndUpdate(query, data, updateOpts)
@@ -50,7 +52,7 @@ export default class ProfileFollowersHistoryBL {
     return ProfileFollowersHistoryModel
       .find({
         profile_id: profileId,
-        date_to: { $exists: false },
+        date_to: {$exists: false}
       })
       .exec();
   }
@@ -63,13 +65,13 @@ export default class ProfileFollowersHistoryBL {
 
   static countByProfileId(profileId) {
     return ProfileFollowersHistoryModel
-      .count({ profile_id: profileId })
+      .count({profile_id: profileId})
       .exec();
   }
 
   static removeByProfileId(profileId) {
     return ProfileFollowersHistoryModel
-      .remove({ profile_id: profileId })
+      .remove({profile_id: profileId})
       .exec();
   }
 
@@ -79,4 +81,5 @@ export default class ProfileFollowersHistoryBL {
   }
 
 }
+/* eslint-enable camelcase, no-underscore-dangle */
 

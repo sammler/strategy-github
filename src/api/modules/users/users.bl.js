@@ -1,4 +1,4 @@
-import { Model as UserModel } from './users.model';
+import {Model as UserModel} from './users.model';
 import Context from './../../config/context';
 
 export default class UsersBL {
@@ -9,9 +9,8 @@ export default class UsersBL {
     this.logger = context.logger;
   }
 
-
   static save(data) {
-    const query = { id: data.id };
+    const query = {id: data.id};
     const User = new UserModel(data);
     const error = User.validateSync();
     if (error && error.errors) {
@@ -22,14 +21,14 @@ export default class UsersBL {
       .findOneAndUpdate(query, data, {
         upsert: true,
         setDefaultsOnInsert: true,
-        new: true,
+        new: true
       })
       .exec();
   }
 
   static remove(userId) {
     return UserModel
-      .remove({ id: userId })
+      .remove({id: userId})
       .exec();
   }
 
@@ -41,13 +40,13 @@ export default class UsersBL {
 
   static getById(userId) {
     return UserModel
-      .findOne({ id: userId })
+      .findOne({id: userId})
       .exec();
   }
 
   getByLogin(login) {
     return UserModel
-      .findOne({ login })
+      .findOne({login})
       .exec();
   }
 

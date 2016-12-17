@@ -2,6 +2,7 @@
 import GitHubProfile from './../../src/api/modules/github/github.profile';
 
 describe('integration => github-profile => ', () => {
+
   let ghProfile;
   beforeEach(() => {
     ghProfile = new GitHubProfile(global.Context);

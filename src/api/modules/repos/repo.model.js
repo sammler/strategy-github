@@ -1,25 +1,26 @@
-import mongoose from 'mongoose';
-const Schema = mongoose.Schema;
-
+const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 const timeStamps = require('mongoose-timestamp');
 
+const Schema = mongoose.Schema;
+
 // Todo: Add more fields and remove unwanted fields in the pre_save event, e.g.: permissions object,
 // Todo: Do we have one ore more owner? Should be somehow reflected ...
+/* eslint-disable camelcase */
 const schema = new Schema({
 
   repo_id: {
     type: Number,
     null: false,
-    unique: true,
+    unique: true
   },
   name: {
     type: String,
-    null: false,
+    null: false
   },
   full_name: {
     type: String,
-    null: false,
+    null: false
   },
   private: Boolean,
   fork: Boolean,
@@ -44,12 +45,13 @@ const schema = new Schema({
   forks_count: Number,
   stargazers_count: Number,
   watchers_count: Number,
-  size: Number,
+  size: Number
 
-}, { collection: 'repos', strict: false });
+}, {collection: 'repos', strict: false});
+/* eslint-enable camelcase */
 
 schema.plugin(uniqueValidator, null);
-schema.plugin(timeStamps, { createdAt: 's5r_created_at', updatedAt: 's5r_updated_at' });
+schema.plugin(timeStamps, {createdAt: 's5r_created_at', updatedAt: 's5r_updated_at'});
 
 module.exports.Schema = schema;
 module.exports.Model = mongoose.model('repos', schema);

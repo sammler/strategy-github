@@ -1,4 +1,6 @@
-import * as winston from 'winston';
+const winston = require('winston');
+// eslint disable-next-line no-unassigned-import
+require('winston-logstash');
 
 // Todo: some refactoring based on http://stackoverflow.com/questions/27980996/return-a-value-other-than-the-class-in-es6
 const defaultOpts = {
@@ -7,7 +9,7 @@ const defaultOpts = {
   colorize: true,
   prettyPrint: object => JSON.stringify(object, null, 2),
   handleExceptions: true,
-  json: false,
+  json: false
 };
 
 export default class Logger {
@@ -15,16 +17,21 @@ export default class Logger {
     if (process.env.NODE_ENV === 'test') {
       this.winston = new (winston.Logger)({
         transports: [
-          new (winston.transports.File)({ filename: 'foo.log' }),
-        ],
+          new (winston.transports.File)({filename: 'foo.log'})
+        ]
       });
     } else {
       this.winston = new winston.Logger({
         transports: [
-          new winston.transports.Console(defaultOpts),
-        ],
+          new winston.transports.Console(defaultOpts)
+        ]
       });
     }
+
+    this.winston.add(winston.transports.Logstash, {
+      port: 5000,
+      host: 'localhost'
+    });
   }
 
   silly(message, ...args) {

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Model as ProfileModel } from './profile.model';
+import {Model as ProfileModel} from './profile.model';
 import ProfileHistoryBL from './../../modules/profile-history/profile-history.bl';
 
 export default class ProfileBL {
@@ -16,7 +16,7 @@ export default class ProfileBL {
    */
   static save(gitHubProfile, saveOptions = {}) {
     const defaultOpts = {
-      saveHistory: true,
+      saveHistory: true
     };
     saveOptions = _.assignIn(defaultOpts, saveOptions);
 
@@ -37,31 +37,29 @@ export default class ProfileBL {
     function savePromiseHistory(doIt) {
       if (doIt) {
         return ProfileHistoryBL.save(_.clone(gitHubProfile));
-      } else {
-        return Promise.resolve();
       }
+      return Promise.resolve();
     }
 
     return ProfileModel
       .findById(gitHubProfile._id)
       .exec()
-      .then((result) => {
+      .then(result => {
         if (result) {
           // update existing record
           return savePromiseHistory(saveOptions.saveHistory)
             .then(() => {
-              const updateOpts = { new: true, setDefaultsOnInsert: true };
+              const updateOpts = {new: true, setDefaultsOnInsert: true};
               return ProfileModel
                 .findByIdAndUpdate(gitHubProfile._id, gitHubProfile, updateOpts)
                 .exec();
             });
-        } else {
-          // create a new one
-          const insertOpts = { new: true, upsert: true, setDefaultsOnInsert: true };
-          return ProfileModel
-            .findByIdAndUpdate(gitHubProfile._id, gitHubProfile, insertOpts)
-            .exec();
         }
+        // create a new one
+        const insertOpts = {new: true, upsert: true, setDefaultsOnInsert: true};
+        return ProfileModel
+          .findByIdAndUpdate(gitHubProfile._id, gitHubProfile, insertOpts)
+          .exec();
       });
   }
 
@@ -75,7 +73,7 @@ export default class ProfileBL {
   // Todo: Need testing
   static getByLogin(login) {
     return ProfileModel
-      .find({ login })
+      .find({login})
       .exec();
   }
 
@@ -87,7 +85,7 @@ export default class ProfileBL {
 
   static countByLogin(login) {
     return ProfileModel
-      .count({ login })
+      .count({login})
       .exec();
   }
 

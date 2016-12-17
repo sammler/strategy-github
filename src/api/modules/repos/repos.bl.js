@@ -1,8 +1,5 @@
 
 export default class ReposBL {
-  constructor() {
-
-  }
 
   create() {
 
@@ -15,6 +12,5 @@ export default class ReposBL {
   remove(repoId) {
     console.log('remove', repoId);
   }
-
 
 }

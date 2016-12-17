@@ -1,6 +1,6 @@
 // import { Model as profileModel } from './profile.model';
-import HttpStatus from 'http-status';
-import ProfileBL from './profile.bl';
+const HttpStatus = require('http-status');
+const ProfileBL = require('./profile.bl');
 
 export default class ProfileController {
   constructor(context) {
@@ -16,6 +16,7 @@ export default class ProfileController {
   create(req, res, next) {
     console.log('controller:req.body', req.body);
     this.profileBL.save(req.body, (err, doc) => {
+      // eslint-disable-next-line max-statements-per-line
       if (err) { return next(err); }
       return res.status(200).json(doc);
     });

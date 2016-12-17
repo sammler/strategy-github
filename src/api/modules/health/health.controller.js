@@ -1,8 +1,5 @@
 
 export default class HealthController {
-  constructor() {
-
-  }
 
   /**
    * Get all profiles
@@ -11,7 +8,7 @@ export default class HealthController {
    */
   static get(req, res) {
     res.setHeader('Content-Type', 'application/json');
-    res.send({ ts: new Date().toJSON(), bla: 'test' });
+    res.send({ts: new Date().toJSON(), bla: 'test'});
   }
 
 }

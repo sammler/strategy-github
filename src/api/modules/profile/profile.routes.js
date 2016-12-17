@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import {Router} from 'express';
 import ProfileController from './profile.controller';
 
 export function routes() {

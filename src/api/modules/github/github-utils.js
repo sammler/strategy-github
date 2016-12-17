@@ -5,7 +5,7 @@ const auth = require('./github.auth');
 export function getGhClient() {
   // Todo: Use bluebird for promises
   const clientInstance = new GitHubApi({
-    debug: false,
+    debug: false
     // bluebird could be used here
   });
   clientInstance.authenticate(auth);
@@ -32,7 +32,7 @@ export function getAll(ghClient, fnName, options, cb) {
   const nameSpace = (fnName).toString().split('.');
   let resolvedFnName = ghClient;
   if (nameSpace.length > 0) {
-    nameSpace.forEach((name) => {
+    nameSpace.forEach(name => {
       resolvedFnName = resolvedFnName[name];
     });
   }
