@@ -17,7 +17,9 @@ export default class ProfileController {
     console.log('controller:req.body', req.body);
     this.profileBL.save(req.body, (err, doc) => {
       // eslint-disable-next-line max-statements-per-line
-      if (err) { return next(err); }
+      if (err) {
+        return next(err); 
+      }
       return res.status(200).json(doc);
     });
   }

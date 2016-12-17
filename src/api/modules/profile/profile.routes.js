@@ -1,12 +1,12 @@
-import {Router} from 'express';
+const express = require('express');
 import ProfileController from './profile.controller';
 
 export function routes() {
-  const routes = Router();
+  const router = express.Router(); // eslint-disable-line new-cap
   const profileController = new ProfileController();
 
-  routes.get('/', profileController.get);
-  routes.post('/', profileController.create);
+  router.get('/', profileController.get);
+  router.post('/', profileController.create);
 
-  return routes;
+  return router;
 }

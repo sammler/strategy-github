@@ -56,7 +56,6 @@
     "winston": "^2.3.0",
     "winston-logstash": "^0.3.0",
     "winston-mongodb": "^1.6.5",
-    "xo": "^0.17.1",
     "yarn": "^0.17.10"
   },
   "devDependencies": {
@@ -68,8 +67,7 @@
     "chai": "^3.5.0",
     "del": "^2.2.2",
     "eslint": "^3.10.2",
-    "eslint-config-airbnb": "^12.0.0",
-    "eslint-plugin-import": "^2.2.0",
+    "eslint-config-xo-space": "^0.15.0",
     "eslint-plugin-mocha": "^4.7.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
@@ -100,7 +98,13 @@
     "esnext": true,
     "space": true,
     "globals": [
-      "expect", "it", "describe", "beforeEach", "afterEach", "before", "after"
+      "expect",
+      "it",
+      "describe",
+      "beforeEach",
+      "afterEach",
+      "before",
+      "after"
     ],
     "rules": {
       "quotes": [
@@ -119,16 +123,12 @@
           "allowSingleLine": true
         }
       ],
-      "no-underscore-dangle": [
-        1
-      ],
+      "no-underscore-dangle": 0,
       "class-methods-use-this": 0,
       "no-trailing-spaces": 0,
       "no-param-reassign": 0,
-      "no-underscore-dangle": 0,
       "camelcase": 0
     }
-
   },
   "verb": {
     "run": true,

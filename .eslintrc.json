@@ -1,5 +1,5 @@
 {
-  "extends": "airbnb/base",
+  "extends": "xo-space/esnext",
   "env": {
     "node": true,
     "es6": true
@@ -8,11 +8,11 @@
     "quotes": [2, "single"],
     "no-console": 0,
     "one-var": [2, "never"],
-    "brace-style": [2, "1tbs", { "allowSingleLine": true }],
-    "no-underscore-dangle": [1],
+    "no-underscore-dangle": 0,
     "class-methods-use-this": 0,
     "no-trailing-spaces": 0,
-    "no-param-reassign": 0
+    "no-param-reassign": 0,
+    "camelcase": 0
   },
 
   "parserOptions": {

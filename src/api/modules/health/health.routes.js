@@ -1,11 +1,11 @@
-import {Router} from 'express';
+const express = require('express');
 import HealthController from './health.controller';
 
 export function routes() {
-  const routes = Router();
+  const router = express.Router(); // eslint-disable-line new-cap
   // let healthController = new HealthController();
 
-  routes.get('/', HealthController.get);
+  router.get('/', HealthController.get);
 
-  return routes;
+  return router;
 }
