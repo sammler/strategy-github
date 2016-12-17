@@ -9,7 +9,7 @@ describe('profile.bl', function () {
 
   let dbHelpers;
   let context;
-  before((done) => {
+  before(done => {
     context = Context.instance();
     dbHelpers = new DBHelpers();
     dbHelpers.dropDatabase(done);
@@ -17,7 +17,7 @@ describe('profile.bl', function () {
 
   beforeEach(() => Promise.all([
     ProfileBL.removeAll(),
-    ProfileHistoryBL.removeAll(),
+    ProfileHistoryBL.removeAll()
   ]));
 
   it('removeAll removes all existing profiles', () => ProfileBL.removeAll());
@@ -26,13 +26,13 @@ describe('profile.bl', function () {
     const gitHubProfile = {
       id: 1,
       login: 'stefanwalther',
-      foo: 'baz',
+      foo: 'baz'
     };
     return ProfileBL.save(gitHubProfile)
-      .catch((err) => {
+      .catch(err => {
         expect(err).to.exist;
         expect(err).to.have.property('name').to.be.equal('ValidationError');
-        expect(err.errors.name).to.deep.include({ path: 'name' });
+        expect(err.errors.name).to.deep.include({path: 'name'});
       });
   });
 
@@ -45,24 +45,24 @@ describe('profile.bl', function () {
       id: 1,
       login: 'stefanwalther',
       public_repos: 1,
-      last_check: dateToday.setUTCHours(0, 0, 0, 0),
+      last_check: dateToday.setUTCHours(0, 0, 0, 0)
     };
 
     const doc2 = {
       id: 1,
       login: 'stefanwalther',
       public_repos: 1,
-      last_check: new Date(dateYesterday).setUTCHours(0, 0, 0, 0),
+      last_check: new Date(dateYesterday).setUTCHours(0, 0, 0, 0)
     };
 
     return ProfileBL.save(_.clone(doc1))
       .then(() => ProfileBL.save(_.clone(doc2)))
       .then(() => ProfileHistoryBL.countPerProfileId(doc2.id))
-      .then((countProfile) => {
+      .then(countProfile => {
         expect(countProfile).to.be.equal(1);
       })
       .then(() => ProfileBL.countTotal())
-      .then((countHistory) => {
+      .then(countHistory => {
         expect(countHistory).to.be.equal(1);
       });
   });
@@ -76,24 +76,24 @@ describe('profile.bl', function () {
       id: 1,
       login: 'stefanwalther',
       public_repos: 1,
-      last_check: dateToday.setUTCHours(0, 0, 0, 0),
+      last_check: dateToday.setUTCHours(0, 0, 0, 0)
     };
 
     const doc2 = {
       id: 1,
       login: 'stefanwalther',
       public_repos: 1,
-      last_check: new Date(dateYesterday).setUTCHours(0, 0, 0, 0),
+      last_check: new Date(dateYesterday).setUTCHours(0, 0, 0, 0)
     };
 
     return ProfileBL.save(_.clone(doc1))
-      .then(() => ProfileBL.save(_.clone(doc2), { saveHistory: false }))
+      .then(() => ProfileBL.save(_.clone(doc2), {saveHistory: false}))
       .then(() => ProfileHistoryBL.countPerProfileId(doc2.id))
-      .then((countProfile) => {
+      .then(countProfile => {
         expect(countProfile).to.be.equal(0);
       })
       .then(() => ProfileBL.countTotal())
-      .then((countHistory) => {
+      .then(countHistory => {
         expect(countHistory).to.be.equal(1);
       });
   });
@@ -105,14 +105,14 @@ describe('profile.bl', function () {
       foo: 'bar',
       name: 'Stefan Walther',
       plan: {
-        name: 'personal',
+        name: 'personal'
       },
       meta: {
-        'x-ratelimit-limit': '5000',
-      },
+        'x-ratelimit-limit': '5000'
+      }
     };
     return ProfileBL.save(gitHubProfile)
-      .then((result) => {
+      .then(result => {
         expect(result).to.exist;
         expect(result).to.have.a.property('login').to.be.equal(gitHubProfile.login);
         expect(result).to.have.a.property('name').to.be.equal(gitHubProfile.name);
@@ -126,11 +126,11 @@ describe('profile.bl', function () {
       id: 1,
       login: 'stefanwalther',
       foo: 'bar',
-      name: 'Stefan Walther',
+      name: 'Stefan Walther'
     };
 
     return ProfileBL.save(_.clone(gitHubProfile))
-      .then((doc) => {
+      .then(doc => {
         expect(doc).to.exist;
         expect(doc).to.be.an.object;
         expect(doc.login).to.be.equal(gitHubProfile.login);
@@ -139,7 +139,7 @@ describe('profile.bl', function () {
         expect(doc).to.have.property('last_check').to.exist;
       })
       .then(() => ProfileBL.getById(1)
-        .then((result) => {
+        .then(result => {
           expect(result).to.exist;
           expect(result).to.have.a.property('login').to.be.equal(gitHubProfile.login);
 
@@ -153,22 +153,22 @@ describe('profile.bl', function () {
     const doc1 = {
       id: 1,
       login: 'stefanwalther',
-      name: 'Stefan Walther',
+      name: 'Stefan Walther'
     };
 
     const doc2 = {
       id: 1,
       login: 'stefanwalther',
-      name: 'Stefan Walther 2',
+      name: 'Stefan Walther 2'
     };
 
     return ProfileBL.save(_.clone(doc1))
       .then(() => ProfileBL.save(_.clone(doc2)))
-      .then((doc) => {
+      .then(doc => {
         expect(doc).to.exist;
         expect(doc).to.have.a.property('name').to.be.equal(doc2.name);
         return ProfileBL.getById(doc2.id)
-          .then((updatedDoc) => {
+          .then(updatedDoc => {
             expect(updatedDoc).to.exist;
             expect(updatedDoc).to.have.a.property('name').to.be.equal(doc2.name);
           });
@@ -180,20 +180,20 @@ describe('profile.bl', function () {
       id: 1,
       login: 'stefanwalther',
       following: 1,
-      name: 'Stefan Walther',
+      name: 'Stefan Walther'
     };
 
     const doc2 = {
       id: 1,
       login: 'stefanwalther',
       following: 2,
-      name: 'Stefan Walther 2',
+      name: 'Stefan Walther 2'
     };
 
     return ProfileBL.save(_.clone(doc1))
       .then(() => ProfileBL.save(_.clone(doc2)))
       .then(() => ProfileBL.countByLogin(('stefanwalther'))
-        .then((count) => {
+        .then(count => {
           expect(count).to.be.equal(1);
         }));
   });
@@ -203,20 +203,20 @@ describe('profile.bl', function () {
       id: 1,
       login: 'stefanwalther',
       name: 'Stefan Walther',
-      last_check: new Date().setUTCHours(0, 0, 0, 0),
+      last_check: new Date().setUTCHours(0, 0, 0, 0)
     };
     const doc2 = {
       id: 1,
       login: 'stefanwalther',
       name: 'Stefan Walther 2',
-      last_check: new Date().setUTCHours(0, 0, 0, 0),
+      last_check: new Date().setUTCHours(0, 0, 0, 0)
     };
     return ProfileBL.save(_.clone(doc1))
       .then(() => ProfileBL.save(_.clone(doc2)))
-      .then((result2) => {
+      .then(result2 => {
         expect(result2).to.exist;
         return ProfileBL.getById(doc2.id)
-          .then((resultUpdated) => {
+          .then(resultUpdated => {
             expect(resultUpdated).to.exist;
             /* eslint-disable no-underscore-dangle */
             expect(resultUpdated._doc).to.have.a.property('name').to.be.equal(doc2.name);
@@ -224,7 +224,7 @@ describe('profile.bl', function () {
           });
       })
       .then(() => ProfileBL.countByLogin(doc1.login))
-      .then((count) => {
+      .then(count => {
         expect(count).to.be.equal(1);
       });
   });
@@ -234,26 +234,26 @@ describe('profile.bl', function () {
       id: 1,
       login: 'stefanwalther',
       name: 'Stefan Walther',
-      last_check: new Date().setUTCHours(0, 0, 0, 0),
+      last_check: new Date().setUTCHours(0, 0, 0, 0)
     };
     const doc2 = {
       id: 2,
       login: 'stefanwalther2',
       name: 'Stefan Walther 2',
-      last_check: new Date().setUTCHours(0, 0, 0, 0),
+      last_check: new Date().setUTCHours(0, 0, 0, 0)
     };
 
     return ProfileBL.save(_.clone(doc1))
       .then(() => ProfileBL.save(_.clone(doc2)))
-      .then((results) => {
+      .then(results => {
         expect(results).to.exist;
       })
       .then(() => ProfileBL.countByLogin('stefanwalther')
-        .then((count) => {
+        .then(count => {
           expect(count).to.be.equal(1);
         }))
       .then(() => ProfileBL.countTotal()
-        .then((countTotal) => {
+        .then(countTotal => {
           expect(countTotal).to.be.equal(2);
         }));
   });

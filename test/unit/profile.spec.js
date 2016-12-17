@@ -9,23 +9,23 @@ describe('unit:Profile ==>', () => {
     ProfileMock.restore();
   });
 
-  it('should return all profiles', (done) => {
-    const expectedResult = { status: true, data: [] };
+  it('should return all profiles', done => {
+    const expectedResult = {status: true, data: []};
     ProfileMock.expects('find').yields(null, expectedResult);
     Profile.find((err, result) => {
       ProfileMock.verify();
       expect(result.status).to.be.true;
-      done();
+      return done();
     });
   });
 
-  it('should return an error', (done) => {
-    const expectedResult = { status: false, error: 'Something went wrong' };
+  it('should return an error', done => {
+    const expectedResult = {status: false, error: 'Something went wrong'};
     ProfileMock.expects('find').yields(expectedResult, null);
     Profile.find((err, result) => {
       ProfileMock.verify();
       expect(err.status).to.not.be.true;
-      done();
+      return done();
     });
   });
 });

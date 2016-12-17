@@ -6,7 +6,7 @@ xdescribe('users.bl', () => {
   let usersBL;
   let dbHelpers;
   let context;
-  before((done) => {
+  before(done => {
     context = Context.instance();
     usersBL = new UsersBL();
     dbHelpers = new DBHelpers();
@@ -32,11 +32,11 @@ xdescribe('users.bl', () => {
   it('`save` => saves a new user (with defaults)', () => {
     const user = {
       id: 1,
-      login: 'foo',
+      login: 'foo'
     };
     return usersBL
       .save(user)
-      .then((result) => {
+      .then(result => {
         expect(result).to.exist;
         expect(result).to.have.a.property('last_check');
         // Todo: Date conversion
@@ -44,7 +44,7 @@ xdescribe('users.bl', () => {
         expect(result).to.have.a.property('created_at');
         expect(result).to.have.a.property('updated_at');
       })
-      .catch((err) => {
+      .catch(err => {
         expect(err).to.not.exist;
       });
   });
@@ -52,18 +52,18 @@ xdescribe('users.bl', () => {
   it('`remove` removes a user', () => {
     const user = {
       id: 1,
-      login: 'foo',
+      login: 'foo'
     };
 
     return usersBL
       .removeAll()
       .then(() => usersBL.save(user))
       .then(() => usersBL.remove(user.id))
-      .then((result) => {
+      .then(result => {
         expect(result).to.exist;
         expect(result.message.numberReturned).to.equal(1);
       })
-      .catch((err) => {
+      .catch(err => {
         expect(err).to.not.exist;
       });
   });
@@ -71,13 +71,13 @@ xdescribe('users.bl', () => {
   it('`getById` returns an existing user', () => {
     const user = {
       id: 100,
-      login: 'foo',
+      login: 'foo'
     };
     return usersBL
       .removeAll()
       .then(() => usersBL.save(user))
       .then(() => usersBL.getById(user.id))
-      .then((result) => {
+      .then(result => {
         expect(result).to.exist;
         expect(result).to.have.a.property('id').to.be.equal(user.id);
       });
@@ -86,14 +86,14 @@ xdescribe('users.bl', () => {
   it('`getByLogin` returns the desired user', () => {
     const user = {
       id: 100,
-      login: 'foo',
+      login: 'foo'
     };
 
     return usersBL
       .removeAll()
       .then(() => usersBL.save(user))
       .then(() => usersBL.getByLogin(user.login))
-      .then((result) => {
+      .then(result => {
         expect(result).to.exist;
         // Todo: Research the _doc stuff
         expect(result).to.have.a.property('_doc');
@@ -111,13 +111,13 @@ xdescribe('users.bl', () => {
       login: 'foo',
       foo: 'bar',
       // eslint-disable-next-line no-mixed-operators
-      last_check: new Date(new Date() - 24 * 60 * 60 * 1000).setUTCHours(0, 0, 0, 0),
+      last_check: new Date(new Date() - 24 * 60 * 60 * 1000).setUTCHours(0, 0, 0, 0)
     };
 
     const userUpdated = {
       id: 1,
       login: 'foo',
-      foo: 'baz',
+      foo: 'baz'
     };
 
     const expectedDate = new Date(new Date().setUTCHours(0, 0, 0, 0));
@@ -126,7 +126,7 @@ xdescribe('users.bl', () => {
       .removeAll()
       .then(() => usersBL.save(user))
       .then(() => usersBL.save(userUpdated))
-      .then((result) => {
+      .then(result => {
         expect(result).to.exist;
 
         /* eslint-disable no-underscore-dangle */

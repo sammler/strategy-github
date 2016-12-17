@@ -11,7 +11,7 @@ export default class DBHelpers {
   }
 
   dropDatabase(done) {
-    this.context.db.connection.dropDatabase((err) => {
+    this.context.db.connection.dropDatabase(err => {
       done(err);
     });
   }

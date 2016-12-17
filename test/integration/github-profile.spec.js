@@ -2,7 +2,6 @@
 import GitHubProfile from './../../src/api/modules/github/github.profile';
 
 describe('integration => github-profile => ', () => {
-
   let ghProfile;
   beforeEach(() => {
     ghProfile = new GitHubProfile(global.Context);
@@ -20,18 +19,18 @@ describe('integration => github-profile => ', () => {
   it('should fetch the profile data', () => {
     const cfg = {
       affiliation: 'owner',
-      per_page: 100,
+      per_page: 100
     };
     const filter = {};
 
     return ghProfile.getProfile(cfg, filter)
-      .then((res) => {
+      .then(res => {
         expect(res).to.not.be.an.array;
         expect(res).to.have.property('name');
         expect(res).to.have.property('login');
         expect(res).to.have.property('created_at').to.exist;
       })
-      .catch((err) => {
+      .catch(err => {
         expect(err).to.not.exist;
       });
   });
@@ -39,7 +38,7 @@ describe('integration => github-profile => ', () => {
   it('should fetch the profile data (without filter)', () => {
     const cfg = {
       affiliation: 'owner',
-      per_page: 100,
+      per_page: 100
     };
 
     return ghProfile.getProfile(cfg);

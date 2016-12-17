@@ -20,7 +20,7 @@ describe('Sync a profile', () => {
   it('should sync', () => {
     const cfg = {
       affiliation: 'owner',
-      per_page: 100,
+      per_page: 100
     };
 
     // Todos: for the profile:
@@ -32,7 +32,7 @@ describe('Sync a profile', () => {
     // Todo: Actually mock all responses from GitHub, so that we can run the tests, offline.
     return ProfileBL.removeAll()
       .then(() => gitHubProfile.getProfile(cfg))
-      .then((profile) => {
+      .then(profile => {
         expect(profile).to.exist;
         delete profile.plan;
         delete profile.meta;
@@ -41,7 +41,7 @@ describe('Sync a profile', () => {
         return Promise.resolve(profile);
       })
       .then(profile => ProfileBL.save(profile))
-      .then((savedProfile) => {
+      .then(savedProfile => {
         expect(savedProfile).to.exist;
         expect(savedProfile).to.contain.property('name');
         expect(savedProfile).to.contain.property('login');

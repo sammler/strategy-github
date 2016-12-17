@@ -6,12 +6,11 @@ import _ from 'lodash';
 // Don't use arrow functions here, otherwise we don't have access to `this.timeout`
 // eslint-disable-next-line func-names
 describe('profile-history.bl', function () {
-
   this.timeout(2000);
   let dbHelpers;
   let context;
 
-  before((done) => {
+  before(done => {
     context = Context.instance();
     dbHelpers = new DBHelpers();
     dbHelpers.dropDatabase(done);
@@ -24,10 +23,10 @@ describe('profile-history.bl', function () {
       id: 1,
       login: 'stefanwalther',
       foo: 'profile-history',
-      date: new Date().setUTCHours(0, 0, 0, 0),
+      date: new Date().setUTCHours(0, 0, 0, 0)
     };
     return ProfileHistoryBL.save(_.clone(doc))
-      .then((result) => {
+      .then(result => {
         expect(result).to.exist;
         expect(result).to.have.property('login').to.be.equal(doc.login);
 
@@ -43,19 +42,19 @@ describe('profile-history.bl', function () {
       id: 1,
       login: 'stefanwalther',
       foo: 'profile-history',
-      date: new Date().setUTCHours(0, 0, 0, 0),
+      date: new Date().setUTCHours(0, 0, 0, 0)
     };
     const doc2 = {
       id: 1,
       login: 'stefanwalther',
       foo: 'profile-history',
-      date: new Date().setUTCHours(0, 0, 0, 0),
+      date: new Date().setUTCHours(0, 0, 0, 0)
     };
 
     return ProfileHistoryBL.save(_.clone(doc1))
       .then(() => ProfileHistoryBL.save(_.clone(doc2)))
       .then(() => ProfileHistoryBL.count())
-      .then((count) => {
+      .then(count => {
         expect(count).to.be.equal(1);
       });
   });
@@ -66,22 +65,22 @@ describe('profile-history.bl', function () {
       id: 1,
       login: 'stefanwalther',
       foo: 'profile-history',
-      date: dateToday.setUTCHours(0, 0, 0, 0),
+      date: dateToday.setUTCHours(0, 0, 0, 0)
     };
 
     const doc2 = {
       id: 1,
       login: 'stefanwalther',
       foo: 'profile-history2',
-      date: dateToday.setUTCHours(0, 0, 0, 0),
+      date: dateToday.setUTCHours(0, 0, 0, 0)
     };
     return ProfileHistoryBL.save(_.clone(doc1))
       .then(() => ProfileHistoryBL.save(_.clone(doc2)))
       .then(() => ProfileHistoryBL.countPerProfileId(1)
-        .then((count) => {
+        .then(count => {
           expect(count).to.be.equal(1);
         }))
-      .catch((err) => {
+      .catch(err => {
         expect(err).to.not.exist;
       });
   });
@@ -93,7 +92,7 @@ describe('profile-history.bl', function () {
       id: 1,
       login: 'stefanwalther',
       foo: 'profile-history',
-      date: dateToday.setUTCHours(0, 0, 0, 0),
+      date: dateToday.setUTCHours(0, 0, 0, 0)
     };
 
     let dateYesterday = new Date(dateToday.setDate(dateToday.getDate() - 1));
@@ -102,12 +101,12 @@ describe('profile-history.bl', function () {
       id: 1,
       login: 'stefanwalther',
       foo: 'profile-history',
-      date: dateYesterday,
+      date: dateYesterday
     };
 
     return ProfileHistoryBL.save(doc1)
       .then(() => ProfileHistoryBL.save(doc2))
-      .catch((err) => {
+      .catch(err => {
         expect(err).to.not.exist;
       });
   });
@@ -124,24 +123,24 @@ describe('profile-history.bl', function () {
       id: 1,
       login: 'stefanwalther',
       name: 'Stefan Walther',
-      date: new Date(dateYesterday).setUTCHours(0, 0, 0, 0),
+      date: new Date(dateYesterday).setUTCHours(0, 0, 0, 0)
     };
 
     const doc2 = {
       id: 1,
       login: 'stefanwalther',
       name: 'Stefan Walther 2',
-      date: new Date(dateYesterday).setUTCHours(0, 0, 0, 0),
+      date: new Date(dateYesterday).setUTCHours(0, 0, 0, 0)
     };
 
     return ProfileHistoryBL.save(_.clone(doc1))
       .then(() => ProfileHistoryBL.save(_.clone(doc2)))
       .then(() => ProfileHistoryBL.countPerProfileId(1)
-        .then((count) => {
+        .then(count => {
           expect(count).to.be.equal(1);
         }))
       .then(() => ProfileHistoryBL.getByProfileId(1)
-        .then((result) => {
+        .then(result => {
           expect(result).not.to.be.empty;
           expect(result).to.have.a.property('name').to.be.equal('Stefan Walther 2');
         }));

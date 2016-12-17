@@ -3,7 +3,7 @@ machine:
     - mkdir ~/.yarn-cache
   node:
     version: stable
-## Customize dependencies
+
 dependencies:
   pre:
     - curl -o- -L https://yarnpkg.com/install.sh | bash
