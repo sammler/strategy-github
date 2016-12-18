@@ -1,4 +1,4 @@
-import AppServer from './../../src/api/appServer';
+import AppServer from './../../src/api/app-server';
 import supertest from 'supertest';
 
 describe('AppServer', () => {

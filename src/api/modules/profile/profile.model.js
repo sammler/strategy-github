@@ -13,6 +13,7 @@ const schema = new Schema({
   },
 
   // last time the data was updated in the MongoDb (not on GitHub!)
+  // Todo: rename to s5r_last_check (to be consistent)
   last_check: {
     type: Date,
     default: new Date().setUTCHours(0, 0, 0, 0),

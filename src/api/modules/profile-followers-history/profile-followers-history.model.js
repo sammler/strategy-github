@@ -20,17 +20,22 @@ const schema = new Schema({
     null: false,
     required: true
   },
+
+  // Todo: rename to s5r_date_from (to be consistent)
   date_from: {
     type: Date,
     null: false,
     default: new Date().setUTCHours(0, 0, 0, 0)
   },
+
+  // Todo: rename to s5r_date_to (to be consistent)
   date_to: {
     type: Date,
     null: true,
     required: false
   },
 
+  // Todo: rename to s5r_last_check (to be consistent)
   last_check: {
     type: Date,
     null: false,
