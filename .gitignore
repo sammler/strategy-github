@@ -1,6 +1,13 @@
 # project
 /dist
 
+# secure credentials
+/.github-auth.json
+
+# IDEs
+.vscode
+.idea
+
 # always ignore files
 *.DS_Store
 *.sublime-*
@@ -23,5 +30,4 @@ temp
 tmp
 TODO.md
 
-# secure credentials
-/.github-auth.json
+
