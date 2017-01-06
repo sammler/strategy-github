@@ -1,5 +1,5 @@
-import mongoose from 'mongoose' ;
-import Logger from './../helper/logger';
+const mongoose  = require('mongoose');
+const Logger = require('./../helper/logger');
 
 let instance;
 export default class Context {

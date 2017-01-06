@@ -1,5 +1,5 @@
 /*global describe, expect, it, beforeEach*/
-import GitHub from './../../src/api/index';
+const GitHub = require('./../../src/api/index');
 
 describe( 'unit::repos', () => {
 

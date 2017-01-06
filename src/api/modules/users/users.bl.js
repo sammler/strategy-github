@@ -1,5 +1,5 @@
-import {Model as UserModel} from './users.model';
-import Context from './../../config/context';
+const UserModel = require('./users.model').Model;
+const Context = require('./../../config/context');
 
 export default class UsersBL {
   constructor(context) {

@@ -1,4 +1,4 @@
-import AppServer from './appServer';
+const AppServer = require('./appServer');
 
 const appServer = new AppServer();
 appServer.start();

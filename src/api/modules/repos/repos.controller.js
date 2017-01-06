@@ -1,5 +1,5 @@
-import HttpStatus from 'http-status';
-import ReposBL from './repos.bl';
+const HttpStatus = require('http-status');
+const ReposBL = require('./repos.bl');
 
 export default class ReposController {
   constructor(context) {

@@ -1,7 +1,7 @@
-import ProfileHistoryBL from './../../src/api/modules/profile-history/profile-history.bl';
-import Context from './../../src/api/config/context';
-import DBHelpers from './../lib/db-helpers';
-import _ from 'lodash';
+const ProfileHistoryBL = require('./../../src/api/modules/profile-history/profile-history.bl');
+const Context = require('./../../src/api/config/context');
+const DBHelpers = require('./../lib/db-helpers');
+const _ = require('lodash');
 
 // Don't use arrow functions here, otherwise we don't have access to `this.timeout`
 // eslint-disable-next-line func-names

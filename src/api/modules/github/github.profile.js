@@ -1,4 +1,4 @@
-import * as ghUtils from './github-utils';
+const ghUtils = require('./github-utils');
 
 export default class GitHubProfile {
   constructor(context) {

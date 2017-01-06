@@ -1,6 +1,6 @@
 /* eslint-disable camelcase, no-underscore-dangle */
-import {Model as ProfileHistoryModel} from './profile-history.model';
-import _ from 'lodash';
+const ProfileHistoryModel = require('./profile-history.model').Model;
+const _ = require('lodash');
 
 export default class ProfileHistoryBL {
 

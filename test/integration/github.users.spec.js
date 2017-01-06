@@ -1,5 +1,4 @@
-import GithubUsers from './../../src/api/modules/github/github.users';
-// import Context from './../../src/api/config/context';
+const GithubUsers = require('./../../src/api/modules/github/github.users');
 
 describe('integration => github.profile.follwers =>', () => {
   let gitHubUsers;

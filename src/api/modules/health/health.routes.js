@@ -1,5 +1,5 @@
 const express = require('express');
-import HealthController from './health.controller';
+const HealthController = require('./health.controller');
 
 export function routes() {
   const router = express.Router(); // eslint-disable-line new-cap

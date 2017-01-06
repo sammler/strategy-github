@@ -1,4 +1,4 @@
-import * as ghLib from './../../src/api/helper/github-utils';
+const ghLib = require('./../../src/api/helper/github-utils');
 
 describe('github-utils', () => {
   it('should have a function ghClient', () => {

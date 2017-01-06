@@ -1,4 +1,4 @@
-import Context from './../../src/api/config/context';
+const Context = require('./../../src/api/config/context');
 
 export default class DBHelpers {
   constructor(context) {

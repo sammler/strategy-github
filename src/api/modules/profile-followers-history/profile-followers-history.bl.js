@@ -1,6 +1,6 @@
 /* eslint-disable camelcase, no-underscore-dangle */
-import {Model as ProfileFollowersHistoryModel} from './profile-followers-history.model';
-import Context from './../../config/context';
+const ProfileFollowersHistoryModel = require('./profile-followers-history.model').Model;
+const Context = require('./../../config/context');
 
 const _ = require('lodash');
 const Promise = require('bluebird');
