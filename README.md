@@ -1,5 +1,8 @@
 ## sammler-strategy-github
 
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2a1e636d72504f42b780fda9151056f8)](https://www.codacy.com/app/sammler/sammler-strategy-github?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sammler/sammler-strategy-github&amp;utm_campaign=badger)
+
 > Sammler strategy to collect GitHub content.
 
 [![CircleCI](https://circleci.com/gh/sammler/sammler-strategy-github/tree/master.svg?style=svg)](https://circleci.com/gh/sammler/sammler-strategy-github/tree/master)
