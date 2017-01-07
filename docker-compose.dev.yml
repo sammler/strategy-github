@@ -10,17 +10,35 @@ services:
       file: ./node_modules/sammler-base/docker-compose.yml
       service: "s5r-rabbitmq"
 
-  s5r-scheduler:
+  s5r-mongo:
     extends:
       file: ./node_modules/sammler-base/docker-compose.yml
-      service: "s5r-scheduler"
+      service: "s5r-mongo"
+    ports:
+      - "27017:27017"
+
+  # ----------------------------------------------------------
+  # Dependent services
+  # ----------------------------------------------------------
+
+  s5r-jobs-service:
+    build:
+      context: ./node_modules/sammler-jobs-service
+    environment:
+      - PORT=4003
+      - WAIT_COMMAND=[ $$(curl --write-out %{http_code} --silent --output /dev/null http://s5r-mongo:27017) = 200 ]
+      - WAIT_START_CMD=yarn run start:dev
+      - WAIT_SLEEP=2
+      - WAIT_LOOPS=20
+      - SAMMLER_DB_JOBS_URI=mongodb://s5r-mongo:27017/jobs
+    volumes:
+      - ./node_modules/sammler-jobs-service/:/home
+    links:
+      - s5r-mongo
+    command: sh wait_to_start.sh
 
   # ----------------------------------------------------------
   # Strategies
   # ----------------------------------------------------------
 
-  s5r-strategy-github-db:
-    image: mongo
-    ports:
-      - "27017:27017"
 

@@ -5,7 +5,7 @@ const routes = require('./routes');
 
 // import * as mqListener from './modules/mq-listener';
 
-export default class AppServer {
+class AppServer {
 
   constructor(config) {
     this.PORT = process.env.SAMMLER_MIDDLEWARE_GITHUB_PORT || (config ? config.port : null) || 3000;
@@ -52,4 +52,6 @@ export default class AppServer {
     });
   }
 }
+
+module.exports = AppServer;
 
