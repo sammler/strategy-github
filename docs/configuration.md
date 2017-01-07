@@ -2,7 +2,7 @@
 
 The following environment variables are necessary.
 
-- `PORT`
+- `PORT` - port of the express application, defaults to 3000
 - `SAMMLER_RABBITMQ_URI`
 
 

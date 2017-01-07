@@ -8,7 +8,7 @@ const routes = require('./routes');
 class AppServer {
 
   constructor(config) {
-    this.PORT = process.env.SAMMLER_MIDDLEWARE_GITHUB_PORT || (config ? config.port : null) || 3000;
+    this.PORT = (config ? config.port : null) || 3000;
     this.app = express();
     this.initApp();
 

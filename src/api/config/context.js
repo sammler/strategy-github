@@ -9,7 +9,7 @@ class Context {
 
     mongoose.Promise = global.Promise;
 
-    // Todo: make this configurable
+    // Todo: make this configurable (nconf?)
     mongoose.set('debug', false);
 
     if (!this.db) {
@@ -25,6 +25,7 @@ class Context {
   }
 
   dbConnect() {
+    // Todo: See http://stackoverflow.com/questions/10656574/how-to-manage-mongodb-connections-in-a-nodejs-webapp
     // Todo: Check for mongoose.connection.readyState: http://stackoverflow.com/questions/19599543/check-mongoose-connection-state-without-creating-new-connection
     // Todo: make this configurable
     const uri = 'mongodb://localhost:27017/s5r-s-github';
