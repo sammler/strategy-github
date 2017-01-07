@@ -1,5 +1,5 @@
-import AppServer from './../../src/api/app-server';
-import supertest from 'supertest';
+const AppServer = require('./../../src/api/app-server');
+const supertest = require('supertest');
 
 describe('AppServer', () => {
   let appServer = null;

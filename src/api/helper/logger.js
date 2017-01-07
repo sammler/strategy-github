@@ -12,12 +12,12 @@ const defaultOpts = {
   json: false
 };
 
-export default class Logger {
+class Logger {
   constructor() {
     if (process.env.NODE_ENV === 'test') {
       this.winston = new (winston.Logger)({
         transports: [
-          new (winston.transports.File)({filename: 'foo.log'})
+          new (winston.transports.File)({filename: 'test-errors.log'})
         ]
       });
     } else {
@@ -68,3 +68,4 @@ export default class Logger {
 //  winston.Logger.prototype.log.apply( this, args );
 // };
 
+module.exports = Logger;

@@ -1,5 +1,4 @@
-// import Context from './../../src/api/config/context';
-import GitHubProfile from './../../src/api/modules/github/github.profile';
+const GitHubProfile = require('./../../src/api/modules/github/github.profile');
 
 describe('integration => github-profile => ', () => {
   let ghProfile;

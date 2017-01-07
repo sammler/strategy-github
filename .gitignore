@@ -1,5 +1,12 @@
 # project
-/dist
+test-errors.log
+
+# secure credentials
+/.github-auth.json
+
+# IDEs
+.vscode
+.idea
 
 # always ignore files
 *.DS_Store
@@ -23,5 +30,4 @@ temp
 tmp
 TODO.md
 
-# secure credentials
-/.github-auth.json
+

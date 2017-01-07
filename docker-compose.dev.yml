@@ -1,0 +1,26 @@
+version: "2"
+
+services:
+
+  # ----------------------------------------------------------
+  # Base services
+  # ----------------------------------------------------------
+  s5r-rabbitmq:
+    extends:
+      file: ./node_modules/sammler-base/docker-compose.yml
+      service: "s5r-rabbitmq"
+
+  s5r-scheduler:
+    extends:
+      file: ./node_modules/sammler-base/docker-compose.yml
+      service: "s5r-scheduler"
+
+  # ----------------------------------------------------------
+  # Strategies
+  # ----------------------------------------------------------
+
+  s5r-strategy-github-db:
+    image: mongo
+    ports:
+      - "27017:27017"
+

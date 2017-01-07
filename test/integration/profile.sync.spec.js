@@ -1,14 +1,11 @@
-import Context from './../../src/api/config/context';
-import GitHubProfile from './../../src/api/modules/github/github.profile';
-import ProfileBL from './../../src/api/modules/profile/profile.bl';
-// import ProfileHistoryBL from './../../src/api/modules/profile-history/profile-history.bl';
-import * as mUtils from './../../src/api/helper/m-utils';
+const Context = require('./../../src/api/config/context');
+const GitHubProfile = require('./../../src/api/modules/github/github.profile');
+const ProfileBL = require('./../../src/api/modules/profile/profile.bl');
+const mUtils = require('./../../src/api/helper/m-utils');
 
 describe('Sync a profile', () => {
   let context;
   let gitHubProfile;
-  // let profileBL;
-  // let profileHistoryBL;
   let logger;
   before(() => {
     context = Context.instance();

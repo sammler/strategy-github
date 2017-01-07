@@ -1,6 +1,6 @@
 /*global describe, expect, it, beforeEach*/
-import GitHub from './../../src/index';
-import appServer from './../../src/app';
+const GitHub = require('./../../src/index');
+const appServer = require('./../../src/app');
 
 describe( 'unit::GitHub', () => {
 

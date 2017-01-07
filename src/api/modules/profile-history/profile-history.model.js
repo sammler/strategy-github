@@ -1,4 +1,4 @@
-import Context from './../../config/context';
+const Context = require('./../../config/context');
 
 const mongoose = require('mongoose');
 const timeStamps = require('mongoose-timestamp');

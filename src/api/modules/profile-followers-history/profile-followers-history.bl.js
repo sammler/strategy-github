@@ -1,11 +1,11 @@
 /* eslint-disable camelcase, no-underscore-dangle */
-import {Model as ProfileFollowersHistoryModel} from './profile-followers-history.model';
-import Context from './../../config/context';
+const ProfileFollowersHistoryModel = require('./profile-followers-history.model').Model;
+const Context = require('./../../config/context');
 
 const _ = require('lodash');
 const Promise = require('bluebird');
 
-export default class ProfileFollowersHistoryBL {
+class ProfileFollowersHistoryBL {
   constructor(context) {
     if (!context) {
       context = Context.instance();
@@ -83,3 +83,4 @@ export default class ProfileFollowersHistoryBL {
 }
 /* eslint-enable camelcase, no-underscore-dangle */
 
+module.exports = ProfileFollowersHistoryBL;
