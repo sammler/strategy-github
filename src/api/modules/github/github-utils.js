@@ -59,4 +59,4 @@ function getAll(ghClient, fnName, options, cb) {
 module.exports = {
   getGhClient,
   getAll
-}
+};

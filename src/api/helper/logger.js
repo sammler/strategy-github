@@ -17,7 +17,7 @@ class Logger {
     if (process.env.NODE_ENV === 'test') {
       this.winston = new (winston.Logger)({
         transports: [
-          new (winston.transports.File)({filename: 'foo.log'})
+          new (winston.transports.File)({filename: 'test-errors.log'})
         ]
       });
     } else {

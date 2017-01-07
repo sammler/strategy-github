@@ -17,4 +17,4 @@ function modelToJSON(doc, fn, options) {
 
 module.exports = {
   modelToJSON
-}
+};
