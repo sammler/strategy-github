@@ -1,14 +1,10 @@
 # project
 test-errors.log
+.cache
+.config
+.yarn
 
-# secure credentials
-/.github-auth.json
-
-# IDEs
-.vscode
-.idea
-
-# secure credentials
+# project: secure credentials
 /.github-auth.json
 
 # IDEs
