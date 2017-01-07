@@ -1,6 +1,6 @@
 const Context = require('./../../src/api/config/context');
 
-export default class DBHelpers {
+class DBHelpers {
   constructor(context) {
     if (!context) {
       context = Context.instance();
@@ -23,3 +23,5 @@ export default class DBHelpers {
   // }
 
 }
+
+module.exports = DBHelpers;

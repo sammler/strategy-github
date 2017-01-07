@@ -2,8 +2,8 @@
 
 The following environment variables are necessary.
 
-- SAMMLER_MIDDLEWARE_GITHUB_PORT
-- SAMMLER_RABBITMQ_URL
+- `PORT`
+- `SAMMLER_RABBITMQ_URI`
 
 
 - `S5R_STRATEGY_GITHUB__TOKEN`

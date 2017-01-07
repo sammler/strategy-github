@@ -1,7 +1,7 @@
 const ghUtils = require('./github-utils');
 const Context = require('./../../config/context');
 
-export default class GithubUsers {
+class GithubUsers {
   constructor(context) {
     if (!context) {
       context = Context.instance();
@@ -41,3 +41,5 @@ export default class GithubUsers {
     });
   }
 }
+
+module.exports = GithubUsers;

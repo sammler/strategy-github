@@ -1,7 +1,7 @@
 const UserStarredModel = require('./user-starred.model').Model;
 const _ = require('lodash');
 
-export default class UserStarredBL {
+class UserStarredBL {
 
   static modelFromGitHub(userId, ghStarredItem) {
     const o = ghStarredItem;
@@ -68,3 +68,5 @@ export default class UserStarredBL {
   }
 
 }
+
+module.exports = UserStarredBL;

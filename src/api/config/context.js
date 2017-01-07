@@ -1,8 +1,8 @@
-const mongoose  = require('mongoose');
+const mongoose = require('mongoose');
 const Logger = require('./../helper/logger');
 
 let instance;
-export default class Context {
+class Context {
   constructor() {
     this.logger = new Logger();
     this.db = null;
@@ -43,3 +43,5 @@ export default class Context {
   }
 
 }
+
+module.exports = Context;

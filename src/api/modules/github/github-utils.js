@@ -2,7 +2,7 @@ const GitHubApi = require('github');
 // const auth = require( './../../../.github-auth.json' );
 const auth = require('./github.auth');
 
-export function getGhClient() {
+function getGhClient() {
   // Todo: Use bluebird for promises
   const clientInstance = new GitHubApi({
     debug: false
@@ -22,7 +22,7 @@ export function getGhClient() {
  *
  * @see https://github.com/mikedeboer/node-github/blob/master/examples/getStarred.js
  */
-export function getAll(ghClient, fnName, options, cb) {
+function getAll(ghClient, fnName, options, cb) {
   if (!cb || typeof cb !== 'function') {
     throw new Error('No callback defined');
   }
@@ -54,4 +54,9 @@ export function getAll(ghClient, fnName, options, cb) {
   function returnResult() {
     return cb(null, items);
   }
+}
+
+module.exports = {
+  getGhClient,
+  getAll
 }

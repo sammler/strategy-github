@@ -1,7 +1,7 @@
 const UserModel = require('./users.model').Model;
 const Context = require('./../../config/context');
 
-export default class UsersBL {
+class UsersBL {
   constructor(context) {
     if (!context) {
       context = Context.instance();
@@ -51,3 +51,5 @@ export default class UsersBL {
   }
 
 }
+
+module.exports = UsersBL;

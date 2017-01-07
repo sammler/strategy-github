@@ -5,7 +5,7 @@ const Context = require('./../../config/context');
 const _ = require('lodash');
 const Promise = require('bluebird');
 
-export default class ProfileFollowersHistoryBL {
+class ProfileFollowersHistoryBL {
   constructor(context) {
     if (!context) {
       context = Context.instance();
@@ -83,3 +83,4 @@ export default class ProfileFollowersHistoryBL {
 }
 /* eslint-enable camelcase, no-underscore-dangle */
 
+module.exports = ProfileFollowersHistoryBL;

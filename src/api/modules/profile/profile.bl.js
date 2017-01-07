@@ -2,7 +2,7 @@ const _ = require('lodash');
 const ProfileModel = require('./profile.model').Model;
 const ProfileHistoryBL = require('./../../modules/profile-history/profile-history.bl');
 
-export default class ProfileBL {
+class ProfileBL {
 
   /**
    * Save a GitHub profile.
@@ -94,3 +94,4 @@ export default class ProfileBL {
   }
 }
 
+module.exports = ProfileBL;

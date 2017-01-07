@@ -2929,6 +2929,10 @@ rx-lite@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/rx-lite/-/rx-lite-3.1.2.tgz#19ce502ca572665f3b647b10939f97fd1615f102"
 
+sammler-base@sammler/sammler-base:
+  version "0.0.7"
+  resolved "https://codeload.github.com/sammler/sammler-base/tar.gz/0a9e06958e38526d027996c93430ae8638c7cfd8"
+
 samsam@1.1.2, samsam@~1.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/samsam/-/samsam-1.1.2.tgz#bec11fdc83a9fda063401210e40176c3024d1567"

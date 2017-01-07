@@ -1,6 +1,6 @@
 const ghUtils = require('./github-utils');
 
-export default class GitHubProfile {
+class GitHubProfile {
   constructor(context) {
     if (!context) {
       throw new Error('No context provided.');
@@ -32,3 +32,5 @@ export default class GitHubProfile {
     });
   }
 }
+
+module.exports = GitHubProfile;
