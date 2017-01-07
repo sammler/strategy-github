@@ -1,8 +1,8 @@
 /* eslint-disable camelcase, no-underscore-dangle */
-import {Model as ProfileHistoryModel} from './profile-history.model';
-import _ from 'lodash';
+const ProfileHistoryModel = require('./profile-history.model').Model;
+const _ = require('lodash');
 
-export default class ProfileHistoryBL {
+class ProfileHistoryBL {
 
   static save(gitHubProfile) {
     gitHubProfile.profile_id = _.clone(gitHubProfile.id || gitHubProfile._id);
@@ -52,3 +52,5 @@ export default class ProfileHistoryBL {
 
 }
 /* eslint-enable camelcase, no-underscore-dangle */
+
+module.exports = ProfileHistoryBL;

@@ -24,11 +24,11 @@
   "repository": "sammler/sammler-strategy-github",
   "scripts": {
     "build": "gulp build",
-    "docker-compose": "docker-compose up --build",
-    "docker-compose-down": "docker-compose down",
-    "dc-dev-up": "docker-compose --f=dc-dev.yml up --build",
-    "dc-dev-down": "docker-compose --f=dc-dev.yml down",
     "coverage": "babel-node ./node_modules/.bin/isparta cover _mocha",
+    "dc-dev-down": "docker-compose --f=./docker-compose.dev.yml down",
+    "dc-dev-up": "docker-compose --f=./docker-compose.dev.yml up --build",
+    "dc-down": "docker-compose down",
+    "dc-up": "docker-compose up --build",
     "docs": "verb",
     "lint:src": "eslint src",
     "lint:src:fix": "eslint src --fix",
@@ -42,7 +42,6 @@
   "dependencies": {
     "amqp-as-promised": "^4.1.0",
     "amqplib": "^0.5.1",
-    "babel-polyfill": "^6.16.0",
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
     "debug": "^2.3.3",
@@ -55,28 +54,20 @@
     "mongoose-unique-validator": "^1.0.3",
     "winston": "^2.3.0",
     "winston-logstash": "^0.3.0",
-    "winston-mongodb": "^1.6.5",
-    "yarn": "^0.17.10"
+    "winston-mongodb": "^1.6.5"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-core": "^6.18.2",
-    "babel-plugin-istanbul": "^3.0.0",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-stage-0": "^6.16.0",
     "chai": "^3.5.0",
     "del": "^2.2.2",
     "eslint": "^3.10.2",
     "eslint-config-xo-space": "^0.15.0",
     "eslint-plugin-mocha": "^4.7.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
     "gulp-format-md": "*",
-    "gulp-sourcemaps": "^2.2.0",
     "isparta": "^4.0.0",
     "mocha": "^3.1.2",
     "nock": "^9.0.2",
     "nyc": "^9.0.1",
+    "sammler-base": "sammler/sammler-base",
     "sinon": "^1.17.6",
     "sinon-as-promised": "^4.0.2",
     "sinon-chai": "^2.8.0",
@@ -90,6 +81,27 @@
   "nyc": {
     "sourceMap": false,
     "instrument": false
+  },
+  "verb": {
+    "run": true,
+    "toc": false,
+    "layout": "empty",
+    "tasks": [
+      "readme"
+    ],
+    "plugins": [
+      "gulp-format-md"
+    ],
+    "related": {
+      "list": []
+    },
+    "lint": {
+      "reflinks": true
+    },
+    "reflinks": [
+      "verb",
+      "verb-readme-generator"
+    ]
   },
   "xo": {
     "envs": [
@@ -130,26 +142,5 @@
       "no-param-reassign": 0,
       "camelcase": 0
     }
-  },
-  "verb": {
-    "run": true,
-    "toc": false,
-    "layout": "empty",
-    "tasks": [
-      "readme"
-    ],
-    "plugins": [
-      "gulp-format-md"
-    ],
-    "related": {
-      "list": []
-    },
-    "lint": {
-      "reflinks": true
-    },
-    "reflinks": [
-      "verb",
-      "verb-readme-generator"
-    ]
   }
 }

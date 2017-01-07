@@ -1,5 +1,12 @@
 # project
-/dist
+test-errors.log
+
+# secure credentials
+/.github-auth.json
+
+# IDEs
+.vscode
+.idea
 
 # secure credentials
 /.github-auth.json

@@ -1,8 +1,7 @@
-import _ from 'lodash';
-import Promise from 'bluebird';
-import ProfileFollowersHistoryBL from './../../src/api/modules/profile-followers-history/profile-followers-history.bl';
-// import Context from './../../src/api/config/context';
-import DBHelpers from './../lib/db-helpers';
+const _ = require('lodash');
+const Promise = require('bluebird');
+const ProfileFollowersHistoryBL = require('./../../src/api/modules/profile-followers-history/profile-followers-history.bl');
+const DBHelpers = require('./../lib/db-helpers');
 
 describe('profile-followers-history.bl', () => {
   let dbHelpers;

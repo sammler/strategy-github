@@ -1,8 +1,8 @@
-import _ from 'lodash';
-import ProfileBL from './../../src/api/modules/profile/profile.bl';
-import ProfileHistoryBL from './../../src/api/modules/profile-history/profile-history.bl';
-import Context from './../../src/api/config/context';
-import DBHelpers from './../lib/db-helpers';
+const _ = require('lodash');
+const ProfileBL = require('./../../src/api/modules/profile/profile.bl');
+const ProfileHistoryBL = require('./../../src/api/modules/profile-history/profile-history.bl');
+const Context = require('./../../src/api/config/context');
+const DBHelpers = require('./../lib/db-helpers');
 
 describe('profile.bl', function () {
   this.timeout(1000);

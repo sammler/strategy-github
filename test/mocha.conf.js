@@ -1,6 +1,4 @@
-import Global from './global';
-require('babel-core/register');
-require('babel-polyfill');
+const Global = require('./global');
 
 const globalContext = new Global();
 

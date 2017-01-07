@@ -1,6 +1,6 @@
-import UsersBL from './../../src/api/modules/users/users.bl';
-import Context from './../../src/api/config/context';
-import DBHelpers from './../lib/db-helpers';
+const UsersBL = require('./../../src/api/modules/users/users.bl');
+const Context = require('./../../src/api/config/context');
+const DBHelpers = require('./../lib/db-helpers');
 
 xdescribe('users.bl', () => {
   let usersBL;

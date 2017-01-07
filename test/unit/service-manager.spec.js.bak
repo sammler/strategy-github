@@ -1,4 +1,4 @@
-import ServiceManager from './../../src/config/service-manager';
+const ServiceManager = require('./../../src/config/service-manager');
 
 describe.only( 'service-manager', () => {
 

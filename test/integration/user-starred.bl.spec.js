@@ -1,4 +1,4 @@
-const UserStarredBL = require('./../../src/api/modules/user-starred/user-starred.bl').default;
+const UserStarredBL = require('./../../src/api/modules/user-starred/user-starred.bl');
 const _ = require('lodash');
 
 describe('user-starred.bl => ', () => {
