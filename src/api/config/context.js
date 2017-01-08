@@ -27,8 +27,7 @@ class Context {
   dbConnect() {
     // Todo: See http://stackoverflow.com/questions/10656574/how-to-manage-mongodb-connections-in-a-nodejs-webapp
     // Todo: Check for mongoose.connection.readyState: http://stackoverflow.com/questions/19599543/check-mongoose-connection-state-without-creating-new-connection
-    // Todo: make this configurable
-    const uri = 'mongodb://localhost:27017/s5r-s-github';
+    const uri = process.env.SAMMLER_STRATEGY_GITHUB_DB_URI || 'mongodb://localhost:27017/test-github';
     const options = {
       server: {
         poolSize: 5
