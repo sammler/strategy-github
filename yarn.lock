@@ -67,6 +67,12 @@ amqp-as-promised@^4.1.0:
     mem-cache "0.0.4"
     uuid "~2.0.1"
 
+amqplib-sugar@sammler/amqplib-sugar:
+  version "0.1.0"
+  resolved "https://codeload.github.com/sammler/amqplib-sugar/tar.gz/375d83160d91cb629b88e6f23eb65be227d0a3d8"
+  dependencies:
+    amqplib "^0.5.1"
+
 amqplib@^0.4.2:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/amqplib/-/amqplib-0.4.2.tgz#5e4a2a914ccb3125f9cb91f6da07c97aa4cb13a6"
@@ -2396,21 +2402,6 @@ rx-lite@^3.1.2:
 sammler-base@sammler/sammler-base:
   version "0.0.7"
   resolved "https://codeload.github.com/sammler/sammler-base/tar.gz/0a9e06958e38526d027996c93430ae8638c7cfd8"
-
-sammler-jobs-service@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/sammler-jobs-service/-/sammler-jobs-service-0.0.7.tgz#52679b0df791e41548d481118914a30181c8b9ea"
-  dependencies:
-    bluebird "^3.4.6"
-    body-parser "^1.15.2"
-    express "^4.14.0"
-    http-status-codes "^1.0.6"
-    lodash "^4.17.2"
-    mongoose "^4.7.3"
-    mongoose-timestamp "^0.6.0"
-    swagger-jsdoc "^1.8.3"
-    winston "^2.3.0"
-    winston-logstash "^0.3.0"
 
 sammler-jobs-service@sammler/sammler-jobs-service:
   version "0.0.7"

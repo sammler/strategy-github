@@ -3,7 +3,7 @@ const express = require('express');
 const Context = require('./config/context');
 const routes = require('./routes');
 
-// import * as mqListener from './modules/mq-listener';
+const MqWorker = require('./mq/mq-worker');
 
 class AppServer {
 
@@ -24,6 +24,7 @@ class AppServer {
       next();
     });
     routes.config(this.app);
+    this.mqWorker = new MqWorker();
   }
 
   /**
