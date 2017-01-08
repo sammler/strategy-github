@@ -1,7 +1,7 @@
 const HttpStatus = require('http-status');
 const ProfileBL = require('./profile.bl');
 
-export default class ProfileController {
+class ProfileController {
   constructor(context) {
     this.profileBL = new ProfileBL(context);
   }
@@ -55,3 +55,5 @@ export default class ProfileController {
   }
 
 }
+
+module.exports = ProfileController;

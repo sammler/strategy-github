@@ -1,7 +1,7 @@
 const express = require('express');
 const ProfileController = require('./profile.controller');
 
-export function routes() {
+function routes() {
   const router = express.Router(); // eslint-disable-line new-cap
   const profileController = new ProfileController();
 
@@ -9,4 +9,8 @@ export function routes() {
   router.post('/', profileController.create);
 
   return router;
+}
+
+module.exports = {
+  routes
 }

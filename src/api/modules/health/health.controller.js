@@ -1,5 +1,5 @@
 
-export default class HealthController {
+class HealthController {
 
   /**
    * Get all profiles
@@ -12,3 +12,5 @@ export default class HealthController {
   }
 
 }
+
+module.exports = HealthController;

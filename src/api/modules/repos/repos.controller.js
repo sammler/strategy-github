@@ -1,7 +1,7 @@
 const HttpStatus = require('http-status');
 const ReposBL = require('./repos.bl');
 
-export default class ReposController {
+class ReposController {
   constructor(context) {
     this.profileBL = new ReposBL(context);
   }
@@ -10,3 +10,5 @@ export default class ReposController {
     return res.status(HttpStatus.NOT_IMPLEMENTED);
   }
 }
+
+module.exports = ReposController

@@ -1,5 +1,5 @@
 
-export default class ReposBL {
+class ReposBL {
 
   create() {
 
@@ -14,3 +14,5 @@ export default class ReposBL {
   }
 
 }
+
+module.exports = ReposBL;

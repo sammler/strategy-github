@@ -6,4 +6,3 @@ const config = {
 
 const appServer = new AppServer(config);
 appServer.start();
-appServer.dbConnect();
