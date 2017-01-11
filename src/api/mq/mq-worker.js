@@ -1,6 +1,6 @@
 const amqp = require('amqplib');
 // const amqpSugar = require('amqplib-sugar');
-const superagent = require('superagent-promise')(require('superagent'), Promise);
+// const superagent = require('superagent-promise')(require('superagent'), Promise);
 
 const uri = process.env.SAMMLER_RABBITMQ_URI;
 

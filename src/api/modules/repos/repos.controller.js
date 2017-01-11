@@ -11,4 +11,4 @@ class ReposController {
   }
 }
 
-module.exports = ReposController
+module.exports = ReposController;
