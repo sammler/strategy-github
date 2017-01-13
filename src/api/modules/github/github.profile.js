@@ -1,9 +1,10 @@
 const ghUtils = require('./github-utils');
+const Context = require('./../../config/context');
 
 class GitHubProfile {
   constructor(context) {
     if (!context) {
-      throw new Error('No context provided.');
+      context = Context.instance();
     }
     this.ghClient = ghUtils.getGhClient();
 
