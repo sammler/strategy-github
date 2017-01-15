@@ -4,9 +4,6 @@ test-errors.log
 .config
 .yarn
 
-# project: secure credentials
-/.github-auth.json
-
 # IDEs
 .vscode
 .idea

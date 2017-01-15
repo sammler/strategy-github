@@ -8,11 +8,14 @@ describe('integration => github.profile.follwers =>', () => {
     gitHubUsers = new GithubUsers();
   });
 
-  xit('returns the authenticated user', () => gitHubUsers
+  it('returns the authenticated user', () => {
+
+    return gitHubUsers
       .get()
       .then(result => {
         expect(result).to.exist;
-      }));
+      });
+  });
 
   it('returns the followers (current authenticated user)', () => {
     const options = {

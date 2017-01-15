@@ -19,7 +19,6 @@ class ProfileBL {
       saveHistory: true
     };
     saveOptions = _.assignIn(defaultOpts, saveOptions);
-
     if (!gitHubProfile) {
       throw new Error('No data provided');
     }

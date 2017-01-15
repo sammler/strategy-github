@@ -1,13 +1,23 @@
 const GitHubApi = require('github');
-// const auth = require( './../../../.github-auth.json' );
-const auth = require('./github.auth');
+//const auth = require('./github.auth');
 
-function getGhClient() {
+function getGhClient(auth) {
   // Todo: Use bluebird for promises
   const clientInstance = new GitHubApi({
     debug: false
     // bluebird could be used here
   });
+  if (auth) {
+  } else {
+    if (!process.env.S5R_STRATEGY_GITHUB__TOKEN) {
+      throw new Error('S5R_STRATEGY_GITHUB__TOKEN is missing');
+    }
+    auth = {
+      type: 'oauth',
+      token: process.env.S5R_STRATEGY_GITHUB__TOKEN
+    };
+
+  }
   clientInstance.authenticate(auth);
   return clientInstance;
 }

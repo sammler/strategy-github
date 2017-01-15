@@ -19,15 +19,13 @@ class GitHubProfile {
    * @private
    */
   getProfile(options) {
-    this.logger.silly('getProfile');
-
     return new Promise((resolve, reject) => {
       ghUtils.getAll(this.ghClient, 'users.get', options || {}, (err, res) => {
         if (err) {
           this.logger.error('err', err);
           return reject(err);
         }
-        this.logger.info('Got profile', res[0]);
+        // this.logger.silly('Got profile', res[0]);
         return resolve(res[0]);
       });
     });

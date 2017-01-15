@@ -10,9 +10,10 @@ class GithubUsers {
     this.ghClient = ghUtils.getGhClient();
   }
 
-  get() {
+  get(auth) {
+    let ghClient = ghUtils.getGhClient(auth);
     return new Promise((resolve, reject) => {
-      ghUtils.getAll(this.ghClient, 'users.get', {}, (err, res) => {
+      ghUtils.getAll(ghClient, 'users.get', {}, (err, res) => {
         if (err) {
           this.logger.error('err', err);
           return reject(err);
@@ -30,7 +31,7 @@ class GithubUsers {
   getFollowersByUser(username) {
     // Todo: Promisify this ugly stuff
     return new Promise((resolve, reject) => {
-      ghUtils.getAll(this.ghClient, 'users.getFollowersForUser', username || {}, (err, res) => {
+      ghUtils.getAll(ghUtils.getGhClient(), 'users.getFollowersForUser', username || {}, (err, res) => {
         if (err) {
           this.logger.error('err', err);
           return reject(err);
