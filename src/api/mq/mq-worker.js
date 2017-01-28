@@ -61,21 +61,22 @@ class MqWorker {
                     logger.silly('Complete job', jobId);
                     return superagent
                       .patch(SAMMLER_JOBS_SERVICE + `/v1/jobs/${jobId}/status`)
-                      .send({status: 'completed'})
+                      .send({status: 'completed'});
                   })
+                  // Todo: Delete, just for debugging purposes
                   .then(() => {
                     superagent
                       .get(SAMMLER_JOBS_SERVICE + `/v1/jobs/${jobId}`)
                       .then(result => {
                         logger.silly('response.body', result.body);
                         return Promise.resolve();
-                      })
+                      });
                   })
                   .then(() => {
                     logger.silly('OK, ack');
                     channel.ack(msg);
                     return Promise.resolve();
-                  })
+                  });
               })
               .catch(err => {
                 logger.error('err', err);
