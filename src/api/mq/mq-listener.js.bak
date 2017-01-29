@@ -21,7 +21,7 @@ export default class MqListener {
       .then(ch => ch.assertQueue(queue)
           .then(() => ch.consume(queue, (msg) => {
             if (msg !== null) {
-              logger.silly('Got message from MQ: ', JSON.parse(msg.content));
+              logger.trace('Got message from MQ: ', JSON.parse(msg.content));
               ch.ack(msg);
 
                 // let base = new Base();

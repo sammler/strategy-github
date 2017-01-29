@@ -79,7 +79,7 @@ export default class Repos {
    * @private
    */
   _filterRepos( repos, filter ) {
-    this.logger.silly( 'Filter repos', repos.length, filter );
+    this.logger.trace( 'Filter repos', repos.length, filter );
     return _.filter( repos, filter || {} )
   }
 
@@ -90,7 +90,7 @@ export default class Repos {
    * @private
    */
   _saveRepos( repos, cb ) {
-    this.logger.silly( 'Save repos' );
+    this.logger.trace( 'Save repos' );
     cb();
   }
 }

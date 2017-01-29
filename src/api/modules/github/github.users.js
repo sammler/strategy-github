@@ -11,7 +11,7 @@ class GithubUsers {
   }
 
   get(auth) {
-    let ghClient = ghUtils.getGhClient(auth);
+    const ghClient = ghUtils.getGhClient(auth);
     return new Promise((resolve, reject) => {
       ghUtils.getAll(ghClient, 'users.get', {}, (err, res) => {
         if (err) {
@@ -36,7 +36,7 @@ class GithubUsers {
           this.logger.error('err', err);
           return reject(err);
         }
-        this.logger.silly('result', res);
+        this.logger.trace('result', res);
         return resolve(res);
       });
     });

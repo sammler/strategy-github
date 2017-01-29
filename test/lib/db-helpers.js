@@ -7,13 +7,6 @@ class DBHelpers {
     }
     this.context = context;
     this.logger = this.context.logger;
-    this.db = this.context.db;
-  }
-
-  dropDatabase(done) {
-    this.context.db.connection.dropDatabase(err => {
-      done(err);
-    });
   }
 
   // dropProfileCollection( done ) {

@@ -1,5 +1,5 @@
 const GitHubApi = require('github');
-//const auth = require('./github.auth');
+// const auth = require('./github.auth');
 
 function getGhClient(auth) {
   // Todo: Use bluebird for promises
@@ -7,6 +7,8 @@ function getGhClient(auth) {
     debug: false
     // bluebird could be used here
   });
+
+  // eslint-disable-next-line no-empty
   if (auth) {
   } else {
     if (!process.env.S5R_STRATEGY_GITHUB__TOKEN) {

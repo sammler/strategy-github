@@ -1,10 +1,11 @@
 const amqp = require('amqplib');
 // const amqpSugar = require('amqplib-sugar');
 const superagent = require('superagent-promise')(require('superagent'), Promise);
+const moment = require('moment');
+
 const GitHubProfile = require('./../modules/github/github.profile');
 const gitHubProfileBL = require('./../modules/profile/profile.bl');
 const logger = require('./../config/context').instance().logger;
-const moment = require('moment');
 
 const uri = process.env.SAMMLER_RABBITMQ_URI;
 const SAMMLER_JOBS_SERVICE = process.env.SAMMLER_JOBS_SERVICE__URI;
@@ -38,7 +39,7 @@ class MqWorker {
 
             const msgContent = JSON.parse(msg.content.toString());
             // eslint-disable-next-line quotes
-            logger.silly(" [x] %s - %s:'%s'", '#', msg.fields.routingKey, msg.content.toString());
+            logger.trace(" [x] %s - %s:'%s'", '#', msg.fields.routingKey, msg.content.toString());
 
             // Mark job as running
             const jobId = msgContent.job_id;
@@ -48,17 +49,17 @@ class MqWorker {
               .then(() => {
                 return this.gitHubProfile.getProfile()
                   .then(result => {
-                    logger.silly('GitHub meta: ', result.meta);
+                    logger.trace('GitHub meta: ', result.meta);
                     // Todo: Something is wrong, the x-ratelimit-reset is always in the past
                     // https://developer.github.com/v3/#rate-limiting
-                    logger.silly('Time to next reset: ', moment.utc(result.meta['x-ratelimit-reset'], 'X').format("DD-MM-YYYY HH:mm:ss"));
-                    logger.silly('Time to next reset: ', new Date(result.meta['x-ratelimit-reset'] * 1000));
-                    logger.silly('Time to next reset: ', new Date(result.meta['x-ratelimit-reset'] * 1000).toLocaleString());
+                    logger.trace('Time to next reset: ', moment.utc(result.meta['x-ratelimit-reset'], 'X').format('DD-MM-YYYY HH:mm:ss'));
+                    logger.trace('Time to next reset: ', new Date(result.meta['x-ratelimit-reset'] * 1000));
+                    logger.trace('Time to next reset: ', new Date(result.meta['x-ratelimit-reset'] * 1000).toLocaleString());
                     return result;
                   })
                   .then(result => gitHubProfileBL.save(result))
                   .then(() => {
-                    logger.silly('Complete job', jobId);
+                    logger.trace('Complete job', jobId);
                     return superagent
                       .patch(SAMMLER_JOBS_SERVICE + `/v1/jobs/${jobId}/status`)
                       .send({status: 'completed'});
@@ -68,12 +69,12 @@ class MqWorker {
                     superagent
                       .get(SAMMLER_JOBS_SERVICE + `/v1/jobs/${jobId}`)
                       .then(result => {
-                        logger.silly('response.body', result.body);
+                        logger.trace('response.body', result.body);
                         return Promise.resolve();
                       });
                   })
                   .then(() => {
-                    logger.silly('OK, ack');
+                    logger.trace('OK, ack');
                     channel.ack(msg);
                     return Promise.resolve();
                   });
@@ -84,6 +85,10 @@ class MqWorker {
 
           }, {noAck: false})
         ]);
+      })
+      .catch(err => {
+        // Todo: Should really be fatal, but fatal does not work ...
+        logger.error('Cannot connect to RabbitMQ\r\n', err);
       });
   }
 }

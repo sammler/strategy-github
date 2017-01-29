@@ -33,22 +33,29 @@ class AppServer {
    */
   start() {
     return new Promise((resolve, reject) => {
-      this.server = this.app.listen(this.PORT, err => {
-        if (err) {
-          return reject(err);
-        }
-        this.logger.silly('Express server listening on port %d in "%s" mode', this.PORT, this.app.settings.env);
-        return resolve();
-      });
+      this.context.db.get()
+        .then(() => {
+          this.server = this.app.listen(this.PORT, err => {
+            if (err) {
+              return reject(err);
+            }
+            this.logger.info('Express server listening on port %d in "%s" mode', this.PORT, this.app.settings.env);
+            return resolve();
+          });
+        })
+        .catch(err => {
+          this.context.logger.error('Cannot connect to MongoDB', err);
+        });
     });
   }
 
   stop() {
     return new Promise(resolve => {
-      this.context.dbDisconnect();
+
+      // Todo: disconnect from DB
 
       this.server.close();
-      this.logger.silly('Server stopped');
+      this.logger.trace('Server stopped');
       resolve();
     });
   }

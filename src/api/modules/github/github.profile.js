@@ -25,7 +25,7 @@ class GitHubProfile {
           this.logger.error('err', err);
           return reject(err);
         }
-        // this.logger.silly('Got profile', res[0]);
+        // this.logger.trace('Got profile', res[0]);
         return resolve(res[0]);
       });
     });

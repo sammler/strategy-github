@@ -10,10 +10,9 @@ describe('profile-history.bl', function () {
   let dbHelpers;
   let context;
 
-  before(done => {
+  before(() => {
     context = Context.instance();
-    dbHelpers = new DBHelpers();
-    dbHelpers.dropDatabase(done);
+    return context.db.dropDatabase();
   });
 
   beforeEach(() => ProfileHistoryBL.removeAll());
