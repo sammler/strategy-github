@@ -11,7 +11,7 @@ WORKDIR $HOME
 
 COPY package.json yarn.lock ./
 
-RUN yarn install --force
+RUN npm install
 
 COPY /src ./src/
 
