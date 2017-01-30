@@ -1,4 +1,6 @@
 const GitHubApi = require('github');
+const logger = require('winster').instance();
+
 // const auth = require('./github.auth');
 
 function getGhClient(auth) {
@@ -12,7 +14,8 @@ function getGhClient(auth) {
   if (auth) {
   } else {
     if (!process.env.S5R_STRATEGY_GITHUB__TOKEN) {
-      throw new Error('S5R_STRATEGY_GITHUB__TOKEN is missing');
+      //throw new Error('S5R_STRATEGY_GITHUB__TOKEN is missing');
+      logger.error('S5R_STRATEGY_GITHUB__TOKEN is missing');
     }
     auth = {
       type: 'oauth',

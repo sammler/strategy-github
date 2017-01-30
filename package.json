@@ -1,6 +1,6 @@
 {
   "name": "sammler-strategy-github",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Sammler strategy to collect GitHub content.",
   "keywords": [
     "github",
@@ -21,7 +21,8 @@
   "repository": "sammler/sammler-strategy-github",
   "scripts": {
     "coverage": "babel-node ./node_modules/.bin/isparta cover _mocha",
-    "d-build": "docker build .",
+    "d-build": "docker build -t local/sammler-strategy-github .",
+    "d-run": "docker run -e 'S5R_STRATEGY_GITHUB__TOKEN=$S5R_STRATEGY_GITHUB__TOKEN' -d local/sammler-strategy-github ",
     "dc-dev-down": "docker-compose --f=./docker-compose.dev.yml down",
     "dc-dev-up": "docker-compose --f=./docker-compose.dev.yml up --build",
     "dc-down": "docker-compose down",
@@ -71,7 +72,6 @@
     "nyc": "^10.1.2",
     "sammler-base": "sammler/sammler-base",
     "sammler-jobs-service": "sammler/sammler-jobs-service",
-    "sammler-scheduler-service": "sammler/sammler-scheduler-service",
     "sinon": "^1.17.6",
     "sinon-as-promised": "^4.0.2",
     "sinon-chai": "^2.8.0",
@@ -79,7 +79,7 @@
     "supertest": "^3.0.0"
   },
   "engines": {
-    "node": ">=7.0.0"
+    "node": ">=7.2.0"
   },
   "nyc": {
     "sourceMap": false,

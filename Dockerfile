@@ -1,4 +1,4 @@
-FROM netczuk/node-yarn:node-7.3.0-slim-yarn-0.18.1
+FROM kkarczmarczyk/node-yarn:7.2
 
 ARG PORT=3003
 ENV PORT=$PORT
