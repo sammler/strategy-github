@@ -21,6 +21,7 @@
   "repository": "sammler/sammler-strategy-github",
   "scripts": {
     "coverage": "babel-node ./node_modules/.bin/isparta cover _mocha",
+    "d-build": "docker build .",
     "dc-dev-down": "docker-compose --f=./docker-compose.dev.yml down",
     "dc-dev-up": "docker-compose --f=./docker-compose.dev.yml up --build",
     "dc-down": "docker-compose down",
@@ -43,7 +44,7 @@
     "amqplib": "^0.5.1",
     "amqplib-sugar": "sammler/amqplib-sugar",
     "bluebird": "^3.4.6",
-    "body-parser": "^1.16.0",
+    "body-parser": "^1.15.2",
     "debug": "^2.3.3",
     "express": "^4.14.0",
     "github": "^8.1.1",
