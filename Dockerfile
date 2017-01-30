@@ -1,5 +1,4 @@
 FROM kkarczmarczyk/node-yarn:7.2-slim
-MAINTAINER Stefan Walther <swr.nixda@gmail.com>
 
 ARG PORT=3003
 ENV PORT=$PORT
@@ -12,7 +11,8 @@ WORKDIR $HOME
 
 COPY package.json yarn.lock ./
 
-RUN yarn install
+RUN yarn install && \
+    yarn add winster
 
 COPY /src ./src/
 

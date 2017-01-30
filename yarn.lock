@@ -782,9 +782,9 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-sammler@sammler/eslint-config-sammler:
-  version "0.0.3"
-  resolved "https://codeload.github.com/sammler/eslint-config-sammler/tar.gz/e2957f492ce919eeda1dad0e6d3effa401412be3"
+eslint-config-sammler@*:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/eslint-config-sammler/-/eslint-config-sammler-0.0.4.tgz#977a0e7ccdf9002e892c1d74d48f46f0cad6bf11"
   dependencies:
     eslint-config-xo-space "^0.15.0"
 
@@ -2949,9 +2949,9 @@ window-size@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.2.0.tgz#b4315bb4214a3d7058ebeee892e13fa24d98b075"
 
-winster@latest:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/winster/-/winster-0.2.2.tgz#9dbe59bb1ce652353993797c2ff13ff1c896c656"
+winster@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/winster/-/winster-0.2.4.tgz#e80f22fd596fddf9d67e9f595da803c1c5304a96"
   dependencies:
     lodash "^4.17.4"
     pkg-dir "^1.0.0"

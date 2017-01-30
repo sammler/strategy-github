@@ -1,4 +1,5 @@
 const Winster = require('winster');
+
 const MongooseClient = require('./mongoose-client');
 
 let instance;

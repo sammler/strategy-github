@@ -55,13 +55,13 @@
     "mongoose-unique-validator": "^1.0.3",
     "superagent": "^3.3.1",
     "superagent-promise": "^1.1.0",
-    "winster": "latest"
+    "winster": "^0.2.4"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "del": "^2.2.2",
     "eslint": "^3.10.2",
-    "eslint-config-sammler": "sammler/eslint-config-sammler",
+    "eslint-config-sammler": "*",
     "eslint-plugin-mocha": "^4.7.0",
     "gulp-format-md": "*",
     "isparta": "^4.0.0",

@@ -54,8 +54,8 @@ class MongooseClient {
   dropDatabase() {
     return new Promise((resolve, reject) => {
       this.get()
-        .then(connection => {
-          connection.dropDatabase(err => {
+        .then(conn => {
+          conn.dropDatabase(err => {
             if (err) {
               return reject(err);
             }
