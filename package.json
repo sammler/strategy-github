@@ -1,6 +1,6 @@
 {
   "name": "sammler-strategy-github",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Sammler strategy to collect GitHub content.",
   "keywords": [
     "github",
