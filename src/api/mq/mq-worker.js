@@ -21,6 +21,7 @@ class MqWorker {
     this.listenProfileSyncRequested();
   }
 
+  // Todo: Needs to be refactored and broken out to amqplib-sugar
   listenProfileSyncRequested() {
     const ex = 'github.profile-sync';
     const exchangeType = 'topic';
@@ -51,10 +52,9 @@ class MqWorker {
                   .then(result => {
                     logger.trace('GitHub meta: ', result.meta);
                     // Todo: Something is wrong, the x-ratelimit-reset is always in the past
+                    // Todo: Double-check again, in a US timezone I didn't have the problem ...
                     // https://developer.github.com/v3/#rate-limiting
                     logger.trace('Time to next reset: ', moment.utc(result.meta['x-ratelimit-reset'], 'X').format('DD-MM-YYYY HH:mm:ss'));
-                    logger.trace('Time to next reset: ', new Date(result.meta['x-ratelimit-reset'] * 1000));
-                    logger.trace('Time to next reset: ', new Date(result.meta['x-ratelimit-reset'] * 1000).toLocaleString());
                     return result;
                   })
                   .then(result => gitHubProfileBL.save(result))

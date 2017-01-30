@@ -1,15 +1,15 @@
 const _ = require('lodash');
 const Promise = require('bluebird');
 const ProfileFollowersHistoryBL = require('./../../src/api/modules/profile-followers-history/profile-followers-history.bl');
-// const DBHelpers = require('./../lib/db-helpers');
 const context = require('./../../src/api/config/context').instance();
 
 describe('profile-followers-history.bl', () => {
-  let dbHelpers;
-  // let context;
 
   before(() => {
-    return context.db.dropDatabase();
+    return context.db.get()
+      .then(conn => {
+        conn.dropDatabase();
+      });
   });
 
   beforeEach(() => ProfileFollowersHistoryBL.removeAll());

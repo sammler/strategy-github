@@ -67,6 +67,19 @@ amqp-as-promised@^4.1.0:
     mem-cache "0.0.4"
     uuid "~2.0.1"
 
+amqp-winston@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/amqp-winston/-/amqp-winston-1.0.7.tgz#017e267e54a1f26719f2401c4b9bb4585f3c0e27"
+  dependencies:
+    amqp "^0.2.0"
+    winston "^0.8.3"
+
+amqp@^0.2.0:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/amqp/-/amqp-0.2.6.tgz#d97fee5143026fa0b4fd6a5d56485f0448eb37ca"
+  dependencies:
+    lodash "^4.0.0"
+
 amqplib-sugar@sammler/amqplib-sugar:
   version "0.1.0"
   resolved "https://codeload.github.com/sammler/amqplib-sugar/tar.gz/375d83160d91cb629b88e6f23eb65be227d0a3d8"
@@ -170,6 +183,10 @@ assertion-error@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/assertion-error/-/assertion-error-1.0.2.tgz#13ca515d86206da0bac66e834dd397d87581094c"
 
+async@0.2.x, async@~0.2.6:
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/async/-/async-0.2.10.tgz#b6bbe0b0674b9d719708ca38de8c237cb526c3d1"
+
 async@1.x, async@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/async/-/async-1.0.0.tgz#f8fc04ca3a13784ade9e1641af98578cfbd647a9"
@@ -183,10 +200,6 @@ async@2.1.4:
 async@^1.4.0, async@^1.4.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
-
-async@~0.2.6:
-  version "0.2.10"
-  resolved "https://registry.yarnpkg.com/async/-/async-0.2.10.tgz#b6bbe0b0674b9d719708ca38de8c237cb526c3d1"
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -489,6 +502,10 @@ co@^4.6.0:
 code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
+
+colors@0.6.x:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/colors/-/colors-0.6.2.tgz#2423fe6678ac0c5dae8852e5d0e5be08c997abcc"
 
 colors@1.0.x:
   version "1.0.3"
@@ -2185,6 +2202,10 @@ pkg-dir@^1.0.0:
   dependencies:
     find-up "^1.0.0"
 
+pkginfo@0.3.x:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/pkginfo/-/pkginfo-0.3.1.tgz#5b29f6a81f70717142e09e765bbeab97b4f81e21"
+
 pluralize@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-1.2.1.tgz#d1a21483fd22bb41e58a12fa3421823140897c45"
@@ -2455,6 +2476,13 @@ sammler-jobs-service@sammler/sammler-jobs-service:
     swagger-jsdoc "^1.8.3"
     winston "^2.3.0"
     winston-logstash "^0.3.0"
+
+sammler-nodelib-logger@sammler/sammler-nodelib-logger:
+  version "0.2.1"
+  resolved "https://codeload.github.com/sammler/sammler-nodelib-logger/tar.gz/49a25c669075abde79e29d65faf1dcf05496c60b"
+  dependencies:
+    amqp-winston "^1.0.7"
+    winster "^0.2.5"
 
 sammler-scheduler-service@sammler/sammler-scheduler-service:
   version "0.3.1"
@@ -2931,7 +2959,7 @@ window-size@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.1.0.tgz#5438cd2ea93b202efa3a19fe8887aee7c94f9c9d"
 
-winster@*:
+winster@^0.2.5:
   version "0.2.5"
   resolved "https://registry.yarnpkg.com/winster/-/winster-0.2.5.tgz#ec1c5a238118675b239adc8791601091c4a6d179"
   dependencies:
@@ -2943,6 +2971,18 @@ winster@*:
 winston-logstash@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/winston-logstash/-/winston-logstash-0.3.0.tgz#f71fa1278be1f0eae83bcad3e22fe41d51c7f1a9"
+
+winston@^0.8.3:
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/winston/-/winston-0.8.3.tgz#64b6abf4cd01adcaefd5009393b1d8e8bec19db0"
+  dependencies:
+    async "0.2.x"
+    colors "0.6.x"
+    cycle "1.0.x"
+    eyes "0.1.x"
+    isstream "0.1.x"
+    pkginfo "0.3.x"
+    stack-trace "0.0.x"
 
 winston@^2.3.0, winston@^2.3.1:
   version "2.3.1"

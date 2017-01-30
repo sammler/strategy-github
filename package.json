@@ -53,9 +53,9 @@
     "mongoose": "^4.7.1",
     "mongoose-timestamp": "^0.6.0",
     "mongoose-unique-validator": "^1.0.3",
+    "sammler-nodelib-logger": "sammler/sammler-nodelib-logger",
     "superagent": "^3.3.1",
-    "superagent-promise": "^1.1.0",
-    "winster": "*"
+    "superagent-promise": "^1.1.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -106,6 +106,6 @@
     ]
   },
   "winster": {
-    "configFile": "./src/api/config/logger-config.js"
+    "configFile": "./src/api/config/winster-config.js"
   }
 }
