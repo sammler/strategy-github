@@ -71,7 +71,7 @@
     "nock": "^9.0.2",
     "nyc": "^10.1.2",
     "sammler-base": "sammler/sammler-base",
-    "sammler-jobs-service": "sammler/sammler-jobs-service",
+    "jobs-service": "sammler/jobs-service",
     "sinon": "^1.17.6",
     "sinon-as-promised": "^4.0.2",
     "sinon-chai": "^2.8.0",

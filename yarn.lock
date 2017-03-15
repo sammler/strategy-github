@@ -1583,6 +1583,23 @@ istanbul@^0.4.0:
     which "^1.1.1"
     wordwrap "^1.0.0"
 
+jobs-service@sammler/jobs-service:
+  version "0.0.13"
+  resolved "https://codeload.github.com/sammler/jobs-service/tar.gz/5e4f7f93ae685041705f3139458711e76d3c68b0"
+  dependencies:
+    bluebird "^3.4.7"
+    body-parser "^1.16.0"
+    express "^4.14.1"
+    http-status-codes "^1.1.6"
+    js-yaml "^3.7.0"
+    lodash "^4.17.4"
+    mongoose "^4.8.0"
+    mongoose-materialized "^0.1.9"
+    mongoose-timestamp "^0.6.0"
+    sammler-nodelib-logger sammler/sammler-nodelib-logger
+    swagger-jsdoc "^1.9.1"
+    swagger-ui-express "^1.0.3"
+
 js-tokens@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.1.tgz#08e9f132484a2c45a30907e9dc4d5567b7f114d7"
@@ -2512,23 +2529,6 @@ rx-lite@^3.1.2:
 sammler-base@sammler/sammler-base:
   version "0.0.8"
   resolved "https://codeload.github.com/sammler/sammler-base/tar.gz/c016816ff2ef64c6146a7db044e368c51b2c71a9"
-
-sammler-jobs-service@sammler/sammler-jobs-service:
-  version "0.0.13"
-  resolved "https://codeload.github.com/sammler/sammler-jobs-service/tar.gz/5e4f7f93ae685041705f3139458711e76d3c68b0"
-  dependencies:
-    bluebird "^3.4.7"
-    body-parser "^1.16.0"
-    express "^4.14.1"
-    http-status-codes "^1.1.6"
-    js-yaml "^3.7.0"
-    lodash "^4.17.4"
-    mongoose "^4.8.0"
-    mongoose-materialized "^0.1.9"
-    mongoose-timestamp "^0.6.0"
-    sammler-nodelib-logger sammler/sammler-nodelib-logger
-    swagger-jsdoc "^1.9.1"
-    swagger-ui-express "^1.0.3"
 
 sammler-nodelib-logger@sammler/sammler-nodelib-logger:
   version "0.2.1"
