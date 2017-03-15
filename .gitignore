@@ -3,6 +3,7 @@ test-errors.log
 .cache
 .config
 .yarn
+yarn-error.log
 
 # IDEs
 .vscode
