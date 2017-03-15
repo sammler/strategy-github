@@ -26,7 +26,7 @@ services:
 
   s5r-jobs-service:
     build:
-      context: ./node_modules/sammler-jobs-service
+      context: ./node_modules/jobs-service
     environment:
       - PORT=4003
       - WAIT_COMMAND=[ $$(curl --write-out %{http_code} --silent --output /dev/null http://s5r-mongo:27017) = 200 ]
@@ -35,7 +35,7 @@ services:
       - WAIT_LOOPS=20
       - SAMMLER_DB_JOBS_URI=$SAMMLER_DB_JOBS_URI
     volumes:
-      - ./node_modules/sammler-jobs-service/:/home
+      - ./node_modules/jobs-service/:/home
     links:
       - s5r-mongo
     command: sh wait_to_start.sh
