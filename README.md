@@ -1,5 +1,7 @@
 ## sammler-strategy-github
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/sammler/sammler-strategy-github.svg)](https://greenkeeper.io/)
+
 > Sammler strategy to collect GitHub content.
 
 [![CircleCI](https://circleci.com/gh/sammler/sammler-strategy-github/tree/master.svg?style=svg)](https://circleci.com/gh/sammler/sammler-strategy-github/tree/master)
