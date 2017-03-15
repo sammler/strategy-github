@@ -15,6 +15,8 @@ class AppServer {
     this.server = null;
     this.context = Context.instance();
     this.logger = this.context.logger;
+
+    console.log('SAMMLER_DB_JOBS_URI', process.env.SAMMLER_DB_JOBS_URI);
   }
 
   initApp() {

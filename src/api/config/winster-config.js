@@ -1,3 +1,21 @@
-const winsterConfig = require('sammler-nodelib-logger');
+const Winston = require('winston');
 
-module.exports = winsterConfig.WINSTER_CONFIG;
+const config = {
+  development: [
+    {
+      transporter: Winston.transports.Console,
+      options: {
+        name: 'Console',
+        level: 'trace',
+        colorize: true,
+        json: false,
+        prettyPrint(object) {
+          return JSON.stringify(object, null, 2);
+        },
+        handleExceptions: true
+      }
+    }
+  ]
+};
+
+module.exports = config;

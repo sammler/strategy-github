@@ -1,5 +1,6 @@
 const ghUtils = require('./github-utils');
 const Context = require('./../../config/context');
+const logger = require('winster').instance();
 
 class GitHubProfile {
   constructor(context) {
@@ -8,8 +9,6 @@ class GitHubProfile {
     }
     this.ghClient = ghUtils.getGhClient();
 
-    // shortcuts
-    this.logger = context.logger;
   }
 
   /**
@@ -22,10 +21,9 @@ class GitHubProfile {
     return new Promise((resolve, reject) => {
       ghUtils.getAll(this.ghClient, 'users.get', options || {}, (err, res) => {
         if (err) {
-          this.logger.error('err', err);
+          logger.error('An error occurred fetching all users.', err);
           return reject(err);
         }
-        // this.logger.trace('Got profile', res[0]);
         return resolve(res[0]);
       });
     });

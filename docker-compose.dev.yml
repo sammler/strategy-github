@@ -33,7 +33,7 @@ services:
       - WAIT_START_CMD=yarn run start:dev
       - WAIT_SLEEP=2
       - WAIT_LOOPS=20
-      - SAMMLER_DB_JOBS_URI=mongodb://s5r-mongo:27017/jobs
+      - SAMMLER_DB_JOBS_URI=$SAMMLER_DB_JOBS_URI
     volumes:
       - ./node_modules/sammler-jobs-service/:/home
     links:

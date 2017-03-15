@@ -1,5 +1,5 @@
 {
-  "name": "sammler-strategy-github",
+  "name": "strategy-github",
   "version": "0.0.13",
   "description": "Sammler strategy to collect GitHub content.",
   "keywords": [
@@ -7,9 +7,9 @@
     "sammler",
     "sammler-strategy"
   ],
-  "homepage": "https://github.com/sammler/sammler-strategy-github",
+  "homepage": "https://github.com/sammler/strategy-github",
   "bugs": {
-    "url": "https://github.com/sammler/sammler-strategy-github/issues"
+    "url": "https://github.com/sammler/strategy-github/issues"
   },
   "license": "MIT",
   "author": {
@@ -18,11 +18,11 @@
     "twitter": "waltherstefan"
   },
   "main": "./src/index.js",
-  "repository": "sammler/sammler-strategy-github",
+  "repository": "sammler/strategy-github",
   "scripts": {
     "coverage": "babel-node ./node_modules/.bin/isparta cover _mocha",
-    "d-build": "docker build -t local/sammler-strategy-github .",
-    "d-run": "docker run -e 'S5R_STRATEGY_GITHUB__TOKEN=$S5R_STRATEGY_GITHUB__TOKEN' -d local/sammler-strategy-github ",
+    "d-build": "docker build -t local/strategy-github .",
+    "d-run": "docker run -e 'S5R_STRATEGY_GITHUB__TOKEN=$S5R_STRATEGY_GITHUB__TOKEN' -d local/strategy-github ",
     "dc-dev-down": "docker-compose --f=./docker-compose.dev.yml down",
     "dc-dev-up": "docker-compose --f=./docker-compose.dev.yml up --build",
     "dc-down": "docker-compose down",

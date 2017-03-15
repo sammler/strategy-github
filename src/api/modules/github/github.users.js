@@ -1,12 +1,12 @@
 const ghUtils = require('./github-utils');
 const Context = require('./../../config/context');
+const logger = require('winster').instance();
 
 class GithubUsers {
   constructor(context) {
     if (!context) {
       context = Context.instance();
     }
-    this.logger = context.logger;
     this.ghClient = ghUtils.getGhClient();
   }
 
@@ -15,7 +15,7 @@ class GithubUsers {
     return new Promise((resolve, reject) => {
       ghUtils.getAll(ghClient, 'users.get', {}, (err, res) => {
         if (err) {
-          this.logger.error('err', err);
+          logger.error('err', err);
           return reject(err);
         }
         return resolve(res);
@@ -33,10 +33,10 @@ class GithubUsers {
     return new Promise((resolve, reject) => {
       ghUtils.getAll(ghUtils.getGhClient(), 'users.getFollowersForUser', username || {}, (err, res) => {
         if (err) {
-          this.logger.error('err', err);
+          logger.error('err', err);
           return reject(err);
         }
-        this.logger.trace('result', res);
+        logger.trace('result', res);
         return resolve(res);
       });
     });

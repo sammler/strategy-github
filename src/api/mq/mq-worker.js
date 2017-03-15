@@ -5,7 +5,7 @@ const moment = require('moment');
 
 const GitHubProfile = require('./../modules/github/github.profile');
 const gitHubProfileBL = require('./../modules/profile/profile.bl');
-const logger = require('./../config/context').instance().logger;
+const logger = require('winster').instance();
 
 const uri = process.env.SAMMLER_RABBITMQ_URI;
 const SAMMLER_JOBS_SERVICE = process.env.SAMMLER_JOBS_SERVICE__URI;
@@ -39,8 +39,10 @@ class MqWorker {
           channel.consume(queueProfileSync, msg => {
 
             const msgContent = JSON.parse(msg.content.toString());
+
+            // Todo (AAA): We haven an error in winster, not being able to obviously pass more than two params!!!
             // eslint-disable-next-line quotes
-            logger.trace(" [x] %s - %s:'%s'", '#', msg.fields.routingKey, msg.content.toString());
+            // logger.trace(" [x] %s - %s:'%s'", '#', msg.fields.routingKey, msg.content.toString());
 
             // Mark job as running
             const jobId = msgContent.job_id;
@@ -80,7 +82,9 @@ class MqWorker {
                   });
               })
               .catch(err => {
+                // Todo (AAA): We get an error here without further details?!
                 logger.error('err', err);
+                //console.log('error', err);
               });
 
           }, {noAck: false})
