@@ -1,6 +1,6 @@
 const amqp = require('amqplib');
 // const amqpSugar = require('amqplib-sugar');
-const superagent = require('superagent-promise')(require('superagent'), Promise);
+const superagent = require('superagent');
 const moment = require('moment');
 
 const GitHubProfile = require('./../modules/github/github.profile');
