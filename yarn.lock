@@ -2179,9 +2179,9 @@ mongoose-timestamp@^0.6.0:
   dependencies:
     defaults "^1.0.3"
 
-mongoose-unique-validator@^1.0.3:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/mongoose-unique-validator/-/mongoose-unique-validator-1.0.4.tgz#dc1a7c80bfd5968cdfba75237056c4656b146cea"
+mongoose-unique-validator@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/mongoose-unique-validator/-/mongoose-unique-validator-2.0.1.tgz#34c64f097cb5e1c61f822116b0a5b07667e6de92"
   dependencies:
     lodash.foreach "^4.1.0"
     lodash.get "^4.0.2"
