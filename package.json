@@ -46,7 +46,7 @@
     "amqplib-sugar": "sammler/amqplib-sugar",
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
-    "debug": "^2.3.3",
+    "debug": "^3.0.0",
     "express": "^4.14.0",
     "github": "^9.2.0",
     "http-status": "^1.0.0",
