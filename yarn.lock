@@ -2944,9 +2944,10 @@ signal-exit@^3.0.0, signal-exit@^3.0.1:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
 
-sinon-as-promised@4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/sinon-as-promised/-/sinon-as-promised-4.0.2.tgz#120e9ce033daa39648dc429062fe660be1b5b412"
+sinon-as-promised@4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/sinon-as-promised/-/sinon-as-promised-4.0.3.tgz#c0545b1685fd813588a4ed697012487ed11d151b"
+  integrity sha512-9vApOPQydJD7ZFRGZGD4+6Am5NU3QqlFdpbbZbnvdOoZte8cp4dOb0ej8CHfMlyfJtbweXOnmj/TimBkfcB/GA==
   dependencies:
     create-thenable "~1.0.0"
     native-promise-only "~0.8.1"
