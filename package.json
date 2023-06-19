@@ -63,7 +63,7 @@
     "del": "2.2.2",
     "eslint": "3.18.0",
     "eslint-config-sammler": "*",
-    "eslint-plugin-mocha": "4.9.0",
+    "eslint-plugin-mocha": "4.12.1",
     "gulp-format-md": "*",
     "isparta": "4.0.0",
     "jobs-service": "sammler/jobs-service",
