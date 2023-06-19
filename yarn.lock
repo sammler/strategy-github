@@ -3128,8 +3128,7 @@ strip-json-comments@~2.0.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
 superagent@^3.0.0, superagent@^3.3.1:
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/superagent/-/superagent-3.5.1.tgz#0a4faefda33677777888347dd7b4d21f410c871b"
+  version "3.7.0"
   dependencies:
     component-emitter "^1.2.0"
     cookiejar "^2.0.6"
